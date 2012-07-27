@@ -60,6 +60,8 @@
 - (void) sortingList:(NSInteger)indexValue;
 //- (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL
 - (void)CreateBannerForPage;
+- (void)checkCategoryType;
 - (BOOL)isiPad;
+-(void)parseXMLFileAtURL:(NSMutableData *)URL;
 
 @end

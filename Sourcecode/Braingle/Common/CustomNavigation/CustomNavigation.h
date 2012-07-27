@@ -17,6 +17,7 @@
     IBOutlet UILabel          *labelHeader;
     IBOutlet UILabel          *headerLabelActive;
     IBOutlet UIButton         *btnHeart;
+    IBOutlet UIButton         *btnMenu;
 }
 
 @property(nonatomic, retain) UIButton         *btnHeart;
@@ -27,7 +28,7 @@
 - (void) setLabelNav:(BOOL) isActive setText:(NSString *) _text;
 - (void) setnavigationImage:(BOOL) isActive; 
 - (void) setNavImageView:(UIImage *) imgTittle;
-
+- (void) setMenubtn:(BOOL) isActive;
 
 
 @end

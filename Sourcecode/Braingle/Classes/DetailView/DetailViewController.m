@@ -88,6 +88,7 @@
     [myCustomNavigation setBackActive:YES];
     [myCustomNavigation setListActive:NO];
     [myCustomNavigation setInfoActive:NO];
+    [myCustomNavigation setMenubtn:NO];
     
     if ([strDetailId isEqualToString:@"Featured"]) 
     {

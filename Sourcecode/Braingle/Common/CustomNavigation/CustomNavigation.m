@@ -84,6 +84,11 @@
     [imgTitle setHidden:!isActive];
 }
 
+- (void) setMenubtn:(BOOL) isActive
+{
+    [btnMenu setHidden:!isActive];
+}
+
 //- (void) setLabelHeader:(NSString *)strHeaderText
 //{
 //  

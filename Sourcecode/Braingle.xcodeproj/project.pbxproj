@@ -168,6 +168,8 @@
 		519A23F415C01747002071C7 /* Trick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 519A23CA15C01747002071C7 /* Trick@2x.png */; };
 		519A23F515C01747002071C7 /* Trivia.png in Resources */ = {isa = PBXBuildFile; fileRef = 519A23CB15C01747002071C7 /* Trivia.png */; };
 		519A23F615C01747002071C7 /* Trivia@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 519A23CC15C01747002071C7 /* Trivia@2x.png */; };
+		519F144015C2C5B500190A85 /* menu-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 519F143E15C2C5B500190A85 /* menu-button.png */; };
+		519F144115C2C5B500190A85 /* menu-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 519F143F15C2C5B500190A85 /* menu-button@2x.png */; };
 		51F154E415C0507400CA1D94 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 51F154E315C0507400CA1D94 /* bg.png */; };
 		51F154E715C0527200CA1D94 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 51F154E515C0527200CA1D94 /* back@2x.png */; };
 		51F154E815C0527200CA1D94 /* bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 51F154E615C0527200CA1D94 /* bg@2x.png */; };
@@ -351,6 +353,8 @@
 		519A23CA15C01747002071C7 /* Trick@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Trick@2x.png"; path = "Common/Images/Home/Trick@2x.png"; sourceTree = "<group>"; };
 		519A23CB15C01747002071C7 /* Trivia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Trivia.png; path = Common/Images/Home/Trivia.png; sourceTree = "<group>"; };
 		519A23CC15C01747002071C7 /* Trivia@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Trivia@2x.png"; path = "Common/Images/Home/Trivia@2x.png"; sourceTree = "<group>"; };
+		519F143E15C2C5B500190A85 /* menu-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu-button.png"; path = "Common/Images/Info/menu-button.png"; sourceTree = "<group>"; };
+		519F143F15C2C5B500190A85 /* menu-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu-button@2x.png"; path = "Common/Images/Info/menu-button@2x.png"; sourceTree = "<group>"; };
 		51F154E315C0507400CA1D94 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg.png; path = Common/Images/Home/bg.png; sourceTree = "<group>"; };
 		51F154E515C0527200CA1D94 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back@2x.png"; path = "Common/Images/Home/back@2x.png"; sourceTree = "<group>"; };
 		51F154E615C0527200CA1D94 /* bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bg@2x.png"; path = "Common/Images/Home/bg@2x.png"; sourceTree = "<group>"; };
@@ -521,7 +525,7 @@
 			path = Common/Images/icons;
 			sourceTree = "<group>";
 		};
-		510E69DF15C03C5400DEFFE0 /* Riddles */ = {
+		510E69DF15C03C5400DEFFE0 /* BrainTeaser */ = {
 			isa = PBXGroup;
 			children = (
 				513F5D6F15C1AF2900AE91F8 /* g1.png */,
@@ -581,7 +585,7 @@
 				510E69EA15C041DD00DEFFE0 /* star0.png */,
 				510E69EB15C041DD00DEFFE0 /* star0@2x.png */,
 			);
-			name = Riddles;
+			name = BrainTeaser;
 			sourceTree = "<group>";
 		};
 		513F5CF015C12A8B00AE91F8 /* DetailView */ = {
@@ -649,10 +653,11 @@
 		51723C5115BEF8F40064D9A1 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				519F143D15C2C58200190A85 /* Info */,
 				30D147AE15C2AA91007DB1E7 /* icons */,
 				513F5D0815C1606200AE91F8 /* SplashView */,
 				513F5CF015C12A8B00AE91F8 /* DetailView */,
-				510E69DF15C03C5400DEFFE0 /* Riddles */,
+				510E69DF15C03C5400DEFFE0 /* BrainTeaser */,
 				519A23A215C0171B002071C7 /* Home */,
 				519A239915C0130A002071C7 /* CustomNAvigation */,
 			);
@@ -758,6 +763,15 @@
 				519A23CC15C01747002071C7 /* Trivia@2x.png */,
 			);
 			name = Home;
+			sourceTree = "<group>";
+		};
+		519F143D15C2C58200190A85 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				519F143E15C2C5B500190A85 /* menu-button.png */,
+				519F143F15C2C5B500190A85 /* menu-button@2x.png */,
+			);
+			name = Info;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -959,6 +973,8 @@
 				0694B11815C2BA86004341C8 /* Braingle_DB.sqlite in Resources */,
 				306642D115C2BBB700880E2B /* InfoDesc.html in Resources */,
 				306642DB15C2BCED00880E2B /* BrainTeaserCustomCell.xib in Resources */,
+				519F144015C2C5B500190A85 /* menu-button.png in Resources */,
+				519F144115C2C5B500190A85 /* menu-button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

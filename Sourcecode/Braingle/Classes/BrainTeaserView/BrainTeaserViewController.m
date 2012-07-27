@@ -207,6 +207,7 @@
     [myCustomNavigation setBackActive:YES];
     [myCustomNavigation setListActive:YES];
     [myCustomNavigation setInfoActive:NO];    
+    [myCustomNavigation setMenubtn:NO];
     [myCustomNavigation setbtnHeart:NO heartImage:NO];
     [myCustomNavigation setLabelNav:YES setText:strCategoryType];
     [myCustomNavigation release];

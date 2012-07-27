@@ -57,6 +57,7 @@
     [myCustomNavigation setBackActive:NO];
     [myCustomNavigation setListActive:NO];
     [myCustomNavigation setInfoActive:YES];
+    [myCustomNavigation setMenubtn:NO];
     [myCustomNavigation setbtnHeart:NO heartImage:NO];
     [myCustomNavigation setLabelNav:NO setText:@""];
     [myCustomNavigation release];

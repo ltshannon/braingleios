@@ -9,6 +9,7 @@
 #import "InfoViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "CustomNavigation.h"
+#import "HomeViewController.h"
 @implementation InfoViewController
 
 #pragma mark - View lifecycle
@@ -41,23 +42,20 @@
     CustomNavigation *myCustomNavigation =[[CustomNavigation alloc] initWithNibName:@"CustomNavigation"bundle:nil];
     [self.view addSubview:[myCustomNavigation view]];
     [myCustomNavigation setNavImageView:[UIImage imageNamed:@"logo.png"]];
-    [myCustomNavigation setBackActive:YES];
+    [myCustomNavigation setBackActive:NO];
     [myCustomNavigation setListActive:NO];
     [myCustomNavigation setInfoActive:NO];
+    [myCustomNavigation setMenubtn:YES];
     [myCustomNavigation setbtnHeart:NO heartImage:NO];
     [myCustomNavigation release];
 }
-
+-(IBAction)infoBtnAction:(id)sender
+{
+    [self dismissModalViewControllerAnimated:YES];
+    
+}
 #pragma mark - Button Action
 
--(IBAction)infoBackButtonAction:(id)sender
-{
-    if ([self isiPad]) {
-        [self dismissModalViewControllerAnimated:YES];
-    } else {
-        [self dismissModalViewControllerAnimated:YES];
-    }
-}
 
 #pragma mark - Check Device
 
