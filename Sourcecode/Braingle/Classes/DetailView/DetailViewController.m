@@ -9,6 +9,10 @@
 #import "DetailViewController.h"
 @implementation DetailViewController
 @synthesize strDetailId,selectedDictionary;
+@synthesize masterPopoverController;
+@synthesize appdelegate;
+@synthesize isViewControllerRootViewController;
+@synthesize isViewControllerDetailViewController;
 
 #pragma mark - View Life Cycle
 
@@ -81,14 +85,23 @@
 #pragma mark - Add Navigation
 
 - (void) loadNavigation {
+    if([self isiPad])
+    {
+        myCustomNavigation=[[CustomNavigation alloc]initWithNibName:@"CustomNavigation_ipad" bundle:nil];
     isFavorite = NO;
     self.navigationController.navigationBarHidden=YES;
     [self.view addSubview:[myCustomNavigation view]];
-    [myCustomNavigation setNavImageView:[UIImage imageNamed:@"logo.png"]];
-    [myCustomNavigation setBackActive:YES];
+    [myCustomNavigation setNavImageView:[UIImage imageNamed:@""]];
+    [myCustomNavigation setBackActive:NO];
     [myCustomNavigation setListActive:NO];
+    [myCustomNavigation setDoneBtn:NO];
     [myCustomNavigation setInfoActive:NO];
-    [myCustomNavigation setMenubtn:NO];
+        [myCustomNavigation setMenubtn:YES];
+           
+       
+
+   
+    [myCustomNavigation setLblHeader:YES setText:@""];
     
     if ([strDetailId isEqualToString:@"Featured"]) 
     {
@@ -96,6 +109,8 @@
     } 
     else 
     {
+        myCustomNavigation=[[CustomNavigation alloc]initWithNibName:@"CustomNavigation" bundle:nil];
+
         [myCustomNavigation setbtnHeart:YES heartImage:NO];
         for (int i = 0; i < [favoritesArray count]; i++)
         {
@@ -106,6 +121,37 @@
             } 
         }
     }
+    }
+    else
+    {
+        isFavorite = NO;
+        self.navigationController.navigationBarHidden=YES;
+        [self.view addSubview:[myCustomNavigation view]];
+        [myCustomNavigation setNavImageView:[UIImage imageNamed:@"logo.png"]];
+        [myCustomNavigation setBackActive:YES];
+        [myCustomNavigation setListActive:NO];
+        [myCustomNavigation setInfoActive:NO];
+        [myCustomNavigation setMenubtn:NO];
+        
+        if ([strDetailId isEqualToString:@"Featured"]) 
+        {
+            [myCustomNavigation setbtnHeart:NO heartImage:NO];
+        } 
+        else 
+        {
+            [myCustomNavigation setbtnHeart:YES heartImage:NO];
+            for (int i = 0; i < [favoritesArray count]; i++)
+            {
+                if ([[[favoritesArray objectAtIndex:i] valueForKey:@"id"] isEqualToString:[selectedDictionary valueForKey:@"id"]]) 
+                {
+                    [myCustomNavigation setbtnHeart:YES heartImage:YES];
+                    isFavorite = YES;
+                } 
+            }
+        }
+    }
+
+    
     [myCustomNavigation setLabelNav:YES setText:@""];
     [myCustomNavigation release];
 }
@@ -257,17 +303,39 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
+    if([self isiPad])
+    {
     [self LoadIcon];
+    }
+    else
+    {
+        [self LoadIcon];
+    }
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+    if([self isiPad])
+    {
     [self removeLoadIcon];
+    }
+    else
+    {
+        [self removeLoadIcon];
+    }
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error;
 {
+    if([self isiPad])
+    {
     [self removeLoadIcon];
+    }
+    else
+    {
+        [self removeLoadIcon];
+
+    }
 }
 
 #pragma mark - Loading icon methods
@@ -275,6 +343,32 @@
 
 -(void)LoadIcon
 {
+    if([self isiPad])
+    {
+        if (loadingView != NULL) {
+            [loadingView removeFromSuperview];
+            loadingView = nil;
+        }
+        
+        loadingView = [[UIView alloc] initWithFrame:CGRectMake((self.view.frame.size.width/2)-40, (self.view.frame.size.height/2)-40, 80, 80)];
+        [loadingView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
+        //Enable maskstobound so that corner radius would work.
+        [loadingView.layer setMasksToBounds:YES];
+        //Set the corner radius
+        [loadingView.layer setCornerRadius:10.0];    
+        activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        [activityView setFrame:CGRectMake(21, 21, 37, 37)];
+        [activityView setHidesWhenStopped:YES];
+        [activityView startAnimating];
+        //    [loadingView setAlpha:0.5];
+        [loadingView addSubview:activityView];
+        [self.view addSubview:loadingView];
+        [self.view bringSubviewToFront:loadingView];
+      
+
+    }
+    else
+    {
     if (loadingView != NULL) {
         [loadingView removeFromSuperview];
         loadingView = nil;
@@ -296,27 +390,51 @@
     [self.view bringSubviewToFront:loadingView];
 	[activityView release];
 }
-
+}
 - (void)removeLoadIcon
 {
+    if([self isiPad])
+    {
     [loadingView removeFromSuperview];
+    }
+    else
+    {
+        [loadingView removeFromSuperview];
+
+    }
 }
 
 #pragma mark - Load iAd
 
 -(void)CreateBannerForPage
 {
+    if([self isiPad])
+    {
     UIView *vw_Adds=[[UIView alloc]init];
-    [vw_Adds setFrame:CGRectMake(0, 410, 320, 50)];
+    [vw_Adds setFrame:CGRectMake(0, 710, 320, 750)];
     [vw_Adds setClipsToBounds:YES];
     [vw_Adds setClearsContextBeforeDrawing:YES];
     adView=[[ADBannerView alloc]init];
-    adView.frame = CGRectOffset(adView.frame, 0, -50);
+    adView.frame = CGRectOffset(adView.frame, 450,-50);
     adView.delegate=self;
     
     [vw_Adds addSubview:adView];
     [self.view addSubview:vw_Adds];
-    [vw_Adds release];
+    }
+    else
+    {
+        UIView *vw_Adds=[[UIView alloc]init];
+        [vw_Adds setFrame:CGRectMake(0, 410, 320, 50)];
+        [vw_Adds setClipsToBounds:YES];
+        [vw_Adds setClearsContextBeforeDrawing:YES];
+        adView=[[ADBannerView alloc]init];
+        adView.frame = CGRectOffset(adView.frame, 0, -50);
+        adView.delegate=self;
+        
+        [vw_Adds addSubview:adView];
+        [self.view addSubview:vw_Adds];
+
+    }
 }
 
 #pragma mark - ADBannerView Delegates
@@ -337,6 +455,42 @@
 
 - (BOOL)isiPad {
     return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? YES : NO;
+}
+- (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
+{
+    UIImageView *backGroundView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 768, 46)];
+    backGroundView.image = [UIImage imageNamed:@"right-top-bar.png"];
+    //self.title = NSLocalizedString(@"Eurodatacar", @"Eurodatacar");
+    [self.navigationController.navigationBar insertSubview:backGroundView atIndex:1];
+    [backGroundView release];
+    self.view.frame = CGRectMake(0, 44, 320, 460);
+    
+    UIButton * buttonList2 = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *image2 = [UIImage imageNamed:@""];
+    [buttonList2 setImage:image2 forState:UIControlStateNormal];
+    //buttonList2.contentEdgeInsets = UIEdgeInsetsMake(12, 12, 12, 12);
+    buttonList2.frame = CGRectMake(0, 3, 60, 31);
+    [buttonList2 addTarget:barButtonItem.target action:barButtonItem.action forControlEvents:UIControlEventTouchUpInside];
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 39, 39)];
+    view.contentMode = UIViewContentModeCenter;
+    [view addSubview:buttonList2];
+    
+    [barButtonItem setCustomView:view];
+    [view release];
+    //[self.navigationController.navigationBar addSubview:buttonList2];
+    
+    [self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
+    self.masterPopoverController = popoverController;
+    self.appdelegate.masterPopoverButtonItem = barButtonItem;    
+}
+
+- (void)splitViewController:(UISplitViewController *)splitController willShowViewController:(UIViewController *)viewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+{
+    // Called when the view is shown again in the split view, invalidating the button and popover controller.
+    [self.navigationItem setLeftBarButtonItem:nil animated:YES];
+    self.masterPopoverController = nil;
+    self.appdelegate.masterPopoverButtonItem = barButtonItem;
 }
 
 @end

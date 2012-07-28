@@ -39,19 +39,44 @@
 #pragma mark - Add Navigation
 
 - (void) loadNavigation {
-    CustomNavigation *myCustomNavigation =[[CustomNavigation alloc] initWithNibName:@"CustomNavigation"bundle:nil];
+    if([self isiPad])
+    {
+    CustomNavigation *myCustomNavigation =[[CustomNavigation alloc] initWithNibName:@"CustomNavigation_ipad"bundle:nil];
     [self.view addSubview:[myCustomNavigation view]];
-    [myCustomNavigation setNavImageView:[UIImage imageNamed:@"logo.png"]];
+    [myCustomNavigation setNavImageView:[UIImage imageNamed:@""]];
     [myCustomNavigation setBackActive:NO];
     [myCustomNavigation setListActive:NO];
     [myCustomNavigation setInfoActive:NO];
-    [myCustomNavigation setMenubtn:YES];
+    [myCustomNavigation setDoneBtn:YES];
+
+    [myCustomNavigation setMenubtn:NO];
     [myCustomNavigation setbtnHeart:NO heartImage:NO];
-    [myCustomNavigation release];
+    }
+    else
+    {
+        CustomNavigation *myCustomNavigation =[[CustomNavigation alloc] initWithNibName:@"CustomNavigation"bundle:nil];
+        [self.view addSubview:[myCustomNavigation view]];
+        [myCustomNavigation setNavImageView:[UIImage imageNamed:@"logo.png"]];
+        [myCustomNavigation setBackActive:NO];
+        [myCustomNavigation setListActive:NO];
+        [myCustomNavigation setInfoActive:NO];
+        [myCustomNavigation setMenubtn:YES];
+        [myCustomNavigation setbtnHeart:NO heartImage:NO];
+   
+    }
 }
 -(IBAction)infoBtnAction:(id)sender
+
 {
+    if([self isiPad])
+    {
     [self dismissModalViewControllerAnimated:YES];
+    }
+    else
+    {
+        [self dismissModalViewControllerAnimated:YES];
+
+    }
     
 }
 #pragma mark - Button Action

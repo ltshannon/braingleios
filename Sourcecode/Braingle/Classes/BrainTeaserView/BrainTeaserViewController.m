@@ -200,17 +200,39 @@
 
 - (void) loadNavigation {
     self.navigationController.navigationBarHidden=YES;
-    CustomNavigation *myCustomNavigation =[[CustomNavigation alloc] initWithNibName:@"CustomNavigation"bundle:nil];
-    [self.view addSubview:[myCustomNavigation view]];
-    [myCustomNavigation setNavImageView:[UIImage imageNamed:@""]];
-    [myCustomNavigation setnavigationImage:NO];
-    [myCustomNavigation setBackActive:YES];
-    [myCustomNavigation setListActive:YES];
-    [myCustomNavigation setInfoActive:NO];    
-    [myCustomNavigation setMenubtn:NO];
-    [myCustomNavigation setbtnHeart:NO heartImage:NO];
-    [myCustomNavigation setLabelNav:YES setText:strCategoryType];
-    [myCustomNavigation release];
+    if([self isiPad])
+    {
+    myCustomNavigation =[[CustomNavigation alloc] initWithNibName:@"CustomNavigation_ipad"bundle:nil];
+        [self.view addSubview:[myCustomNavigation view]];
+        [myCustomNavigation setNavImageView:[UIImage imageNamed:@""]];
+        [myCustomNavigation setnavigationImage:NO];
+        [myCustomNavigation setBackActive:YES];
+        [myCustomNavigation setListActive:YES];
+        [myCustomNavigation setInfoActive:NO]; 
+        [myCustomNavigation setDoneBtn:NO];
+        [myCustomNavigation setMenubtn:NO];
+        [myCustomNavigation setbtnHeart:NO heartImage:NO];
+        [myCustomNavigation setLabelNav:YES setText:strCategoryType];
+        [myCustomNavigation release];
+
+       }
+    else
+    {
+    myCustomNavigation =[[CustomNavigation alloc] initWithNibName:@"CustomNavigation"bundle:nil];
+        [self.view addSubview:[myCustomNavigation view]];
+        [myCustomNavigation setNavImageView:[UIImage imageNamed:@""]];
+        [myCustomNavigation setnavigationImage:NO];
+        [myCustomNavigation setBackActive:YES];
+        [myCustomNavigation setListActive:YES];
+        [myCustomNavigation setInfoActive:NO];    
+        [myCustomNavigation setMenubtn:NO];
+        [myCustomNavigation setbtnHeart:NO heartImage:NO];
+        [myCustomNavigation setLabelNav:YES setText:strCategoryType];
+        [myCustomNavigation release];
+
+
+    }
+    
 }
 
 #pragma mark - Button Action
@@ -447,6 +469,28 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if([self isiPad])
+    {
+        DetailViewController *mefair=[[DetailViewController alloc]initWithNibName:@"DetailViewController_iPad" bundle:nil];
+        if (checkFavorite) {
+            mefair.strDetailId = [[favoritesArray objectAtIndex:indexPath.row] valueForKey:@"id"];
+            mefair.selectedDictionary = [favoritesArray objectAtIndex:indexPath.row];
+        } else {
+            mefair.strDetailId = [[listArray objectAtIndex:indexPath.row] valueForKey:@"id"];
+            mefair.selectedDictionary = [listArray objectAtIndex:indexPath.row];
+        }
+
+            [self.splitViewController.splitViewController viewWillDisappear:YES];
+            NSMutableArray *viewControllerArray = [[NSMutableArray alloc] initWithArray:[[self.splitViewController.viewControllers objectAtIndex:1] viewControllers]];
+            [viewControllerArray removeAllObjects];
+            [viewControllerArray addObject:mefair];
+            [[self.splitViewController.viewControllers objectAtIndex:1] setViewControllers:viewControllerArray animated:YES];
+            [self.splitViewController.splitViewController viewWillAppear:YES];
+       
+    
+    }
+    else
+    {
     DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController_iPhone" bundle:nil];
     if (checkFavorite) {
         detailViewController.strDetailId = [[favoritesArray objectAtIndex:indexPath.row] valueForKey:@"id"];
@@ -457,23 +501,43 @@
     }
     [self.navigationController pushViewController:detailViewController animated:YES];
     [detailViewController release];
+    }
 }
 
 #pragma mark - Load iAd 
 
 -(void)CreateBannerForPage
 {
-    UIView *vw_Adds=[[UIView alloc]init];
-    [vw_Adds setFrame:CGRectMake(0, 410, 320, 50)];
-    [vw_Adds setClipsToBounds:YES];
-    [vw_Adds setClearsContextBeforeDrawing:YES];
-    adView=[[ADBannerView alloc]init];
-    adView.frame = CGRectOffset(adView.frame, 0, -50);
-    adView.delegate=self;
-    
-    [vw_Adds addSubview:adView];
-    [self.view addSubview:vw_Adds];
-    [vw_Adds release];
+    if([self isiPad])
+    {
+        
+        UIView *vw_Adds=[[UIView alloc]init];
+        [vw_Adds setFrame:CGRectMake(0, 710, 320, 850)];
+        [vw_Adds setClipsToBounds:YES];
+        [vw_Adds setClearsContextBeforeDrawing:YES];
+        adView=[[ADBannerView alloc]init];
+        adView.frame = CGRectOffset(adView.frame, 0, -50);
+        adView.delegate=self;
+        
+        [vw_Adds addSubview:adView];
+        [self.view addSubview:vw_Adds];
+
+
+    }
+    else
+    {
+        UIView *vw_Adds=[[UIView alloc]init];
+        [vw_Adds setFrame:CGRectMake(0, 410, 320, 50)];
+        [vw_Adds setClipsToBounds:YES];
+        [vw_Adds setClearsContextBeforeDrawing:YES];
+        adView=[[ADBannerView alloc]init];
+        adView.frame = CGRectOffset(adView.frame, 0, -50);
+        adView.delegate=self;
+        [vw_Adds addSubview:adView];
+        [self.view addSubview:vw_Adds];
+
+
+    }
 }
 
 #pragma mark - ADBannerView Delegates 

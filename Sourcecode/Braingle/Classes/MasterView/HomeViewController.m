@@ -11,6 +11,11 @@
 @implementation HomeViewController
 
 @synthesize detailViewController = _detailViewController;
+@synthesize masterPopoverController;
+@synthesize appdelegate;
+@synthesize isViewControllerRootViewController;
+@synthesize isViewControllerDetailViewController;
+
 
 #pragma mark - View lifecycle
 
@@ -20,7 +25,7 @@
         
     self.navigationController.navigationBarHidden=YES;
     TeasersectionOneArray=[[NSMutableArray alloc]initWithObjects:@"Featured",@"Favorites",nil ];
-    TeasersectionTwoArray=[[NSMutableArray alloc]initWithObjects: @"Cryptography",@"Group",@"Language",@"Letter Equations",@"Logic",@"Math",@"Mystery",@"OpticalIllusions",@"Other",@"Probability",@"Rebus",@"Riddles",@"Science",@"Series",@"Situation",@"Trick",@"Trivia",nil];
+    TeasersectionTwoArray=[[NSMutableArray alloc]initWithObjects: @"Cryptography",@"Group",@"Language",@"Letter Equations",@"Logic",@"Math",@"Mystery",@"Optical Illusions",@"Other",@"Probability",@"Rebus",@"Riddles",@"Science",@"Series",@"Situation",@"Trick",@"Trivia",nil];
     teaserImageOneArray=[[NSMutableArray alloc]initWithObjects:@"Featured.png",@"Favorites.png",nil];
     teaserImageTwoArray=[[NSMutableArray alloc]initWithObjects:@"Cryptography.png",@"Group.png",@"Language.png",@"Letter.png",@"Logic.png",@"Math.png",@"Mystery.png",@"Optical.png",@"Other.png",@"Probability.png",@"Rebus.png",@"Riddles.png",@"Science.png",@"Series.png",@"Situation.png",@"Trick.png",@"Trivia.png", nil];
     [self loadNavigation];
@@ -33,14 +38,6 @@
     [super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    if ([self isiPad]) {
-        return YES;
-    } else {
-        return (interfaceOrientation == UIInterfaceOrientationPortrait);
-    }
-}
 
 - (void)dealloc
 {
@@ -50,25 +47,59 @@
 #pragma mark - Add Navigation
 
 - (void) loadNavigation {
-    CustomNavigation *myCustomNavigation =[[CustomNavigation alloc] initWithNibName:@"CustomNavigation"bundle:nil];
-    [self.view addSubview:[myCustomNavigation view]];
-    [myCustomNavigation setNavImageView:[UIImage imageNamed:@"logo.png"]];
-    [myCustomNavigation setnavigationImage:YES];
-    [myCustomNavigation setBackActive:NO];
-    [myCustomNavigation setListActive:NO];
-    [myCustomNavigation setInfoActive:YES];
-    [myCustomNavigation setMenubtn:NO];
-    [myCustomNavigation setbtnHeart:NO heartImage:NO];
-    [myCustomNavigation setLabelNav:NO setText:@""];
-    [myCustomNavigation release];
+    if([self isiPad])
+    {
+        myCustomNavigation =[[CustomNavigation alloc] initWithNibName:@"CustomNavigation"bundle:nil];
+        
+        [self.view addSubview:[myCustomNavigation view]];
+        [myCustomNavigation setNavImageView:[UIImage imageNamed:@"logo.png"]];
+        [myCustomNavigation setnavigationImage:YES];
+        [myCustomNavigation setBackActive:NO];
+        [myCustomNavigation setListActive:NO];
+        [myCustomNavigation setInfoActive:YES];
+        [myCustomNavigation setMenubtn:NO];
+        
+        [myCustomNavigation setbtnHeart:NO heartImage:NO];
+        [myCustomNavigation setLabelNav:NO setText:@""];
+        [myCustomNavigation release];
+        
+   
+    }
+    else
+    {
+    
+          myCustomNavigation =[[CustomNavigation alloc] initWithNibName:@"CustomNavigation"bundle:nil];
+    
+        [self.view addSubview:[myCustomNavigation view]];
+        [myCustomNavigation setNavImageView:[UIImage imageNamed:@"logo.png"]];
+        [myCustomNavigation setnavigationImage:YES];
+        [myCustomNavigation setBackActive:NO];
+        [myCustomNavigation setListActive:NO];
+        [myCustomNavigation setInfoActive:YES];
+        [myCustomNavigation setMenubtn:NO];
+        
+        [myCustomNavigation setbtnHeart:NO heartImage:NO];
+        [myCustomNavigation setLabelNav:NO setText:@""];
+        [myCustomNavigation release];
+
+    }
 }
 
 #pragma mark - Button Action
 
 -(IBAction)infoButtonAction:(id)sender
 {
-    InfoViewController *infoViewController = [[InfoViewController alloc] initWithNibName:@"InfoViewController" bundle:nil];
+    if([self isiPad])
+    {
+    InfoViewController *infoViewController = [[InfoViewController alloc] initWithNibName:@"InfoViewController_ipad" bundle:nil];
     [self presentModalViewController:infoViewController animated:YES];
+    }
+    else
+    { 
+        InfoViewController *infoViewController = [[InfoViewController alloc] initWithNibName:@"InfoViewController" bundle:nil];
+        [self presentModalViewController:infoViewController animated:YES];
+
+}
 }
 
 #pragma mark - Table View Delegates
@@ -137,10 +168,27 @@
     if(indexPath.section==0)
     {
         if (indexPath.row==0) {
+            if([self isiPad])
+            {
+                DetailViewController *mefair=[[DetailViewController alloc]initWithNibName:@"DetailViewController_iPad" bundle:nil];
+                 mefair.strDetailId = [TeasersectionOneArray objectAtIndex:indexPath.row] ;
+                [self.splitViewController.splitViewController viewWillDisappear:YES];
+                NSMutableArray *viewControllerArray = [[NSMutableArray alloc] initWithArray:[[self.splitViewController.viewControllers objectAtIndex:1] viewControllers]];
+                [viewControllerArray removeAllObjects];
+                [viewControllerArray addObject:mefair];
+                [[self.splitViewController.viewControllers objectAtIndex:1] setViewControllers:viewControllerArray animated:YES];
+                [self.splitViewController.splitViewController viewWillAppear:YES];
+                [viewControllerArray release];
+
+            }
+            else
+            {
             DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController_iPhone" bundle:nil];
             detailViewController.strDetailId = [TeasersectionOneArray objectAtIndex:indexPath.row] ;
             [self.navigationController pushViewController:detailViewController animated:YES];
             [detailViewController release];
+            }
+            
         }
         if (indexPath.row==1) {
             BrainTeaserViewController *brainTeaserViewController=[[BrainTeaserViewController alloc]initWithNibName:@"BrainTeaserViewController" bundle:nil];
@@ -162,17 +210,34 @@
 
 -(void)CreateBannerForPage
 {
-    UIView *vw_Adds=[[UIView alloc]init];
-    [vw_Adds setFrame:CGRectMake(0, 410, 320, 50)];
-    [vw_Adds setClipsToBounds:YES];
-    [vw_Adds setClearsContextBeforeDrawing:YES];
-    adView=[[ADBannerView alloc]init];
-    adView.frame = CGRectOffset(adView.frame, 0, -50);
-    adView.delegate=self;
-    
-    [vw_Adds addSubview:adView];
-    [self.view addSubview:vw_Adds];
-    [vw_Adds release];
+    if([self isiPad])
+    {
+           UIView *vw_Adds=[[UIView alloc]init];
+        [vw_Adds setFrame:CGRectMake(0, 710, 320, 750)];
+        [vw_Adds setClipsToBounds:YES];
+        [vw_Adds setClearsContextBeforeDrawing:YES];
+        adView=[[ADBannerView alloc]init];
+        adView.frame = CGRectOffset(adView.frame, 0, -50);
+        adView.delegate=self;
+         
+        [vw_Adds addSubview:adView];
+        [self.view addSubview:vw_Adds];
+    }
+    else
+    {
+        
+        UIView *vw_Adds=[[UIView alloc]init];
+        [vw_Adds setFrame:CGRectMake(0, 410, 320, 50)];
+        [vw_Adds setClipsToBounds:YES];
+        [vw_Adds setClearsContextBeforeDrawing:YES];
+        adView=[[ADBannerView alloc]init];
+        adView.frame = CGRectOffset(adView.frame, 0, -50);
+        adView.delegate=self;
+        [vw_Adds addSubview:adView];
+        [self.view addSubview:vw_Adds];
+
+    }
+
 }
 
 #pragma mark - ADBannerView Delegates
@@ -195,5 +260,25 @@
     return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? YES : NO;
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+    
+    if ([self isiPad]) {
+        
+        if (self.isViewControllerRootViewController && self.isViewControllerDetailViewController) { 
+            if (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft || toInterfaceOrientation == UIInterfaceOrientationLandscapeRight) {
+                
+                self.navigationItem.leftBarButtonItem = nil;
+            } else {
+                
+                [[self navigationItem] setLeftBarButtonItem:self.appdelegate.masterPopoverButtonItem];
+            }
+        }
+        
+        
+        return YES;
+    } else {
+        return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
+    }
+}
 
 @end

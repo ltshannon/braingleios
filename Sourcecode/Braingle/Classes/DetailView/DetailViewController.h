@@ -13,6 +13,7 @@
 #import "CustomNavigation.h"
 #import <QuartzCore/QuartzCore.h>
 #import <iAd/iAd.h>
+#import "AppDelegate.h"
 
 
 @interface DetailViewController : UIViewController <UISplitViewControllerDelegate,NSXMLParserDelegate,ADBannerViewDelegate>
@@ -37,10 +38,16 @@
     CustomNavigation                    *myCustomNavigation;
     BOOL                                isFavorite;
     IBOutlet ADBannerView               *adView;
+    UIInterfaceOrientation              deviceOrientation;
 
 }
 @property(nonatomic, retain) NSString *strDetailId;
 @property(nonatomic, retain) NSMutableDictionary *selectedDictionary;
+@property (nonatomic,retain)UIPopoverController       *masterPopoverController;
+@property (nonatomic,retain)AppDelegate               *appdelegate;
+@property (nonatomic, readonly) BOOL isViewControllerRootViewController;
+@property (nonatomic, readonly) BOOL isViewControllerDetailViewController;
+
 
 - (void)loadURL;
 - (void)loadWebView;

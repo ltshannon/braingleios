@@ -37,7 +37,7 @@
     
     NSArray                   *docDir ;
     NSString                  *pathToDocuments ;
-    
+    CustomNavigation *myCustomNavigation;
     
     IBOutlet UIActivityIndicatorView *activityView;
     IBOutlet UIView *loadingView;

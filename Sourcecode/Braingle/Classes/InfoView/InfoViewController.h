@@ -10,7 +10,7 @@
 
 @interface InfoViewController : UIViewController
 {
-    IBOutlet UIWebView *infoWebView;    
+    IBOutlet UIWebView *infoWebView;
 }
 
 - (void)loadNavigation;
