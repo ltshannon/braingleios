@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <iAd/iAd.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,ADBannerViewDelegate>
 {
     IBOutlet UIImageView *splashView;
+    UIInterfaceOrientation deviceOrientation;
+
 }
 @property (strong, nonatomic) UIWindow *window;
 
@@ -20,4 +23,7 @@
 
 @property (nonatomic,retain) IBOutlet  UIImageView *splashView;
 
+@property (nonatomic, retain) UIBarButtonItem *masterPopoverButtonItem;
+
+- (BOOL)isiPad;
 @end

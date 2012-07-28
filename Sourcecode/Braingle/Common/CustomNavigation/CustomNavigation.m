@@ -33,6 +33,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+  
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -87,6 +89,16 @@
 - (void) setMenubtn:(BOOL) isActive
 {
     [btnMenu setHidden:!isActive];
+
+}
+- (void) setDoneBtn:(BOOL) isActive
+{
+    [btnDone setHidden:!isActive];
+}
+
+- (void) setLblHeader:(BOOL) isActive setText:(NSString *)_text
+{
+    [detailLblHeader setText:_text];
 }
 
 //- (void) setLabelHeader:(NSString *)strHeaderText
@@ -95,11 +107,9 @@
 //    [labelHeader setText:strHeaderText];
 //    
 //}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+- (BOOL)isiPad; {
+    return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? YES : NO;
 }
+
 
 @end

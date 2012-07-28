@@ -18,6 +18,8 @@
     IBOutlet UILabel          *headerLabelActive;
     IBOutlet UIButton         *btnHeart;
     IBOutlet UIButton         *btnMenu;
+    IBOutlet UIButton         *btnDone;
+    IBOutlet UILabel          *detailLblHeader;
 }
 
 @property(nonatomic, retain) UIButton         *btnHeart;
@@ -29,6 +31,9 @@
 - (void) setnavigationImage:(BOOL) isActive; 
 - (void) setNavImageView:(UIImage *) imgTittle;
 - (void) setMenubtn:(BOOL) isActive;
+- (void) setDoneBtn:(BOOL) isActive;
+- (void) setLblHeader:(BOOL) isActive setText:(NSString *)_text;
 
+- (BOOL)isiPad; 
 
 @end

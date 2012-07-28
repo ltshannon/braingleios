@@ -18,6 +18,7 @@
 @synthesize navigationController = _navigationController;
 @synthesize splitViewController = _splitViewController;
 @synthesize splashView;
+@synthesize masterPopoverButtonItem;
 - (void)dealloc
 {
     [_window release];
@@ -52,13 +53,29 @@
     [self.window makeKeyAndVisible];
     return YES;
 }
+
+
+
+
 -(void)showSplashView {
     //set a image frame for splashscreen.
+    if([self isiPad])
+    {
+        if (deviceOrientation == UIInterfaceOrientationPortrait || deviceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+            [self.window setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Default-Portrait.png"]]];
+        }        
+        else {
+            [self.window setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Default-Landscape.png"]]];
+        } 
+
+    }
+    else
+    {
 	splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 480.0)];	
 	
 	//And then load a content.
 	splashView.image = [UIImage imageNamed:@"Default.png"];
-    
+    }
 	//image should placed a window. 
 	[self.window addSubview:splashView];
 	[self.window bringSubviewToFront:splashView];
@@ -110,5 +127,30 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+- (BOOL)isiPad {
+    return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? YES : NO;
+
+    {
+        if( [[UIApplication sharedApplication] statusBarOrientation]==UIInterfaceOrientationPortrait || 
+           [[UIApplication sharedApplication] statusBarOrientation]==UIInterfaceOrientationPortraitUpsideDown)
+        {
+        }
+                  
+        else  if( [[UIApplication sharedApplication] statusBarOrientation]==UIInterfaceOrientationLandscapeLeft || 
+                 [[UIApplication sharedApplication] statusBarOrientation]==UIInterfaceOrientationLandscapeRight)
+        {
+                  }
+    }
+}
+    - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+    {
+        if(toInterfaceOrientation==UIInterfaceOrientationPortrait || toInterfaceOrientation==UIInterfaceOrientationPortraitUpsideDown)
+        {
+            
+        }
+        else if((toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft ) || (toInterfaceOrientation==UIInterfaceOrientationLandscapeRight))
+        {
+        }
+    }
 
 @end
