@@ -15,8 +15,7 @@
 #import <iAd/iAd.h>
 #import "AppDelegate.h"
 
-
-@interface BrainTeaserViewController : UIViewController<NSXMLParserDelegate, UIActionSheetDelegate, ADBannerViewDelegate, UISplitViewControllerDelegate>
+@interface BrainTeaserViewController : UIViewController<NSXMLParserDelegate, UIActionSheetDelegate, ADBannerViewDelegate, UISplitViewControllerDelegate,BrainTeaserViewControllerDelegate>
 {
     IBOutlet UITableView    *brainTeaserTableView;
     NSString                *strCategoryType;
@@ -57,6 +56,8 @@
     //Loading icon
     IBOutlet UIActivityIndicatorView    *activityView;
     IBOutlet UIView                     *loadingView;
+    NSUInteger                          selectedRow;
+    UIActionSheet                       *sortActionSheet;
 }
 @property(nonatomic, retain) NSString    *strCategoryType;
 
@@ -74,3 +75,4 @@
 - (BOOL)isiPad;
 
 @end
+

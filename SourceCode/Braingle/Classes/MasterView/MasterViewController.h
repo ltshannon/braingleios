@@ -21,11 +21,14 @@
     UIView                  *iAdView;
     float                   table_Y_Position;
     IBOutlet UIView         *infoView;
+    BOOL                    isiAdClicked;
 }
 
 @property (strong, nonatomic) DetailViewController *detailViewController;
 
 - (BOOL)isiPad;
 - (IBAction)infoButtonAction:(id)sender;
+- (void)autoFeaturedCellSelected:(NSInteger) indexValue;
+
 
 @end

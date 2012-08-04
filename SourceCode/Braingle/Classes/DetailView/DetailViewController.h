@@ -14,6 +14,8 @@
 #import "OpenUDID.h"
 #import "AppDelegate.h"
 #import "InfoViewController.h"
+@protocol BrainTeaserViewControllerDelegate;
+
 
 @interface DetailViewController : UIViewController <UISplitViewControllerDelegate, NSXMLParserDelegate, ADBannerViewDelegate>
 {
@@ -38,14 +40,19 @@
     IBOutlet UIView                     *loadingView;
     UIButton                            *heartButton;
     NSString                            *strCategory;
+    
     UIBarButtonItem                     *menuBarButtonItem;
+    NSString                            *strTypeOfCategory;
 }
 @property (nonatomic, retain) NSString *strDetailId;
+@property (nonatomic, retain) NSString *strTypeOfCategory;
 @property (nonatomic,retain) NSMutableDictionary *selectedDictionary;
 @property (retain, nonatomic) UIPopoverController *masterPopoverController;
 @property (nonatomic, retain)  AppDelegate*applicationDelegate;
 @property (nonatomic, readonly) BOOL isViewControllerRootViewController;
 @property (nonatomic, readonly) BOOL isViewControllerDetailViewController;
+@property(nonatomic, retain) id<BrainTeaserViewControllerDelegate> brainDelegate;
+
 
 - (void)checkFileCreateTime;
 - (void)LoadIcon;
@@ -57,5 +64,12 @@
 - (BOOL)isiPad;
 
 @end
+
+@protocol BrainTeaserViewControllerDelegate <NSObject>
+
+- (void)reloadTableView;
+
+@end
+
 
 

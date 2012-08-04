@@ -10,9 +10,9 @@
 
 
 @implementation DetailViewController
-@synthesize strDetailId;
+@synthesize strDetailId,strTypeOfCategory;
 @synthesize selectedDictionary;
-
+@synthesize brainDelegate;
 
 @synthesize masterPopoverController = _masterPopoverController;
 @synthesize applicationDelegate = _applicationDelegate;
@@ -39,9 +39,6 @@
     [heartButton addTarget:self action:@selector(favoritesButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [heartButton setImage:[UIImage imageNamed:@"fav.png"] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:heartButton];
-    if (strDetailId == NULL) {
-        strDetailId = @"Featured";
-    }
     if ([self isiPad]) {
         self.applicationDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     }
@@ -49,6 +46,11 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {  
+    NSLog(@"strDetailId = %@",strDetailId);
+    if (strDetailId == NULL || [strDetailId isEqualToString:@""] || [strDetailId isEqualToString:@"(null)"]) {
+        strDetailId = @"Featured";
+    }
+    
     favoritesArray=[dataBase getFavoriteData];
     docDir=NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     pathToDocuments=[[docDir objectAtIndex:0]copy];
@@ -116,7 +118,7 @@
         }
         return YES;
     } else {
-        return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
+        return YES;
     }
 
 }
@@ -141,7 +143,9 @@
     
 - (void)loadWebView
 {
+    NSLog(@"strDetailId = %@",strDetailId);
     NSString *urlAddress = DETAILVIEW_URL(strDetailId, [OpenUDID value]);
+    NSLog(@"urlAddress = %@",urlAddress);
     NSData *htmlData = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlAddress]];
     NSString *fileName = [NSString stringWithFormat:@"%@.html",strDetailId];
     if (![[NSFileManager defaultManager] fileExistsAtPath:[pathToDocuments stringByAppendingPathComponent:fileName]])
@@ -161,6 +165,7 @@
 
 - (void)checkFileCreateTime
 {
+    NSLog(@"checkFileCreateTime");
     NSString *fileName = [NSString stringWithFormat:@"FeatureID"];
     NSString* filePath = [pathToDocuments stringByAppendingPathComponent:fileName];
     NSError* error;
@@ -342,7 +347,10 @@
         
         [((UIButton*)sender) setImage:[UIImage imageNamed:@"fav-active.png"] forState:UIControlStateNormal];
         [dataBase addFavoriteData:selectedDictionary]; 
-    }    
+    }  
+    if ([strTypeOfCategory isEqualToString:@"Favorite"]) {
+        [self.brainDelegate reloadTableView];
+    }
 }
 							
 #pragma mark - Split view Delegates

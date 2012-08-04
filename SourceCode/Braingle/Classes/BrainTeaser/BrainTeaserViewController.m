@@ -21,6 +21,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    selectedRow = -1;
     UIBarButtonItem *sortButton = [[UIBarButtonItem alloc] initWithTitle:@"Sort" style:UIBarButtonItemStyleBordered target:self action:@selector(sortButtonAction:)];
     self.navigationItem.rightBarButtonItem = sortButton;
     [sortButton release];
@@ -42,6 +43,14 @@
     [self checkCategoryType];
 }
 
+//- (void)viewWillDisappear:(BOOL)animated
+//{
+//    [super viewWillDisappear:animated];
+//    
+//    if (sortActionSheet.window) // If action sheet is on screen, window is non-nil
+//        [sortActionSheet dismissWithClickedButtonIndex:sortActionSheet.cancelButtonIndex animated:animated];
+//}
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -49,8 +58,8 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    if ([self isiPad]) {
+        return YES;
     } else {
         return YES;
     }
@@ -339,14 +348,14 @@
 
 - (IBAction)sortButtonAction:(id)sender
 {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@""  delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Hardest", @"Easiest",@"Most Popular",@"Most Recent",nil ];
-    [actionSheet setActionSheetStyle:UIBarStyleDefault];
+    sortActionSheet = [[UIActionSheet alloc] initWithTitle:@""  delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Hardest", @"Easiest",@"Most Popular",@"Most Recent",nil ];
+    [sortActionSheet setActionSheetStyle:UIBarStyleDefault];
     if ([self isiPad]) {
-        [actionSheet showFromBarButtonItem:self.navigationItem.rightBarButtonItem animated:YES];
+        [sortActionSheet showInView:[UIApplication sharedApplication].keyWindow];
     } else {
-        [actionSheet showInView:self.view];
+        [sortActionSheet showInView:self.view];
     }
-    [actionSheet release];
+    [sortActionSheet release];
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex 
@@ -411,8 +420,6 @@
     }
 }
 
-
-
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -469,11 +476,6 @@
     [cell.contentView addSubview:gearImage2];
     [cell.contentView addSubview:gearImage3];
     [cell.contentView addSubview:gearImage4];
-    
-    
-    
-
-    
     
     return cell;
 }
@@ -653,7 +655,6 @@
         }
         gearImage3.image = [UIImage imageNamed:@"gear0.png"];
         gearImage4.image = [UIImage imageNamed:@"gear0.png"];
-        
     }
     else if(floor(difficulty) == 2.0)
     {
@@ -716,7 +717,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //Check the cell clicked or not.
+    if (selectedRow == indexPath.row) {
+        return;
+    }
     
+    selectedRow = indexPath.row;
+
     DetailViewController *detailViewController;            
     if ([self isiPad]) 
     {
@@ -724,16 +731,20 @@
         if (checkFavorite) {
             detailViewController.strDetailId = [[favoritesArray objectAtIndex:indexPath.row] valueForKey:@"id"];
             detailViewController.selectedDictionary = [favoritesArray objectAtIndex:indexPath.row];
+            detailViewController.strTypeOfCategory = @"Favorite";
         } else {
             detailViewController.strDetailId = [[listArray objectAtIndex:indexPath.row] valueForKey:@"id"];
             detailViewController.selectedDictionary = [listArray objectAtIndex:indexPath.row];
+            detailViewController.strTypeOfCategory = @"BrainTeaser";
+
         }
+        detailViewController.brainDelegate = self;
         [self.splitViewController.splitViewController viewWillDisappear:YES];
         NSMutableArray *viewControllerArray = [[NSMutableArray alloc] initWithArray:[[self.splitViewController.viewControllers objectAtIndex:1] viewControllers]];
         [viewControllerArray removeAllObjects];
         [viewControllerArray addObject:detailViewController];
         self.splitViewController.delegate = detailViewController;
-        [[self.splitViewController.viewControllers objectAtIndex:1] setViewControllers:viewControllerArray animated:YES];
+        [[self.splitViewController.viewControllers objectAtIndex:1] setViewControllers:viewControllerArray animated:NO];
         [self.splitViewController.splitViewController viewWillAppear:YES];
     }
     else 
@@ -746,6 +757,7 @@
             detailViewController.strDetailId = [[listArray objectAtIndex:indexPath.row] valueForKey:@"id"];
             detailViewController.selectedDictionary = [listArray objectAtIndex:indexPath.row];
         }
+        detailViewController.brainDelegate = self;
         [self.navigationController pushViewController:detailViewController animated:YES];
     }
     [detailViewController release];
@@ -759,7 +771,35 @@
     return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? YES : NO;
 }
 
+- (void)reloadTableView
+{
+    favoritesArray = [dataBase getFavoriteData];
+    NSLog(@"favoritesArray = %@",favoritesArray);
+    [brainTeaserTableView reloadData];
+    selectedRow = -1;
+}
 
-
+//- (void)viewDidLoad {
+//    bannerView = [[ADBannerView alloc] 
+//                  initWithFrame:CGRectZero];
+//    bannerView.requiredContentSizeIdentifiers = 
+//    [NSSet setWithObjects: 
+//     ADBannerContentSizeIdentifierPortrait,	
+//     ADBannerContentSizeIdentifierLandscape, nil];
+//    bannerView.delegate = self;
+//    [super viewDidLoad];
+//}
+//
+//- (BOOL)shouldAutorotateToInterfaceOrientation:
+//(UIInterfaceOrientation)interfaceOrientation {
+//    if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
+//        bannerView.currentContentSizeIdentifier =
+//        ADBannerContentSizeIdentifierLandscape;
+//    else
+//        bannerView.currentContentSizeIdentifier =
+//        ADBannerContentSizeIdentifierPortrait;
+//    return YES;
+//}
+//
 
 @end
