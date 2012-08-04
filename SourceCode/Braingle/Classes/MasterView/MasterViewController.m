@@ -55,11 +55,8 @@
     self.navigationItem.leftBarButtonItem = infoButton;
     [infoButton release];
     
-//    if (![self isiPad]) {
-//        [self CreateBannerForPage];
-//    }
-    self.tableView.allowsSelection = YES; // Keeps cells from being selectable while not editing. No more blue flash.
-    self.tableView.allowsSelectionDuringEditing = YES; // Allows cells to be selectable during edit mode.
+    self.tableView.allowsSelection = YES; 
+    self.tableView.allowsSelectionDuringEditing = YES; 
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -148,69 +145,6 @@
     }
 }
 
-#pragma mark - Add iAd
-
--(void)CreateBannerForPage
-{
-//     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-
-    iAdView=[[UIView alloc]init];
-    adView = [[ADBannerView alloc]init];
-//    if ([self isiPad]) {
-//        if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-//            [iAdView setFrame:CGRectMake(0, 950, 1024, 50)];
-//            adView.frame = CGRectMake(0, 0, 1024, 50);
-//
-//        } else 
-//        {
-//            [iAdView setFrame:CGRectMake(0, 950, 1024, 50)];
-//            adView.frame = CGRectMake(0, 0, 1024, 50);
-//        }
-//    }
-//    else 
-//    {
-//        if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
-//        {
-//            [iAdView setFrame:CGRectMake(0, 365, 320, 50)];
-//            adView.frame = CGRectMake(0, 0, 320, 50);
-//        }
-//        else 
-//        {
-//            [iAdView setFrame:CGRectMake(0, 365, 320, 50)];
-//            adView.frame = CGRectMake(0, 0, 320, 50);
-//
-//        }
-//
-//    }
-    [iAdView setClipsToBounds:YES];
-    [iAdView setClearsContextBeforeDrawing:YES];
-    adView.frame = CGRectOffset(adView.frame, 0, -50);
-    adView.delegate=self;
-    [iAdView addSubview:adView];
-    if ([self isiPad]) {
-        [self.splitViewController.view addSubview:iAdView];
-    } else {
-        [self.tableView addSubview:iAdView];
-    }
-     
-    
-/*
-    ADBannerView *adBannerView = [[ADBannerView alloc] initWithFrame:CGRectZero];
-    if (interfaceOrientation == (UIInterfaceOrientationPortrait | UIInterfaceOrientationPortraitUpsideDown)) {
-        <#statements#>
-    }
-    adBannerView.requiredContentSizeIdentifiers = [NSSet setWithObjects:ADBannerContentSizeIdentifierLandscape,ADBannerContentSizeIdentifierPortrait,nil];
-    if ([self isiPad]) 
-    {
-        [self.splitViewController.splitViewController.view addSubview:adView];
-    }
-    else 
-    {
-        [self.view addSubview:adView];
-    }
-*/
-}
-
 #pragma mark - ADBannerView Delegates
 
 - (void)bannerViewDidLoadAd:(ADBannerView *)banner
@@ -272,11 +206,6 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
-
-//-(NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return [NSIndexPath indexPathForRow:0 inSection:0];
-//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

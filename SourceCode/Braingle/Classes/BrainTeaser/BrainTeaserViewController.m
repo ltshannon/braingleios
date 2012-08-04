@@ -779,27 +779,4 @@
     selectedRow = -1;
 }
 
-//- (void)viewDidLoad {
-//    bannerView = [[ADBannerView alloc] 
-//                  initWithFrame:CGRectZero];
-//    bannerView.requiredContentSizeIdentifiers = 
-//    [NSSet setWithObjects: 
-//     ADBannerContentSizeIdentifierPortrait,	
-//     ADBannerContentSizeIdentifierLandscape, nil];
-//    bannerView.delegate = self;
-//    [super viewDidLoad];
-//}
-//
-//- (BOOL)shouldAutorotateToInterfaceOrientation:
-//(UIInterfaceOrientation)interfaceOrientation {
-//    if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
-//        bannerView.currentContentSizeIdentifier =
-//        ADBannerContentSizeIdentifierLandscape;
-//    else
-//        bannerView.currentContentSizeIdentifier =
-//        ADBannerContentSizeIdentifierPortrait;
-//    return YES;
-//}
-//
-
 @end
