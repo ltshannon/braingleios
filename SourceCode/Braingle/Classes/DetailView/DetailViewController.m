@@ -336,18 +336,12 @@
         
         [((UIButton*)sender) setImage:[UIImage imageNamed:@"fav.png"] forState:UIControlStateNormal];
         [dataBase removeFavoriteData:[selectedDictionary valueForKey:@"id"]]; 
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Braingle" message:@"Successfully removed from favorites." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-        [alert release];
     } else {
         
         //Remove from favorites.
         
         [((UIButton*)sender) setImage:[UIImage imageNamed:@"fav-active.png"] forState:UIControlStateNormal];
         [dataBase addFavoriteData:selectedDictionary]; 
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Braingle" message:@"Successfully added to favorites." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-        [alert release];
     }    
 }
 							

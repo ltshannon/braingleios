@@ -309,7 +309,6 @@
 		30A6329B15C942C800FC590A = {
 			isa = PBXGroup;
 			children = (
-				30C8682C15CBEEE80074F603 /* QuartzCore.framework */,
 				30A632B015C942C800FC590A /* Braingle */,
 				30A632A915C942C800FC590A /* Frameworks */,
 				30A632A715C942C800FC590A /* Products */,
@@ -328,6 +327,7 @@
 			isa = PBXGroup;
 			children = (
 				30A6336F15C9583800FC590A /* libsqlite3.0.dylib */,
+				30C8682C15CBEEE80074F603 /* QuartzCore.framework */,
 				30A6336D15C9582D00FC590A /* iAd.framework */,
 				30A632AA15C942C800FC590A /* UIKit.framework */,
 				30A632AC15C942C800FC590A /* Foundation.framework */,

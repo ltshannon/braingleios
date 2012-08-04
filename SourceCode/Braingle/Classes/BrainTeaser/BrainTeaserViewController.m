@@ -27,8 +27,7 @@
     
     favoritesArray = [[NSMutableArray alloc] init];
     dataBase     =  [[Database alloc] initialise];
-    self.title = strCategoryType;
-    
+    self.title = @"Brain Teaser";;
     docDir = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     pathToDocuments  = [[docDir objectAtIndex:0] copy];
     if (![self isiPad])
@@ -152,7 +151,9 @@
 
 -(void)loadURL{
     responseData = [[NSMutableData alloc]initWithLength:0];
-    NSString *strURL = CATEGORYTYPE_URL(strCategoryType,[OpenUDID  value]);
+    NSString *strTempCategory = [strCategoryType stringByReplacingOccurrencesOfString:@" " withString:@"-"];
+    
+    NSString *strURL = CATEGORYTYPE_URL(strTempCategory,[OpenUDID  value]);
     strURL = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"strURL = %@",strURL);
     NSURL *url=[NSURL URLWithString:strURL];	
@@ -387,6 +388,10 @@
             [listArray sortUsingDescriptors:descriptors];
         }
         [brainTeaserTableView reloadData];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        [brainTeaserTableView scrollToRowAtIndexPath:indexPath
+                              atScrollPosition:UITableViewScrollPositionTop
+                                      animated:YES];
     }
 }
 
