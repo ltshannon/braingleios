@@ -34,7 +34,6 @@
     
     NSMutableArray                      *favoritesArray;
     BOOL                                isFavorite;
-    IBOutlet ADBannerView               *adView;
     
     IBOutlet UIActivityIndicatorView    *activityView;
     IBOutlet UIView                     *loadingView;
@@ -43,6 +42,11 @@
     
     UIBarButtonItem                     *menuBarButtonItem;
     NSString                            *strTypeOfCategory;
+    
+    //iAd
+    ADBannerView                        *adView;
+    UIView                              *iAdView;
+
 }
 @property (nonatomic, retain) NSString *strDetailId;
 @property (nonatomic, retain) NSString *strTypeOfCategory;
@@ -60,7 +64,7 @@
 - (void)loadURL;
 - (void)loadWebView;
 - (IBAction)favoritesButtonAction:(id)sender;
-- (void)CreateBannerForPage;
+//- (void)CreateBannerForPage;
 - (BOOL)isiPad;
 
 @end

@@ -16,6 +16,7 @@
     sqlite3 *database;
 	NSString *databaseName;
 	NSString *databasePath;
+    NSMutableArray *Detail;
 }
 
 - (id) initialise;

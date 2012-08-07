@@ -19,6 +19,11 @@
     //NSLog(@"Open database");
 	return self;
 }
+- (void)dealloc
+{
+    [super dealloc];
+    [Detail release];
+}
 
 -(BOOL) openDatabase
 {
@@ -201,7 +206,7 @@
 
 - (NSMutableArray *)getFavoriteData;
 {
-    NSMutableArray *Detail = [[NSMutableArray alloc] init];
+    Detail = [[NSMutableArray alloc] init];
     
     NSString *query = [NSString stringWithFormat:@"SELECT favorites_id,date,title,difficulty,popularity FROM Favorites_Table"];
     // NSLog(@"query for get = %@",query);

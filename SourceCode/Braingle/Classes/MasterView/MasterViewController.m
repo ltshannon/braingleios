@@ -140,9 +140,9 @@
         infoViewController = [[InfoViewController alloc] initWithNibName:@"InfoViewController_iPhone" bundle:nil];
         infoNavigationController = [[UINavigationController alloc] initWithRootViewController:infoViewController];
         [self.navigationController presentModalViewController:infoNavigationController animated:YES];
-        [infoNavigationController release];
-        [infoViewController release];
     }
+    [infoNavigationController release];
+    [infoViewController release];
 }
 
 #pragma mark - ADBannerView Delegates

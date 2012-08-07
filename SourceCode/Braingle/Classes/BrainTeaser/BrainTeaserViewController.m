@@ -16,6 +16,23 @@
 - (void)dealloc
 {
     [super dealloc];
+    [rssParser release];
+    [responseData release];
+    [favoritesArray release];
+    [listArray release];
+    [strCategoryType release];
+    [strid release];
+    [strDate release];
+    [strDifficulty release];
+    [strPopularity release];
+    [starImage1 release];
+    [starImage2 release];
+    [starImage3 release];
+    [starImage4 release];
+    [gearImage1 release];
+    [gearImage2 release];
+    [gearImage3 release];
+    [gearImage4 release];
 }
 
 - (void)viewDidLoad
@@ -27,29 +44,33 @@
     [sortButton release];
     
     favoritesArray = [[NSMutableArray alloc] init];
-    dataBase     =  [[Database alloc] initialise];
+    dataBase = [[Database alloc] init];
+    dataBase=[dataBase initialise];
     self.title = @"Brain Teaser";;
     docDir = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     pathToDocuments  = [[docDir objectAtIndex:0] copy];
-    if (![self isiPad])
-    {
-        [self CreateBannerForPage];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    
+    
+    iAdView=[[UIView alloc]init];
+    adView = [[ADBannerView alloc]init];
+    [iAdView setClipsToBounds:YES];
+    [iAdView setClearsContextBeforeDrawing:YES];
+    adView.frame = CGRectOffset(adView.frame, 0, -50);
+    adView.delegate=self;
+    [iAdView addSubview:adView];
+    if (![self isiPad]) {
+        [self.view addSubview:iAdView];
+    }
+
+    
+    
     [super viewWillAppear:animated];
     [self checkCategoryType];
 }
-
-//- (void)viewWillDisappear:(BOOL)animated
-//{
-//    [super viewWillDisappear:animated];
-//    
-//    if (sortActionSheet.window) // If action sheet is on screen, window is non-nil
-//        [sortActionSheet dismissWithClickedButtonIndex:sortActionSheet.cancelButtonIndex animated:animated];
-//}
 
 - (void)viewDidUnload
 {
@@ -58,10 +79,32 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
+    if (![self isiPad]) {
+        if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
+            adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
+        else
+            adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+    }
     if ([self isiPad]) {
         return YES;
     } else {
         return YES;
+    }
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    if (![self isiPad]) {
+        if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
+        {
+            [iAdView setFrame:CGRectMake(0, 365, 320, 50)];
+            adView.frame = CGRectMake(0, 0, 320, 50);
+        }
+        else 
+        {
+            [iAdView setFrame:CGRectMake(0, 237, 480, 50)];
+            adView.frame = CGRectMake(0, 0, 480, 50);
+        }
     }
 }
 
@@ -149,12 +192,10 @@
 	[activityView release];
 }
 
-
 - (void)removeLoadIcon
 {
     [loadingView removeFromSuperview];
 }
-
 
 #pragma mark - Load URL
 
@@ -178,10 +219,10 @@
     [rssParser setShouldReportNamespacePrefixes:NO];
     [rssParser setShouldResolveExternalEntities:NO];
     [rssParser parse];
+    [xmlURL release];
 }
 
 #pragma mark - Connection Delegates
-
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
@@ -200,13 +241,13 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
-
 {
     [connection cancel];
     NSString *strResponseData   = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]; 
     if ([strResponseData isEqualToString:@""]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Braingle" message:@"Sorry Feed not Available!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
+        [alert release];
     }
     else
     {
@@ -216,11 +257,10 @@
         NSMutableData *data = [NSData dataWithContentsOfFile:[pathToDocuments stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",strCategoryType]]];
         [self parseXMLFileAtURL:data];
     }
+    [strResponseData release];
 }
 
-
 #pragma mark - XML Parsing Delegates
-
 
 -(void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError{
     NSString * errorString = [NSString stringWithFormat:@"Unable to download feed from web site (Error code %i )", [parseError code]];
@@ -228,9 +268,12 @@
     
     UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"Error loading content" message:errorString delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 	[errorAlert show];
+    [errorAlert release];
+
     [self removeLoadIcon];
     
 }
+
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
 {
     currentElement=[elementName copy];
@@ -247,7 +290,6 @@
         strTitle=[[NSMutableString alloc]init];
         strPopularity=[[NSMutableString alloc]init];
         strDifficulty=[[NSMutableString alloc]init];
-        
     }
 }
 
@@ -260,7 +302,6 @@
     if([currentElement isEqualToString:@"date"])
     {
         [strDate appendString:string];
-        
     }
     if([currentElement isEqualToString:@"title"])
     {
@@ -316,20 +357,6 @@
     [self removeLoadIcon];
 }
 
--(void)CreateBannerForPage
-{
-    UIView *vw_Adds=[[UIView alloc]init];
-    [vw_Adds setFrame:CGRectMake(0, 365, 320, 50)];
-    [vw_Adds setClipsToBounds:YES];
-    [vw_Adds setClearsContextBeforeDrawing:YES];
-    adView=[[ADBannerView alloc]init];
-    adView.frame = CGRectOffset(adView.frame, 0, -50);
-    adView.delegate=self;
-    [vw_Adds addSubview:adView];
-    [self.view addSubview:vw_Adds];
-}
-
-
 #pragma mark - ADBannerView Delegates
 
 - (void)bannerViewDidLoadAd:(ADBannerView *)banner
@@ -337,12 +364,22 @@
     [adView setHidden:NO];
     banner.frame = CGRectOffset(banner.frame, 0, 50);
 }
+- (BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave
+{
+    return YES;
+}
+
+- (void)bannerViewActionDidFinish:(ADBannerView *)banner
+{
+    
+}
 
 - (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
 {
     banner.frame = CGRectOffset(banner.frame, 0, -50);
     [adView setHidden:YES];
 }
+
 
 #pragma mark - Sorting Action
 
@@ -364,10 +401,10 @@
 }
 - (void) sortingList:(NSInteger)indexValue
 {
-    NSLog(@"indexValue = %d",indexValue);
+//    NSLog(@"indexValue = %d",indexValue);
     
     if ([listArray count] != 0 || favoritesArray != 0) {
-        NSSortDescriptor *sortDescriptor;
+        
         if (indexValue == 0)
         {
             sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"difficulty"  ascending:NO];
@@ -375,7 +412,6 @@
         else if (indexValue == 1)
         {
             sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"difficulty"  ascending:YES];
-            
         }
         else if (indexValue == 2)
         {
@@ -389,8 +425,7 @@
         {
             sortDescriptor=nil;
         }
-        NSArray *descriptors = [[NSArray alloc] init];
-        descriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
+        NSArray *descriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
         if (checkFavorite) {
             [favoritesArray sortUsingDescriptors:descriptors];
         } else {
@@ -424,10 +459,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 
-    UILabel *titleLabel = [[UILabel alloc] init];
     starImage1=[[UIImageView alloc]init];
     starImage2=[[UIImageView alloc]init];
     starImage3=[[UIImageView alloc]init];
@@ -438,7 +472,7 @@
     gearImage3=[[UIImageView alloc]init];
     gearImage4=[[UIImageView alloc]init];
     
-    titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(13, 4, 192, 43)];
+    UILabel *titleLabel = [[[UILabel alloc] initWithFrame:CGRectMake(13, 4, 192, 43)]autorelease];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.textColor = [UIColor blackColor];
     titleLabel.textAlignment = UITextAlignmentLeft;
@@ -718,8 +752,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //Check the cell clicked or not.
-    if (selectedRow == indexPath.row) {
-        return;
+    if ([self isiPad]) {
+        if (selectedRow == indexPath.row) {
+            return;
+        }
     }
     
     selectedRow = indexPath.row;
@@ -746,6 +782,7 @@
         self.splitViewController.delegate = detailViewController;
         [[self.splitViewController.viewControllers objectAtIndex:1] setViewControllers:viewControllerArray animated:NO];
         [self.splitViewController.splitViewController viewWillAppear:YES];
+        [viewControllerArray release];
     }
     else 
     {

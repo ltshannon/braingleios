@@ -17,7 +17,7 @@
     NSMutableArray          *teaserSectionTwoImageArray;
     NSMutableArray          *teaserSectionOneArray;
     NSMutableArray          *teaserSectionTwoArray;
-    IBOutlet ADBannerView   *adView;
+    ADBannerView            *adView;
     UIView                  *iAdView;
     float                   table_Y_Position;
     IBOutlet UIView         *infoView;

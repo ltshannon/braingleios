@@ -41,7 +41,8 @@
     BOOL                      checkFavorite;
     
     //iAd
-    IBOutlet ADBannerView     *adView;
+    ADBannerView            *adView;
+    UIView                  *iAdView;
     
     //Rating icon
     UIImageView             *starImage1;
@@ -58,6 +59,7 @@
     IBOutlet UIView                     *loadingView;
     NSUInteger                          selectedRow;
     UIActionSheet                       *sortActionSheet;
+    NSSortDescriptor                    *sortDescriptor;
 }
 @property(nonatomic, retain) NSString    *strCategoryType;
 
@@ -69,7 +71,6 @@
 - (void)removeLoadIcon;
 - (void)checkCategoryType;
 - (void)sortingList:(NSInteger)indexValue;
-- (void)CreateBannerForPage;
 - (void)setPopularityImages:(NSString *) popularityValue;
 - (void)setDifficultyImages:(NSString *) difficultyValue;
 - (BOOL)isiPad;
