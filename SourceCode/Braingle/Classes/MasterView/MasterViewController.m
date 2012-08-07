@@ -223,28 +223,56 @@
             //Favorite Details
 
             BrainTeaserViewController *brainTeaserViewController;
+            DetailViewController *detailViewController;            
             if ([self isiPad]) {
                 brainTeaserViewController = [[BrainTeaserViewController alloc] initWithNibName:@"BrainTeaserViewController_iPad" bundle:nil];
+                brainTeaserViewController.strCategoryType = [teaserSectionOneArray objectAtIndex:indexPath.row];
+                [self.navigationController pushViewController:brainTeaserViewController animated:YES];
+                                
+                detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController_iPad" bundle:nil];
+                [self.splitViewController.splitViewController viewWillDisappear:YES];
+                detailViewController.strTypeOfCategory = @"Static";
+                NSMutableArray *viewControllerArray = [[NSMutableArray alloc] initWithArray:[[self.splitViewController.viewControllers objectAtIndex:1] viewControllers]];
+                [viewControllerArray removeAllObjects];
+                [viewControllerArray addObject:detailViewController];
+                [[self.splitViewController.viewControllers objectAtIndex:1] setViewControllers:viewControllerArray animated:NO];
+                [self.splitViewController.splitViewController viewWillAppear:YES];
+                [viewControllerArray release];
             } else {
                 brainTeaserViewController = [[BrainTeaserViewController alloc] initWithNibName:@"BrainTeaserViewController_iPhone" bundle:nil];
+                brainTeaserViewController.strCategoryType = [teaserSectionOneArray objectAtIndex:indexPath.row];
+                [self.navigationController pushViewController:brainTeaserViewController animated:YES];
             }
-            brainTeaserViewController.strCategoryType = [teaserSectionOneArray objectAtIndex:indexPath.row];
-            [self.navigationController pushViewController:brainTeaserViewController animated:YES];
             [brainTeaserViewController release];
         }
     }
     else if(indexPath.section==1)
     {
         //Brain Teaser Details
-        
         BrainTeaserViewController *brainTeaserViewController;
+        DetailViewController *detailViewController;            
+
         if ([self isiPad]) {
             brainTeaserViewController = [[BrainTeaserViewController alloc] initWithNibName:@"BrainTeaserViewController_iPad" bundle:nil];
+            brainTeaserViewController.strCategoryType = [teaserSectionTwoArray objectAtIndex:indexPath.row];
+            [self.navigationController pushViewController:brainTeaserViewController animated:YES];
+            
+            detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController_iPad" bundle:nil];
+            [self.splitViewController.splitViewController viewWillDisappear:YES];
+            detailViewController.strTypeOfCategory = @"Static";
+            NSMutableArray *viewControllerArray = [[NSMutableArray alloc] initWithArray:[[self.splitViewController.viewControllers objectAtIndex:1] viewControllers]];
+            [viewControllerArray removeAllObjects];
+            [viewControllerArray addObject:detailViewController];
+            [[self.splitViewController.viewControllers objectAtIndex:1] setViewControllers:viewControllerArray animated:NO];
+            [self.splitViewController.splitViewController viewWillAppear:YES];
+            [viewControllerArray release];
+
         } else {
             brainTeaserViewController = [[BrainTeaserViewController alloc] initWithNibName:@"BrainTeaserViewController_iPhone" bundle:nil];
+            brainTeaserViewController.strCategoryType = [teaserSectionTwoArray objectAtIndex:indexPath.row];
+            [self.navigationController pushViewController:brainTeaserViewController animated:YES];
+
         }
-        brainTeaserViewController.strCategoryType = [teaserSectionTwoArray objectAtIndex:indexPath.row];
-        [self.navigationController pushViewController:brainTeaserViewController animated:YES];
         [brainTeaserViewController release];
     }
 }
@@ -284,7 +312,6 @@
     if ([self isiPad]) 
     {
         detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController_iPad" bundle:nil];
-        
         [self.splitViewController.splitViewController viewWillDisappear:YES];
         detailViewController.strDetailId = [teaserSectionOneArray objectAtIndex:indexValue] ;
         NSMutableArray *viewControllerArray = [[NSMutableArray alloc] initWithArray:[[self.splitViewController.viewControllers objectAtIndex:1] viewControllers]];

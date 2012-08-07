@@ -70,24 +70,32 @@
     docDir=NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     pathToDocuments=[[docDir objectAtIndex:0]copy];
     NSString *fileName=[NSString stringWithFormat:@"FeatureID"];
-    
-    if ([strDetailId isEqualToString:@"Featured"]) 
+    if([strTypeOfCategory isEqualToString:@"Static"])
     {
-        //Check the file exist or not.
-        
         heartButton.hidden = YES;
-        if (![[NSFileManager defaultManager] fileExistsAtPath:[pathToDocuments stringByAppendingPathComponent:fileName]])
+        [self loadStaticHTML];
+    }
+    else 
+    {
+        if ([strDetailId isEqualToString:@"Featured"]) 
         {
-            [self loadURL];
-        }
+            //Check the file exist or not.
+            
+            heartButton.hidden = YES;
+            if (![[NSFileManager defaultManager] fileExistsAtPath:[pathToDocuments stringByAppendingPathComponent:fileName]])
+            {
+                [self loadURL];
+            }
+            else 
+            {
+                [self checkFileCreateTime];
+            }
+        } 
         else 
         {
-            [self checkFileCreateTime];
+            heartButton.hidden = NO;
+            [self loadWebView];
         }
-    } else 
-    {
-        heartButton.hidden = NO;
-        [self loadWebView];
     }
 
     for (int i = 0; i < [favoritesArray count]; i++)
@@ -122,27 +130,32 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {    
-    if (![self isiPad]) {
+    if (![self isiPad]) 
+    {
         if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
             adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
         else
             adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
     }
-    
     self.applicationDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    if ([self isiPad]) {
-        if (self.isViewControllerRootViewController && self.isViewControllerDetailViewController) { 
-            if (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight) {
+    if ([self isiPad]) 
+    {
+        if (self.isViewControllerRootViewController && self.isViewControllerDetailViewController)
+        { 
+            if (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight) 
+            {
                 self.navigationItem.leftBarButtonItem = nil;
-            } else {
+            } 
+            else 
+            {
                 [[self navigationItem] setLeftBarButtonItem:self.applicationDelegate.masterPopoverButtonItem];
             }
         }
         return YES;
-    } else {
+    } else 
+    {
         return YES;
     }
-
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -159,6 +172,16 @@
         {
             [iAdView setFrame:CGRectMake(0, 237, 480, 50)];
             adView.frame = CGRectMake(0, 0, 480, 50);
+        }
+    }
+    if ([self isiPad])
+    {
+        if(strTypeOfCategory != NULL)
+        {
+            if ([strTypeOfCategory isEqualToString:@"Static"]) {
+                heartButton.hidden = YES;
+                [self loadStaticHTML];
+            }
         }
     }
 }
@@ -201,6 +224,24 @@
         NSURL *url = [NSURL fileURLWithPath:[pathToDocuments stringByAppendingPathComponent:fileName]];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         [detailWebView loadRequest:request];
+    }
+}
+
+- (void)loadStaticHTML
+{
+    if([strTypeOfCategory isEqualToString:@"Static"])
+    {
+        UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+        if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
+        {
+            NSString *URlStr=[NSString stringWithFormat:@"%@/TeaserDetailPortrait.html",[[NSBundle mainBundle] resourcePath]];
+            [detailWebView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:URlStr]]];
+        }
+        else
+        {
+            NSString *URlStr=[NSString stringWithFormat:@"%@/TeaserDetailLandscape.html",[[NSBundle mainBundle] resourcePath]];
+            [detailWebView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:URlStr]]];
+        }
     }
 }
 

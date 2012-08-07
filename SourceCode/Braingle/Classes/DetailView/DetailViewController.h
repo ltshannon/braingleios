@@ -64,8 +64,8 @@
 - (void)loadURL;
 - (void)loadWebView;
 - (IBAction)favoritesButtonAction:(id)sender;
-//- (void)CreateBannerForPage;
 - (BOOL)isiPad;
+- (void)loadStaticHTML;
 
 @end
 
