@@ -86,11 +86,11 @@
     if ([self isiPad]) 
     {
         return YES;
-    } else 
+    }
+    else 
     {
         return YES;
     }
-    
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -238,12 +238,16 @@
                 [[self.splitViewController.viewControllers objectAtIndex:1] setViewControllers:viewControllerArray animated:NO];
                 [self.splitViewController.splitViewController viewWillAppear:YES];
                 [viewControllerArray release];
+                [detailViewController release];
+                [brainTeaserViewController release];
+
             } else {
                 brainTeaserViewController = [[BrainTeaserViewController alloc] initWithNibName:@"BrainTeaserViewController_iPhone" bundle:nil];
                 brainTeaserViewController.strCategoryType = [teaserSectionOneArray objectAtIndex:indexPath.row];
                 [self.navigationController pushViewController:brainTeaserViewController animated:YES];
+                [brainTeaserViewController release];
+
             }
-            [brainTeaserViewController release];
         }
     }
     else if(indexPath.section==1)
@@ -266,14 +270,18 @@
             [[self.splitViewController.viewControllers objectAtIndex:1] setViewControllers:viewControllerArray animated:NO];
             [self.splitViewController.splitViewController viewWillAppear:YES];
             [viewControllerArray release];
+            [detailViewController release];
+            [brainTeaserViewController release];
+
 
         } else {
             brainTeaserViewController = [[BrainTeaserViewController alloc] initWithNibName:@"BrainTeaserViewController_iPhone" bundle:nil];
             brainTeaserViewController.strCategoryType = [teaserSectionTwoArray objectAtIndex:indexPath.row];
             [self.navigationController pushViewController:brainTeaserViewController animated:YES];
+            [brainTeaserViewController release];
+
 
         }
-        [brainTeaserViewController release];
     }
 }
 

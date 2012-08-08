@@ -129,6 +129,8 @@
 		30BB01FC15D15679008DB29C /* TeaserDetailLandscape.html in Resources */ = {isa = PBXBuildFile; fileRef = 30BB01FA15D15679008DB29C /* TeaserDetailLandscape.html */; };
 		30BB01FD15D15679008DB29C /* TeaserDetailPortrait.html in Resources */ = {isa = PBXBuildFile; fileRef = 30BB01FB15D15679008DB29C /* TeaserDetailPortrait.html */; };
 		30C8682D15CBEEE80074F603 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C8682C15CBEEE80074F603 /* QuartzCore.framework */; };
+		30CFAFCC15D23FBD0088F42A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 30CFAFCB15D23FBD0088F42A /* Reachability.m */; };
+		30CFAFD415D240DD0088F42A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30CFAFD315D240DD0088F42A /* SystemConfiguration.framework */; };
 		30F58FF215C97A8F00F461FF /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 30F58FEB15C97A8F00F461FF /* Icon-72.png */; };
 		30F58FF315C97A8F00F461FF /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 30F58FEC15C97A8F00F461FF /* Icon-Small-50.png */; };
 		30F58FF415C97A8F00F461FF /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 30F58FED15C97A8F00F461FF /* Icon-Small.png */; };
@@ -278,6 +280,9 @@
 		30BB01FA15D15679008DB29C /* TeaserDetailLandscape.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = TeaserDetailLandscape.html; sourceTree = "<group>"; };
 		30BB01FB15D15679008DB29C /* TeaserDetailPortrait.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = TeaserDetailPortrait.html; sourceTree = "<group>"; };
 		30C8682C15CBEEE80074F603 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		30CFAFCA15D23FBD0088F42A /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		30CFAFCB15D23FBD0088F42A /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		30CFAFD315D240DD0088F42A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		30F58FEB15C97A8F00F461FF /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		30F58FEC15C97A8F00F461FF /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
 		30F58FED15C97A8F00F461FF /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
@@ -298,6 +303,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30CFAFD415D240DD0088F42A /* SystemConfiguration.framework in Frameworks */,
 				30C8682D15CBEEE80074F603 /* QuartzCore.framework in Frameworks */,
 				30A6337015C9583800FC590A /* libsqlite3.0.dylib in Frameworks */,
 				30A6336E15C9582D00FC590A /* iAd.framework in Frameworks */,
@@ -331,6 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				30A6336F15C9583800FC590A /* libsqlite3.0.dylib */,
+				30CFAFD315D240DD0088F42A /* SystemConfiguration.framework */,
 				30C8682C15CBEEE80074F603 /* QuartzCore.framework */,
 				30A6336D15C9582D00FC590A /* iAd.framework */,
 				30A632AA15C942C800FC590A /* UIKit.framework */,
@@ -400,6 +407,7 @@
 		30A632D615C9438B00FC590A /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				30CFAFC915D23FBD0088F42A /* Reachability */,
 				30A6336815C9581000FC590A /* Config.h */,
 				30A6336915C9581000FC590A /* OpenUDID */,
 				30A6335D15C9563E00FC590A /* Database */,
@@ -597,6 +605,16 @@
 			);
 			name = RatingImages;
 			path = Images/RatingImages;
+			sourceTree = "<group>";
+		};
+		30CFAFC915D23FBD0088F42A /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				30CFAFCA15D23FBD0088F42A /* Reachability.h */,
+				30CFAFCB15D23FBD0088F42A /* Reachability.m */,
+			);
+			name = Reachability;
+			path = Common/Reachability;
 			sourceTree = "<group>";
 		};
 		30F58FEA15C97A8F00F461FF /* icons */ = {
@@ -816,6 +834,7 @@
 				30A6335915C951B700FC590A /* BrainTeaserViewController.m in Sources */,
 				30A6336015C9563E00FC590A /* Database.m in Sources */,
 				30A6336C15C9581000FC590A /* OpenUDID.m in Sources */,
+				30CFAFCC15D23FBD0088F42A /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

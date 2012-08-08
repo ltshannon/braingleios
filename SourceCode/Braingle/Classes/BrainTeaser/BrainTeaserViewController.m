@@ -46,27 +46,24 @@
     favoritesArray = [[NSMutableArray alloc] init];
     dataBase = [[Database alloc] init];
     dataBase=[dataBase initialise];
-    self.title = @"Brain Teaser";;
+    self.title = strCategoryType;
     docDir = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     pathToDocuments  = [[docDir objectAtIndex:0] copy];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    
-    
-    iAdView=[[UIView alloc]init];
-    adView = [[ADBannerView alloc]init];
-    [iAdView setClipsToBounds:YES];
-    [iAdView setClearsContextBeforeDrawing:YES];
-    adView.frame = CGRectOffset(adView.frame, 0, -50);
-    adView.delegate=self;
-    [iAdView addSubview:adView];
-    if (![self isiPad]) {
+    if (![self isiPad])
+    {
+        iAdView=[[UIView alloc]init];
+        adView = [[ADBannerView alloc]init];
+        [iAdView setClipsToBounds:YES];
+        [iAdView setClearsContextBeforeDrawing:YES];
+        adView.frame = CGRectOffset(adView.frame, 0, -50);
+        adView.delegate=self;
+        [iAdView addSubview:adView];
         [self.view addSubview:iAdView];
     }
-
-    
     
     [super viewWillAppear:animated];
     [self checkCategoryType];
@@ -129,7 +126,17 @@
     NSString *fileName = [NSString stringWithFormat:@"%@",strCategoryType];
     if (![[NSFileManager defaultManager] fileExistsAtPath:[pathToDocuments stringByAppendingPathComponent:fileName]])
     {
-        [self loadURL];
+        if(([[Reachability sharedReachability] internetConnectionStatus] == NotReachable))
+        {
+            UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"Braingle" message:@"No Network Connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [errorAlert show];
+            [errorAlert release];
+            [self removeLoadIcon];
+        }
+        else 
+        {
+            [self loadURL];
+        }
     } 
     else 
     {
@@ -158,8 +165,21 @@
         
         if (hours > 86400.0)
         {
-            [self loadURL];
-        } else {
+            if(([[Reachability sharedReachability] internetConnectionStatus] == NotReachable))
+            {
+                UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"Braingle" message:@"No Network Connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [errorAlert show];
+                [errorAlert release];
+                [self removeLoadIcon];
+            }
+            else 
+            {
+                [self loadURL];
+            }
+
+        } 
+        else 
+        {
             NSMutableData *data = [NSData dataWithContentsOfFile:[pathToDocuments stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",strCategoryType]]];
             [self parseXMLFileAtURL:data];
         }
@@ -757,9 +777,7 @@
             return;
         }
     }
-    
     selectedRow = indexPath.row;
-
     DetailViewController *detailViewController;            
     if ([self isiPad]) 
     {
@@ -768,11 +786,11 @@
             detailViewController.strDetailId = [[favoritesArray objectAtIndex:indexPath.row] valueForKey:@"id"];
             detailViewController.selectedDictionary = [favoritesArray objectAtIndex:indexPath.row];
             detailViewController.strTypeOfCategory = @"Favorite";
-        } else {
+        } else 
+        {
             detailViewController.strDetailId = [[listArray objectAtIndex:indexPath.row] valueForKey:@"id"];
             detailViewController.selectedDictionary = [listArray objectAtIndex:indexPath.row];
             detailViewController.strTypeOfCategory = @"BrainTeaser";
-
         }
         detailViewController.brainDelegate = self;
         [self.splitViewController.splitViewController viewWillDisappear:YES];

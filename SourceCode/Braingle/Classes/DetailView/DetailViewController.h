@@ -12,6 +12,7 @@
 #import "Database.h"
 #import "Config.h"
 #import "OpenUDID.h"
+#import "Reachability.h"
 #import "AppDelegate.h"
 #import "InfoViewController.h"
 @protocol BrainTeaserViewControllerDelegate;

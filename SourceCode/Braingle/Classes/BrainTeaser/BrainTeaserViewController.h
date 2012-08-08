@@ -11,6 +11,7 @@
 #import "DetailViewController.h"
 #import "Config.h"
 #import "OpenUDID.h"
+#import "Reachability.h"
 #import "Database.h"
 #import <iAd/iAd.h>
 #import "AppDelegate.h"

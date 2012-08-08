@@ -32,6 +32,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = @"Brain Teaser";
+    
+    if (![self isiPad])
+    {
+        iAdView=[[UIView alloc]init];
+        adView = [[ADBannerView alloc]init];
+        [iAdView setClipsToBounds:YES];
+        [iAdView setClearsContextBeforeDrawing:YES];
+        adView.frame = CGRectOffset(adView.frame, 0, -50);
+        adView.delegate=self;
+        [iAdView addSubview:adView];
+        [self.view addSubview:iAdView];
+    }
+
     
     isFavorite = NO;
     favoritesArray=[[NSMutableArray alloc]init];
@@ -50,16 +64,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {  
     [super viewWillAppear:animated];
-    iAdView=[[UIView alloc]init];
-    adView = [[ADBannerView alloc]init];
-    [iAdView setClipsToBounds:YES];
-    [iAdView setClearsContextBeforeDrawing:YES];
-    adView.frame = CGRectOffset(adView.frame, 0, -50);
-    adView.delegate=self;
-    [iAdView addSubview:adView];
-    if (![self isiPad]) {
-        [self.view addSubview:iAdView];
-    }
     
     NSLog(@"strDetailId = %@",strDetailId);
     if (strDetailId == NULL || [strDetailId isEqualToString:@""] || [strDetailId isEqualToString:@"(null)"]) {
@@ -84,7 +88,18 @@
             heartButton.hidden = YES;
             if (![[NSFileManager defaultManager] fileExistsAtPath:[pathToDocuments stringByAppendingPathComponent:fileName]])
             {
-                [self loadURL];
+                if(([[Reachability sharedReachability] internetConnectionStatus] == NotReachable))
+                {
+                    UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"Braingle" message:@"No Network Connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    [errorAlert show];
+                    [errorAlert release];
+                    [self removeLoadIcon];
+                }
+                else 
+                {
+                    [self loadURL];
+                }
+
             }
             else 
             {
@@ -174,16 +189,16 @@
             adView.frame = CGRectMake(0, 0, 480, 50);
         }
     }
-    if ([self isiPad])
-    {
-        if(strTypeOfCategory != NULL)
-        {
-            if ([strTypeOfCategory isEqualToString:@"Static"]) {
-                heartButton.hidden = YES;
-                [self loadStaticHTML];
-            }
-        }
-    }
+//    if ([self isiPad])
+//    {
+//        if(strTypeOfCategory != NULL)
+//        {
+//            if ([strTypeOfCategory isEqualToString:@"Static"]) {
+//                heartButton.hidden = YES;
+//                [self loadStaticHTML];
+//            }
+//        }
+//    }
 }
 
 
@@ -214,10 +229,21 @@
     NSString *fileName = [NSString stringWithFormat:@"%@.html",strDetailId];
     if (![[NSFileManager defaultManager] fileExistsAtPath:[pathToDocuments stringByAppendingPathComponent:fileName]])
     {
-        NSURL *url = [NSURL URLWithString:urlAddress];
-        NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-        [detailWebView loadRequest:requestObj];
-        [htmlData writeToFile:[NSString stringWithFormat:@"%@",[pathToDocuments stringByAppendingPathComponent:fileName]]  atomically:YES];
+        if(([[Reachability sharedReachability] internetConnectionStatus] == NotReachable))
+        {
+            UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"Braingle" message:@"Network not available" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [errorAlert show];
+            [errorAlert release];
+            [self removeLoadIcon];
+        }
+        else 
+        {
+            NSURL *url = [NSURL URLWithString:urlAddress];
+            NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+            [detailWebView loadRequest:requestObj];
+            [htmlData writeToFile:[NSString stringWithFormat:@"%@",[pathToDocuments stringByAppendingPathComponent:fileName]]  atomically:YES];
+        }
+
     }
     else 
     {
@@ -229,6 +255,8 @@
 
 - (void)loadStaticHTML
 {
+    NSLog(@"loadStaticHTML");
+
     if([strTypeOfCategory isEqualToString:@"Static"])
     {
         UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
@@ -236,11 +264,14 @@
         {
             NSString *URlStr=[NSString stringWithFormat:@"%@/TeaserDetailPortrait.html",[[NSBundle mainBundle] resourcePath]];
             [detailWebView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:URlStr]]];
+            NSLog(@"Portrait");
         }
         else
         {
             NSString *URlStr=[NSString stringWithFormat:@"%@/TeaserDetailLandscape.html",[[NSBundle mainBundle] resourcePath]];
             [detailWebView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:URlStr]]];
+            NSLog(@"Landscape");
+
         }
     }
 }
@@ -276,7 +307,17 @@
     
     if (seconds > 86400.0)
     {
-        [self loadURL];
+        if(([[Reachability sharedReachability] internetConnectionStatus] == NotReachable))
+        {
+            UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"Braingle" message:@"No Network Connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [errorAlert show];
+            [errorAlert release];
+            [self removeLoadIcon];
+        }
+        else 
+        {
+            [self loadURL];
+        }
     } else {
         
         NSMutableData *data = [NSData dataWithContentsOfFile:[pathToDocuments stringByAppendingPathComponent:fileName]];
@@ -351,7 +392,6 @@
 }
 
 #pragma mark - Loading icon methods
-
 
 -(void)LoadIcon
 {
@@ -433,7 +473,6 @@
 
 - (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
 {    
-    
     //Add menu button
     
     menuBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:barButtonItem.target action:barButtonItem.action];
