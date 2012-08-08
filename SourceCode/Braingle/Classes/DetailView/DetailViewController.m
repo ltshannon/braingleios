@@ -58,6 +58,10 @@
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:heartButton] autorelease];
     if ([self isiPad]) {
         self.applicationDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        if (self.masterPopoverController != nil) {
+            [self.masterPopoverController dismissPopoverAnimated:YES];
+        }        
+
     }
 }
 
@@ -487,7 +491,7 @@
     
     [self.navigationItem setLeftBarButtonItem:nil animated:YES];
     self.masterPopoverController = nil;
-    self.applicationDelegate.masterPopoverButtonItem = barButtonItem;
+//    self.applicationDelegate.masterPopoverButtonItem = barButtonItem;
 }
          
 #pragma mark - Check Device
