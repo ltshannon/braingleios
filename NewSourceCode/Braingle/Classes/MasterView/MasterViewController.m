@@ -45,60 +45,6 @@
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
 }
 
-- (void)addBannerView
-{
-    appDelegate.iAdView=[[UIView alloc]init];
-    appDelegate.iAdBanner = [[ADBannerView alloc]init];
-    [appDelegate.iAdView setClipsToBounds:YES];
-    [appDelegate.iAdView setClearsContextBeforeDrawing:YES];
-    appDelegate.iAdBanner.frame = CGRectOffset(appDelegate.iAdBanner.frame, 0, -50);
-    appDelegate.iAdBanner.delegate=self;
-    [appDelegate.iAdView addSubview:appDelegate.iAdBanner];
-    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    if ([self isiPad]) 
-    {
-        if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
-        {
-            [appDelegate.iAdView setFrame:CGRectMake(0, 950, 768, 50)];
-            appDelegate.iAdBanner.frame = CGRectMake(0, 0, 768, 50);
-        }
-        else 
-        {
-            [appDelegate.iAdView setFrame:CGRectMake(0, 695, 10024, 50)];
-            appDelegate.iAdBanner.frame = CGRectMake(0, 0, 1024, 50);
-        }
-        [self.splitViewController.view addSubview:appDelegate.iAdView];
-    }
-}
-
-- (void)masterAddBannerView
-{
-    master_iAdView=[[UIView alloc]init];
-    master_iAdBanner = [[ADBannerView alloc]init];
-    [master_iAdView setClipsToBounds:YES];
-    [master_iAdView setClearsContextBeforeDrawing:YES];
-    master_iAdBanner.frame = CGRectOffset(master_iAdBanner.frame, 0, -50);
-    master_iAdBanner.delegate=self;
-    [master_iAdView addSubview:master_iAdBanner];
-    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    if (![self isiPad]) 
-    {
-        if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
-        {
-            [master_iAdView setFrame:CGRectMake(0, 365, 320, 50)];
-            master_iAdBanner.frame = CGRectMake(0, 0, 320, 50);
-        }
-        else 
-        {
-            [master_iAdView setFrame:CGRectMake(0, 237, 480, 50)];
-            master_iAdBanner.frame = CGRectMake(0, 0, 480, 50);
-        }
-        [self.tableView addSubview:master_iAdView];
-    }
-}
-
-
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -167,6 +113,63 @@
     }
 }
 
+#pragma mark - Add iAd
+
+//Adding iAd only for iPad.
+- (void)addBannerView
+{
+    appDelegate.iAdView=[[UIView alloc]init];
+    appDelegate.iAdBanner = [[ADBannerView alloc]init];
+    [appDelegate.iAdView setClipsToBounds:YES];
+    [appDelegate.iAdView setClearsContextBeforeDrawing:YES];
+    appDelegate.iAdBanner.frame = CGRectOffset(appDelegate.iAdBanner.frame, 0, -50);
+    appDelegate.iAdBanner.delegate=self;
+    [appDelegate.iAdView addSubview:appDelegate.iAdBanner];
+    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if ([self isiPad]) 
+    {
+        if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
+        {
+            [appDelegate.iAdView setFrame:CGRectMake(0, 950, 768, 50)];
+            appDelegate.iAdBanner.frame = CGRectMake(0, 0, 768, 50);
+        }
+        else 
+        {
+            [appDelegate.iAdView setFrame:CGRectMake(0, 695, 10024, 50)];
+            appDelegate.iAdBanner.frame = CGRectMake(0, 0, 1024, 50);
+        }
+        [self.splitViewController.view addSubview:appDelegate.iAdView];
+    }
+}
+
+//Adding iAd only for iPhone.
+- (void)masterAddBannerView
+{
+    master_iAdView=[[UIView alloc]init];
+    master_iAdBanner = [[ADBannerView alloc]init];
+    [master_iAdView setClipsToBounds:YES];
+    [master_iAdView setClearsContextBeforeDrawing:YES];
+    master_iAdBanner.frame = CGRectOffset(master_iAdBanner.frame, 0, -50);
+    master_iAdBanner.delegate=self;
+    [master_iAdView addSubview:master_iAdBanner];
+    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if (![self isiPad]) 
+    {
+        if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
+        {
+            [master_iAdView setFrame:CGRectMake(0, 365, 320, 50)];
+            master_iAdBanner.frame = CGRectMake(0, 0, 320, 50);
+        }
+        else 
+        {
+            [master_iAdView setFrame:CGRectMake(0, 237, 480, 50)];
+            master_iAdBanner.frame = CGRectMake(0, 0, 480, 50);
+        }
+        [self.tableView addSubview:master_iAdView];
+    }
+}
+
+
 #pragma mark - Button Action
 
 - (IBAction)infoButtonAction:(id)sender
@@ -192,8 +195,7 @@
 
 - (void)bannerViewDidLoadAd:(ADBannerView *)banner
 {
-//    [adView setHidden:NO];
-//    banner.frame = CGRectOffset(banner.frame, 0, 50);
+
 }
 - (BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave
 {
@@ -206,11 +208,9 @@
     
 }
 
-
 - (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
 {
-//    banner.frame = CGRectOffset(banner.frame, 0, -50);
-//    [adView setHidden:YES];
+
 }
 
 #pragma mark - Table View Delagates

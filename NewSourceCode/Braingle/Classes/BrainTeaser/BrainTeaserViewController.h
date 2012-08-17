@@ -17,9 +17,9 @@
 
 @interface BrainTeaserViewController : UIViewController<NSXMLParserDelegate, UIActionSheetDelegate, ADBannerViewDelegate, UISplitViewControllerDelegate,BrainTeaserViewControllerDelegate>
 {
-    IBOutlet UITableView    *brainTeaserTableView;
-    NSString                *strCategoryType;
-    BOOL                     isiAdClicked;
+    IBOutlet UITableView      *brainTeaserTableView;
+    NSString                  *strCategoryType;
+    BOOL                      isiAdClicked;
     //XML
     NSXMLParser               *rssParser;
     NSMutableData             *responseData;
@@ -34,12 +34,10 @@
     NSMutableDictionary       *rowDict;
     NSArray                   *docDir ;
     NSString                  *pathToDocuments ;
-    
     //Database
     Database                  *dataBase;
     NSMutableArray            *favoritesArray;
     BOOL                      checkFavorite;
-    
     //Rating icon
     UIImageView             *starImage1;
     UIImageView             *starImage2;
@@ -54,16 +52,14 @@
     IBOutlet UIView                     *loadingView;
     NSUInteger                          selectedRow;
     UIActionSheet                       *sortActionSheet;
+    //iAd
     AppDelegate                         *appDelegate;
     ADBannerView                        *brainTeaser_iAdBanner;
     UIView                              *brainTeaser_iAdView;
-
 }
 @property(nonatomic, retain) NSString    *strCategoryType;
 @property (retain, nonatomic) UIPopoverController *masterPopoverController;
 @property (strong, nonatomic) DetailViewController *detailViewController;
-
-
 
 - (IBAction)sortButtonAction:(id)sender;
 - (void)parseXMLFileAtURL:(NSMutableData *)URL;

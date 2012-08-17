@@ -20,13 +20,12 @@
     NSMutableArray          *teaserSectionTwoArray;
     IBOutlet UIView         *infoView;
 
-    
+    //iAd
+    ADBannerView            *master_iAdBanner;
+    UIView                  *master_iAdView;
     float                   table_Y_Position;
     BOOL                    isiAdClicked;
     AppDelegate             *appDelegate;
-    
-    ADBannerView            *master_iAdBanner;
-    UIView                  *master_iAdView;
 }
 
 @property (strong, nonatomic) DetailViewController *detailViewController;
@@ -34,6 +33,8 @@
 - (BOOL)isiPad;
 - (IBAction)infoButtonAction:(id)sender;
 - (void)autoFeaturedCellSelected:(NSInteger) indexValue;
+- (void)addBannerView;
+- (void)masterAddBannerView;
 - (void)addBannerView;
 
 @end

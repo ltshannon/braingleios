@@ -37,33 +37,6 @@
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
 }
 
-- (void)brainTeaserAddBannerView
-{
-    brainTeaser_iAdView=[[UIView alloc]init];
-    brainTeaser_iAdBanner = [[ADBannerView alloc]init];
-    [brainTeaser_iAdView setClipsToBounds:YES];
-    [brainTeaser_iAdView setClearsContextBeforeDrawing:YES];
-    brainTeaser_iAdBanner.frame = CGRectOffset(brainTeaser_iAdBanner.frame, 0, -50);
-    brainTeaser_iAdBanner.delegate=self;
-    [brainTeaser_iAdView addSubview:brainTeaser_iAdBanner];
-    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    if (![self isiPad]) 
-    {
-        if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
-        {
-            [brainTeaser_iAdView setFrame:CGRectMake(0, 365, 320, 50)];
-            brainTeaser_iAdBanner.frame = CGRectMake(0, 0, 320, 50);
-        }
-        else 
-        {
-            [brainTeaser_iAdView setFrame:CGRectMake(0, 237, 480, 50)];
-            brainTeaser_iAdBanner.frame = CGRectMake(0, 0, 480, 50);
-        }
-        [self.view addSubview:brainTeaser_iAdView];
-    }
-}
-
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -127,6 +100,37 @@
     }
 
 }
+
+#pragma mark - Add iAd
+
+//Adding iAd only for iPhone.
+- (void)brainTeaserAddBannerView
+{
+    brainTeaser_iAdView=[[UIView alloc]init];
+    brainTeaser_iAdBanner = [[ADBannerView alloc]init];
+    [brainTeaser_iAdView setClipsToBounds:YES];
+    [brainTeaser_iAdView setClearsContextBeforeDrawing:YES];
+    brainTeaser_iAdBanner.frame = CGRectOffset(brainTeaser_iAdBanner.frame, 0, -50);
+    brainTeaser_iAdBanner.delegate=self;
+    [brainTeaser_iAdView addSubview:brainTeaser_iAdBanner];
+    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if (![self isiPad]) 
+    {
+        if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
+        {
+            [brainTeaser_iAdView setFrame:CGRectMake(0, 365, 320, 50)];
+            brainTeaser_iAdBanner.frame = CGRectMake(0, 0, 320, 50);
+        }
+        else 
+        {
+            [brainTeaser_iAdView setFrame:CGRectMake(0, 237, 480, 50)];
+            brainTeaser_iAdBanner.frame = CGRectMake(0, 0, 480, 50);
+        }
+        [self.view addSubview:brainTeaser_iAdView];
+    }
+}
+
+#pragma mark - Check & Load webview
 
 - (void)checkCategoryType
 {
@@ -280,9 +284,7 @@
     }
 }
 
-
 #pragma mark - XML Parsing Delegates
-
 
 -(void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError{
     NSString * errorString = [NSString stringWithFormat:@"Unable to download feed from web site (Error code %i )", [parseError code]];
@@ -795,8 +797,11 @@
     return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? YES : NO;
 }
 
+#pragma mark - DetailView Delegate Method
+
 - (void)reloadTableView
 {
+    //Reload the table from detailview when click the favorite button
     favoritesArray = [dataBase getFavoriteData];
     [brainTeaserTableView reloadData];
     selectedRow = -1;

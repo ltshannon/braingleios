@@ -14,6 +14,7 @@
 }
 
 - (IBAction)doneButtonAction:(id)sender;
+- (BOOL)isiPad;
 
 @end
 

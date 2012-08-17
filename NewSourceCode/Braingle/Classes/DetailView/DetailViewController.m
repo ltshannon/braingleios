@@ -25,100 +25,6 @@
     }
 }
 
-- (void)detailAddBannerView
-{
-    detail_iAdView=[[UIView alloc]init];
-    detail_iAdBanner = [[ADBannerView alloc]init];
-    [detail_iAdView setClipsToBounds:YES];
-    [detail_iAdView setClearsContextBeforeDrawing:YES];
-    detail_iAdBanner.frame = CGRectOffset(detail_iAdBanner.frame, 0, -50);
-    detail_iAdBanner.delegate=self;
-    [detail_iAdView addSubview:detail_iAdBanner];
-    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    if (![self isiPad]) 
-    {
-        if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
-        {
-            [detail_iAdView setFrame:CGRectMake(0, 365, 320, 50)];
-            detail_iAdBanner.frame = CGRectMake(0, 0, 320, 50);
-        }
-        else 
-        {
-            [detail_iAdView setFrame:CGRectMake(0, 237, 480, 50)];
-            detail_iAdBanner.frame = CGRectMake(0, 0, 480, 50);
-        }
-        [self.view addSubview:detail_iAdView];
-    }
-}
-
-
-- (void)dismissMasterView
-{
-    if (self.masterPopoverController != nil) {
-        [self.masterPopoverController dismissPopoverAnimated:YES];
-    } 
-}
-
-- (void)webViewAction
-{
-    NSLog(@"strDetailId = %@",strDetailId);
-    
-    self.title = @"Brain Teaser";
-    isFavorite = NO;
-    favoritesArray=[[NSMutableArray alloc]init];
-    dataBase=[[Database alloc]initialise];
-    heartButton =  [UIButton buttonWithType:UIButtonTypeCustom];
-    [heartButton setFrame:CGRectMake(271, 11, 32, 29)];
-    [heartButton addTarget:self action:@selector(favoritesButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [heartButton setImage:[UIImage imageNamed:@"fav.png"] forState:UIControlStateNormal];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:heartButton];
-
-    if (strDetailId == NULL || [strDetailId isEqualToString:@""] || [strDetailId isEqualToString:@"(null)"]) {
-        strDetailId = @"Featured";
-    }
-    
-    favoritesArray=[dataBase getFavoriteData];
-    docDir=NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    pathToDocuments=[[docDir objectAtIndex:0]copy];
-    NSString *fileName=[NSString stringWithFormat:@"FeatureID"];
-    NSLog(@"fileName = %@",fileName);
-    if([strTypeOfCategory isEqualToString:@"Static"])
-    {
-        heartButton.hidden = YES;
-        [self loadStaticHTML];
-    }
-    else
-    {
-        if ([strDetailId isEqualToString:@"Featured"]) 
-        {
-            //Check the file exist or not.
-            
-            heartButton.hidden = YES;
-            if (![[NSFileManager defaultManager] fileExistsAtPath:[pathToDocuments stringByAppendingPathComponent:fileName]])
-            {
-                [self loadURL];
-            }
-            else 
-            {
-                [self checkFileCreateTime];
-            }
-        } else 
-        {
-            heartButton.hidden = NO;
-            [self loadWebView];
-        }
-        
-        for (int i = 0; i < [favoritesArray count]; i++)
-        {
-            if ([[[favoritesArray objectAtIndex:i] valueForKey:@"id"] isEqualToString:[selectedDictionary valueForKey:@"id"]]) 
-            {
-                [heartButton setImage:[UIImage imageNamed:@"fav-active.png"] forState:UIControlStateNormal];
-                isFavorite = YES;
-            } 
-        }
-    }
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {  
     [super viewWillAppear:animated];
@@ -200,6 +106,107 @@
         }
     }
 }
+
+#pragma mark - Dismiss Master View
+
+- (void)dismissMasterView
+{
+    //Dismiss master view
+    if (self.masterPopoverController != nil) {
+        [self.masterPopoverController dismissPopoverAnimated:YES];
+    } 
+}
+
+#pragma mark - Check & Load the Web View
+
+- (void)webViewAction
+{
+    NSLog(@"strDetailId = %@",strDetailId);
+    self.title = @"Brain Teaser";
+    isFavorite = NO;
+    favoritesArray=[[NSMutableArray alloc]init];
+    dataBase=[[Database alloc]initialise];
+    heartButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [heartButton setFrame:CGRectMake(271, 11, 32, 29)];
+    [heartButton addTarget:self action:@selector(favoritesButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [heartButton setImage:[UIImage imageNamed:@"fav.png"] forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:heartButton];
+    
+    if (strDetailId == NULL || [strDetailId isEqualToString:@""] || [strDetailId isEqualToString:@"(null)"]) {
+        strDetailId = @"Featured";
+    }
+    
+    favoritesArray=[dataBase getFavoriteData];
+    docDir=NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    pathToDocuments=[[docDir objectAtIndex:0]copy];
+    NSString *fileName=[NSString stringWithFormat:@"FeatureID"];
+    NSLog(@"fileName = %@",fileName);
+    if([strTypeOfCategory isEqualToString:@"Static"])
+    {
+        heartButton.hidden = YES;
+        [self loadStaticHTML];
+    }
+    else
+    {
+        if ([strDetailId isEqualToString:@"Featured"]) 
+        {
+            //Check the file exist or not.
+            
+            heartButton.hidden = YES;
+            if (![[NSFileManager defaultManager] fileExistsAtPath:[pathToDocuments stringByAppendingPathComponent:fileName]])
+            {
+                [self loadURL];
+            }
+            else 
+            {
+                [self checkFileCreateTime];
+            }
+        } else 
+        {
+            heartButton.hidden = NO;
+            [self loadWebView];
+        }
+        
+        for (int i = 0; i < [favoritesArray count]; i++)
+        {
+            if ([[[favoritesArray objectAtIndex:i] valueForKey:@"id"] isEqualToString:[selectedDictionary valueForKey:@"id"]]) 
+            {
+                [heartButton setImage:[UIImage imageNamed:@"fav-active.png"] forState:UIControlStateNormal];
+                isFavorite = YES;
+            } 
+        }
+    }
+}
+
+
+#pragma mark - Add iAd
+
+- (void)detailAddBannerView
+{
+    detail_iAdView=[[UIView alloc]init];
+    detail_iAdBanner = [[ADBannerView alloc]init];
+    [detail_iAdView setClipsToBounds:YES];
+    [detail_iAdView setClearsContextBeforeDrawing:YES];
+    detail_iAdBanner.frame = CGRectOffset(detail_iAdBanner.frame, 0, -50);
+    detail_iAdBanner.delegate=self;
+    [detail_iAdView addSubview:detail_iAdBanner];
+    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if (![self isiPad]) 
+    {
+        if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
+        {
+            [detail_iAdView setFrame:CGRectMake(0, 365, 320, 50)];
+            detail_iAdBanner.frame = CGRectMake(0, 0, 320, 50);
+        }
+        else 
+        {
+            [detail_iAdView setFrame:CGRectMake(0, 237, 480, 50)];
+            detail_iAdBanner.frame = CGRectMake(0, 0, 480, 50);
+        }
+        [self.view addSubview:detail_iAdView];
+    }
+}
+
 
 #pragma mark - Split view methods
 
