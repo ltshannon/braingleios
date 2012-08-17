@@ -10,6 +10,7 @@
 #import <iAd/iAd.h>
 #import "InfoViewController.h"
 #import "BrainTeaserViewController.h"
+#import "AppDelegate.h"
 
 @interface MasterViewController : UITableViewController<ADBannerViewDelegate,UISplitViewControllerDelegate>
 {
@@ -17,21 +18,22 @@
     NSMutableArray          *teaserSectionTwoImageArray;
     NSMutableArray          *teaserSectionOneArray;
     NSMutableArray          *teaserSectionTwoArray;
-    IBOutlet ADBannerView   *adView;
-    UIView                  *iAdView;
-    float                   table_Y_Position;
     IBOutlet UIView         *infoView;
+
+    
+    float                   table_Y_Position;
     BOOL                    isiAdClicked;
+    AppDelegate             *appDelegate;
+    
+    ADBannerView            *master_iAdBanner;
+    UIView                  *master_iAdView;
 }
 
 @property (strong, nonatomic) DetailViewController *detailViewController;
-@property (strong, nonatomic) ADBannerView          *adView;
-@property (strong, nonatomic) UIView                *iAdView;
-
 
 - (BOOL)isiPad;
 - (IBAction)infoButtonAction:(id)sender;
 - (void)autoFeaturedCellSelected:(NSInteger) indexValue;
-
+- (void)addBannerView;
 
 @end

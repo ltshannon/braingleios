@@ -11,27 +11,19 @@
 @implementation BrainTeaserViewController
 @synthesize strCategoryType;
 @synthesize masterPopoverController;
+@synthesize detailViewController = _detailViewController;
+
 #pragma mark - View Life Cycle
-
-
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    iAdView=[[UIView alloc]init];
-    adView = [[ADBannerView alloc]init];
-    [iAdView setClipsToBounds:YES];
-    [iAdView setClearsContextBeforeDrawing:YES];
-    adView.frame = CGRectOffset(adView.frame, 0, -50);
-    adView.delegate=self;
-    [iAdView addSubview:adView];
     if (![self isiPad]) {
-        [self.view addSubview:iAdView];
+        [self brainTeaserAddBannerView];
     }
-    else {
-        [self.splitViewController.view addSubview:iAdView];
-    }
+
+    appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    
     selectedRow = -1;
     UIBarButtonItem *sortButton = [[UIBarButtonItem alloc] initWithTitle:@"Sort" style:UIBarButtonItemStyleBordered target:self action:@selector(sortButtonAction:)];
     self.navigationItem.rightBarButtonItem = sortButton;
@@ -41,16 +33,42 @@
     self.title = strCategoryType;
     docDir = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     pathToDocuments  = [[docDir objectAtIndex:0] copy];
+    
+    self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
 }
+
+- (void)brainTeaserAddBannerView
+{
+    brainTeaser_iAdView=[[UIView alloc]init];
+    brainTeaser_iAdBanner = [[ADBannerView alloc]init];
+    [brainTeaser_iAdView setClipsToBounds:YES];
+    [brainTeaser_iAdView setClearsContextBeforeDrawing:YES];
+    brainTeaser_iAdBanner.frame = CGRectOffset(brainTeaser_iAdBanner.frame, 0, -50);
+    brainTeaser_iAdBanner.delegate=self;
+    [brainTeaser_iAdView addSubview:brainTeaser_iAdBanner];
+    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if (![self isiPad]) 
+    {
+        if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
+        {
+            [brainTeaser_iAdView setFrame:CGRectMake(0, 365, 320, 50)];
+            brainTeaser_iAdBanner.frame = CGRectMake(0, 0, 320, 50);
+        }
+        else 
+        {
+            [brainTeaser_iAdView setFrame:CGRectMake(0, 237, 480, 50)];
+            brainTeaser_iAdBanner.frame = CGRectMake(0, 0, 480, 50);
+        }
+        [self.view addSubview:brainTeaser_iAdView];
+    }
+}
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    
     [super viewWillAppear:animated];
     [self checkCategoryType];
 }
-
-
 
 - (void)viewDidUnload
 {
@@ -59,51 +77,55 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
 {
-        if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
-            adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
-        else
-            adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+    
 
     if ([self isiPad]) 
     {
+        if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
+            appDelegate.iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
+        else
+            appDelegate.iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+
         return YES;
     }
     else 
     {
+        if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
+            brainTeaser_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
+        else
+            brainTeaser_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+
         return YES;
     }
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    
     if ([self isiPad]) {
         if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
         {
-            [iAdView setFrame:CGRectMake(0, 950, 768, 50)];
-            adView.frame = CGRectMake(0, 0, 768, 50);
+            [appDelegate.iAdView setFrame:CGRectMake(0, 950, 768, 50)];
+            appDelegate.iAdBanner.frame = CGRectMake(0, 0, 768, 50);
         } else 
         {
-            [iAdView setFrame:CGRectMake(0, 695, 10024, 50)];
-            adView.frame = CGRectMake(0, 0, 1024, 50);
+            [appDelegate.iAdView setFrame:CGRectMake(0, 695, 10024, 50)];
+            appDelegate.iAdBanner.frame = CGRectMake(0, 0, 1024, 50);
         }
     }
-
-    else {
+    else 
+    {
         if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
         {
-            [iAdView setFrame:CGRectMake(0, 365, 320, 50)];
-            adView.frame = CGRectMake(0, 0, 320, 50);
+            [brainTeaser_iAdView setFrame:CGRectMake(0, 365, 320, 50)];
+            brainTeaser_iAdBanner.frame = CGRectMake(0, 0, 320, 50);
         }
         else 
         {
-            [iAdView setFrame:CGRectMake(0, 237, 480, 50)];
-            adView.frame = CGRectMake(0, 0, 480, 50);
+            [brainTeaser_iAdView setFrame:CGRectMake(0, 237, 480, 50)];
+            brainTeaser_iAdBanner.frame = CGRectMake(0, 0, 480, 50);
         }
     }
-     
-  
-    
+
 }
 
 - (void)checkCategoryType
@@ -355,32 +377,6 @@
     NSLog(@"listArray = %@",listArray);
     [self removeLoadIcon];
 }
-
-
-
-#pragma mark - ADBannerView Delegates
-
-- (void)bannerViewDidLoadAd:(ADBannerView *)banner
-{   
-//    [adView setHidden:NO];
-//    banner.frame = CGRectOffset(banner.frame, 0, 50);
-}
-- (BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave
-{
-    return YES;
-}
-
-- (void)bannerViewActionDidFinish:(ADBannerView *)banner
-{
-    
-}
-
-- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
-{
-//    banner.frame = CGRectOffset(banner.frame, 0, -50);
-//    [adView setHidden:YES];
-}
-
 
 #pragma mark - Sorting Action
 
@@ -749,44 +745,37 @@
             gearImage4.image = [UIImage imageNamed:@"g9.png"];
         }
     }
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //Check the cell clicked or not.
-    if ([self isiPad]) {
+    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if ([self isiPad] && (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeLeft)) 
+    {
         if (selectedRow == indexPath.row) {
             return;
         }
     }
     selectedRow = indexPath.row;
-    DetailViewController *detailViewController;            
     if ([self isiPad]) 
     {
-        detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController_iPad" bundle:nil];
         if (checkFavorite) {
-            detailViewController.strDetailId = [[favoritesArray objectAtIndex:indexPath.row] valueForKey:@"id"];
-            detailViewController.selectedDictionary = [favoritesArray objectAtIndex:indexPath.row];
-            detailViewController.strTypeOfCategory = @"Favorite";
+            self.detailViewController.strDetailId = [[favoritesArray objectAtIndex:indexPath.row] valueForKey:@"id"];
+            self.detailViewController.selectedDictionary = [favoritesArray objectAtIndex:indexPath.row];
+            self.detailViewController.strTypeOfCategory = @"Favorite";
         } else {
-            detailViewController.strDetailId = [[listArray objectAtIndex:indexPath.row] valueForKey:@"id"];
-            detailViewController.selectedDictionary = [listArray objectAtIndex:indexPath.row];
-            detailViewController.strTypeOfCategory = @"BrainTeaser";
-
+            self.detailViewController.strDetailId = [[listArray objectAtIndex:indexPath.row] valueForKey:@"id"];
+            self.detailViewController.selectedDictionary = [listArray objectAtIndex:indexPath.row];
+            self.detailViewController.strTypeOfCategory = @"BrainTeaser";
         }
-        detailViewController.brainDelegate = self;
-        [self.splitViewController.splitViewController viewWillDisappear:YES];
-        NSMutableArray *viewControllerArray = [[NSMutableArray alloc] initWithArray:[[self.splitViewController.viewControllers objectAtIndex:1] viewControllers]];
-        [viewControllerArray removeAllObjects];
-        [viewControllerArray addObject:detailViewController];
-        self.splitViewController.delegate = detailViewController;
-        [[self.splitViewController.viewControllers objectAtIndex:1] setViewControllers:viewControllerArray animated:NO];
-        [self.splitViewController.splitViewController viewWillAppear:YES];
-         }
+        self.detailViewController.brainDelegate = self;
+        [self.detailViewController webViewAction];
+        [self.detailViewController dismissMasterView];
+    }
     else 
     {
-        detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController_iPhone" bundle:nil];
+        DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController_iPhone" bundle:nil];
         if (checkFavorite) {
             detailViewController.strDetailId = [[favoritesArray objectAtIndex:indexPath.row] valueForKey:@"id"];
             detailViewController.selectedDictionary = [favoritesArray objectAtIndex:indexPath.row];
@@ -797,8 +786,7 @@
         detailViewController.brainDelegate = self;
         [self.navigationController pushViewController:detailViewController animated:YES];
     }
-    
-    }
+}
 
 #pragma mark - Check Device
 
@@ -810,7 +798,6 @@
 - (void)reloadTableView
 {
     favoritesArray = [dataBase getFavoriteData];
-    NSLog(@"favoritesArray = %@",favoritesArray);
     [brainTeaserTableView reloadData];
     selectedRow = -1;
 }

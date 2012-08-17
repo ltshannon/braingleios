@@ -16,7 +16,6 @@
 #import "InfoViewController.h"
 @protocol BrainTeaserViewControllerDelegate;
 
-
 @interface DetailViewController : UIViewController <UISplitViewControllerDelegate, NSXMLParserDelegate, ADBannerViewDelegate>
 {
     IBOutlet UIWebView                  *detailWebView;
@@ -34,9 +33,6 @@
     
     NSMutableArray                      *favoritesArray;
     BOOL                                isFavorite;
-    IBOutlet ADBannerView               *adView;
-    UIView                              *iAdView;
-
     
     IBOutlet UIActivityIndicatorView    *activityView;
     IBOutlet UIView                     *loadingView;
@@ -45,6 +41,10 @@
     
     UIBarButtonItem                     *menuBarButtonItem;
     NSString                            *strTypeOfCategory;
+    
+    ADBannerView                        *detail_iAdBanner;
+    UIView                              *detail_iAdView;
+
 }
 @property (nonatomic, retain) NSString *strDetailId;
 @property (nonatomic, retain) NSString *strTypeOfCategory;
@@ -55,7 +55,6 @@
 @property (nonatomic, readonly) BOOL isViewControllerDetailViewController;
 @property(nonatomic, retain) id<BrainTeaserViewControllerDelegate> brainDelegate;
 
-
 - (void)checkFileCreateTime;
 - (void)LoadIcon;
 - (void)removeLoadIcon;
@@ -63,6 +62,9 @@
 - (void)loadWebView;
 - (IBAction)favoritesButtonAction:(id)sender;
 - (BOOL)isiPad;
+- (void)dismissMasterView;
+- (void)webViewAction;
+- (void)detailAddBannerView;
 
 @end
 

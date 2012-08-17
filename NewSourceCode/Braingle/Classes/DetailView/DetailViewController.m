@@ -20,20 +20,49 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    iAdView=[[UIView alloc]init];
-    adView = [[ADBannerView alloc]init];
-    [iAdView setClipsToBounds:YES];
-    [iAdView setClearsContextBeforeDrawing:YES];
-    adView.frame = CGRectOffset(adView.frame, 0, -50);
-    adView.delegate=self;
-    [iAdView addSubview:adView];
-    if ([self isiPad])
+    if (![self isiPad]) {
+        [self detailAddBannerView];
+    }
+}
+
+- (void)detailAddBannerView
+{
+    detail_iAdView=[[UIView alloc]init];
+    detail_iAdBanner = [[ADBannerView alloc]init];
+    [detail_iAdView setClipsToBounds:YES];
+    [detail_iAdView setClearsContextBeforeDrawing:YES];
+    detail_iAdBanner.frame = CGRectOffset(detail_iAdBanner.frame, 0, -50);
+    detail_iAdBanner.delegate=self;
+    [detail_iAdView addSubview:detail_iAdBanner];
+    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if (![self isiPad]) 
     {
-        [self.splitViewController.view addSubview:iAdView];
+        if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
+        {
+            [detail_iAdView setFrame:CGRectMake(0, 365, 320, 50)];
+            detail_iAdBanner.frame = CGRectMake(0, 0, 320, 50);
+        }
+        else 
+        {
+            [detail_iAdView setFrame:CGRectMake(0, 237, 480, 50)];
+            detail_iAdBanner.frame = CGRectMake(0, 0, 480, 50);
+        }
+        [self.view addSubview:detail_iAdView];
     }
-    else {
-        [self.view addSubview:iAdView];
-    }
+}
+
+
+- (void)dismissMasterView
+{
+    if (self.masterPopoverController != nil) {
+        [self.masterPopoverController dismissPopoverAnimated:YES];
+    } 
+}
+
+- (void)webViewAction
+{
+    NSLog(@"strDetailId = %@",strDetailId);
+    
     self.title = @"Brain Teaser";
     isFavorite = NO;
     favoritesArray=[[NSMutableArray alloc]init];
@@ -43,11 +72,7 @@
     [heartButton addTarget:self action:@selector(favoritesButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [heartButton setImage:[UIImage imageNamed:@"fav.png"] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:heartButton];
-    }
-- (void)viewWillAppear:(BOOL)animated
-{  
-    [super viewWillAppear:animated];
-    NSLog(@"strDetailId = %@",strDetailId);
+
     if (strDetailId == NULL || [strDetailId isEqualToString:@""] || [strDetailId isEqualToString:@"(null)"]) {
         strDetailId = @"Featured";
     }
@@ -56,12 +81,13 @@
     docDir=NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     pathToDocuments=[[docDir objectAtIndex:0]copy];
     NSString *fileName=[NSString stringWithFormat:@"FeatureID"];
+    NSLog(@"fileName = %@",fileName);
     if([strTypeOfCategory isEqualToString:@"Static"])
     {
         heartButton.hidden = YES;
         [self loadStaticHTML];
     }
-    else 
+    else
     {
         if ([strDetailId isEqualToString:@"Featured"]) 
         {
@@ -90,10 +116,13 @@
                 isFavorite = YES;
             } 
         }
-        if (![self isiPad]) {
-           // [self CreateBannerForPage];
-        }
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{  
+    [super viewWillAppear:animated];
+    [self webViewAction];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -114,10 +143,6 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {    
-    if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
-        adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
-    else
-        adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
     
     self.applicationDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     if ([self isiPad]) 
@@ -134,8 +159,13 @@
             }
         }
         return YES;
-    } else 
+    } 
+    else 
     {
+        if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
+            detail_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
+        else
+            detail_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
         return YES;
     }
 }
@@ -143,32 +173,23 @@
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     //    [self CreateBannerForPage];
- 
-    if ([self isiPad]) {
-        if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
-        {
-            [iAdView setFrame:CGRectMake(0, 950, 768, 50)];
-            adView.frame = CGRectMake(0, 0, 768, 50);
-        } else 
-        {
-            [iAdView setFrame:CGRectMake(0, 695, 10024, 50)];
-            adView.frame = CGRectMake(0, 0, 1024, 50);
-        }
-    }
     
-    else {
+    if (![self isiPad])
+    {
         if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
         {
-            [iAdView setFrame:CGRectMake(0, 365, 320, 50)];
-            adView.frame = CGRectMake(0, 0, 320, 50);
+            [detail_iAdView setFrame:CGRectMake(0, 365, 320, 50)];
+            detail_iAdBanner.frame = CGRectMake(0, 0, 320, 50);
         }
         else 
         {
-            [iAdView setFrame:CGRectMake(0, 237, 480, 50)];
-            adView.frame = CGRectMake(0, 0, 480, 50);
+            [detail_iAdView setFrame:CGRectMake(0, 237, 480, 50)];
+            detail_iAdBanner.frame = CGRectMake(0, 0, 480, 50);
         }
     }
- if ([self isiPad])
+
+ 
+    if ([self isiPad])
     {
         if(strTypeOfCategory != NULL)
         {
@@ -201,15 +222,14 @@
 - (void)loadWebView
 {
     NSLog(@"strDetailId = %@",strDetailId);
-    NSString *urlAddress = DETAILVIEW_URL(strDetailId, [OpenUDID value]);
-    NSLog(@"urlAddress = %@",urlAddress);
-    NSData *htmlData = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlAddress]];
     NSString *fileName = [NSString stringWithFormat:@"%@.html",strDetailId];
-    if (self.masterPopoverController!=nil) {
-        [self.masterPopoverController dismissPopoverAnimated:YES];
-    }
     if (![[NSFileManager defaultManager] fileExistsAtPath:[pathToDocuments stringByAppendingPathComponent:fileName]])
     {
+        NSLog(@"Load from URL");
+        NSString *urlAddress = DETAILVIEW_URL(strDetailId, [OpenUDID value]);
+        NSLog(@"urlAddress = %@",urlAddress);
+        NSData *htmlData = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlAddress]];
+
         NSURL *url = [NSURL URLWithString:urlAddress];
         NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
         [detailWebView loadRequest:requestObj];
@@ -217,6 +237,7 @@
     }
     else 
     {
+        NSLog(@"Load from local");
         NSURL *url = [NSURL fileURLWithPath:[pathToDocuments stringByAppendingPathComponent:fileName]];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         [detailWebView loadRequest:request];
@@ -224,7 +245,7 @@
 }
 - (void)loadStaticHTML
 {
-    NSLog(@"loadStaticHTML");
+    NSLog(@"Load Static HTML");
     
     if([strTypeOfCategory isEqualToString:@"Static"])
     {
@@ -248,7 +269,6 @@
 
 - (void)checkFileCreateTime
 {
-    NSLog(@"checkFileCreateTime");
     NSString *fileName = [NSString stringWithFormat:@"FeatureID"];
     NSString* filePath = [pathToDocuments stringByAppendingPathComponent:fileName];
     NSError* error;
@@ -379,31 +399,6 @@
 {
     [loadingView removeFromSuperview];
 }
-
-
-#pragma mark - ADBannerView Delegates
-
-- (void)bannerViewDidLoadAd:(ADBannerView *)banner
-{
-//    [adView setHidden:NO];
-//    banner.frame = CGRectOffset(banner.frame, 0, 50);
-}
-- (BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave
-{
-    return YES;
-}
-
-- (void)bannerViewActionDidFinish:(ADBannerView *)banner
-{
-    
-}
-
-- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
-{
-//    banner.frame = CGRectOffset(banner.frame, 0, -50);
-//    [adView setHidden:YES];
-}
-
 
 #pragma mark - Button Action
 

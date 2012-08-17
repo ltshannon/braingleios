@@ -12,7 +12,6 @@
 @implementation MasterViewController
 
 @synthesize detailViewController = _detailViewController;
-@synthesize iAdView, adView;
 
 #pragma mark - View Life Cycle
 
@@ -20,19 +19,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    iAdView=[[UIView alloc]init];
-    adView = [[ADBannerView alloc]init];
-    [iAdView setClipsToBounds:YES];
-    [iAdView setClearsContextBeforeDrawing:YES];
-    adView.frame = CGRectOffset(adView.frame, 0, -50);
-    adView.delegate=self;
-    [iAdView addSubview:adView];
+    appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     if ([self isiPad]) {
-        [self.splitViewController.view addSubview:iAdView];
-    } else {
-        [self.tableView addSubview:iAdView];
+        [self addBannerView];
     }
-    
+    else {
+        [self masterAddBannerView];
+    }
+
     isiAdClicked = NO;
     self.title = @"Braingle";
     teaserSectionOneArray=[[NSMutableArray alloc]initWithObjects:@"Featured",@"Favorites",nil ];
@@ -47,7 +41,63 @@
     
     self.tableView.allowsSelection = YES; 
     self.tableView.allowsSelectionDuringEditing = YES; 
+    
+    self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
 }
+
+- (void)addBannerView
+{
+    appDelegate.iAdView=[[UIView alloc]init];
+    appDelegate.iAdBanner = [[ADBannerView alloc]init];
+    [appDelegate.iAdView setClipsToBounds:YES];
+    [appDelegate.iAdView setClearsContextBeforeDrawing:YES];
+    appDelegate.iAdBanner.frame = CGRectOffset(appDelegate.iAdBanner.frame, 0, -50);
+    appDelegate.iAdBanner.delegate=self;
+    [appDelegate.iAdView addSubview:appDelegate.iAdBanner];
+    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if ([self isiPad]) 
+    {
+        if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
+        {
+            [appDelegate.iAdView setFrame:CGRectMake(0, 950, 768, 50)];
+            appDelegate.iAdBanner.frame = CGRectMake(0, 0, 768, 50);
+        }
+        else 
+        {
+            [appDelegate.iAdView setFrame:CGRectMake(0, 695, 10024, 50)];
+            appDelegate.iAdBanner.frame = CGRectMake(0, 0, 1024, 50);
+        }
+        [self.splitViewController.view addSubview:appDelegate.iAdView];
+    }
+}
+
+- (void)masterAddBannerView
+{
+    master_iAdView=[[UIView alloc]init];
+    master_iAdBanner = [[ADBannerView alloc]init];
+    [master_iAdView setClipsToBounds:YES];
+    [master_iAdView setClearsContextBeforeDrawing:YES];
+    master_iAdBanner.frame = CGRectOffset(master_iAdBanner.frame, 0, -50);
+    master_iAdBanner.delegate=self;
+    [master_iAdView addSubview:master_iAdBanner];
+    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if (![self isiPad]) 
+    {
+        if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
+        {
+            [master_iAdView setFrame:CGRectMake(0, 365, 320, 50)];
+            master_iAdBanner.frame = CGRectMake(0, 0, 320, 50);
+        }
+        else 
+        {
+            [master_iAdView setFrame:CGRectMake(0, 237, 480, 50)];
+            master_iAdBanner.frame = CGRectMake(0, 0, 480, 50);
+        }
+        [self.tableView addSubview:master_iAdView];
+    }
+}
+
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -62,8 +112,6 @@
     }
 }
 
-
-
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -71,46 +119,50 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
 {
-    if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
-        adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
-    else
-        adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
     if ([self isiPad]) 
     {
+        if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
+            appDelegate.iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
+        else
+            appDelegate.iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
         return YES;
     }
     else 
     {
+        if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
+            master_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
+        else
+            master_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+
         return YES;
     }
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-//    [self CreateBannerForPage];
-    
-    if ([self isiPad]) {
+    if ([self isiPad]) 
+    {
         if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
         {
-            [iAdView setFrame:CGRectMake(0, 950, 768, 50)];
-            adView.frame = CGRectMake(0, 0, 768, 50);
+            [appDelegate.iAdView setFrame:CGRectMake(0, 950, 768, 50)];
+            appDelegate.iAdBanner.frame = CGRectMake(0, 0, 768, 50);
         } else 
         {
-            [iAdView setFrame:CGRectMake(0, 695, 10024, 50)];
-            adView.frame = CGRectMake(0, 0, 1024, 50);
+            [appDelegate.iAdView setFrame:CGRectMake(0, 695, 10024, 50)];
+            appDelegate.iAdBanner.frame = CGRectMake(0, 0, 1024, 50);
         }
     }
     else 
     {
         if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
         {
-            [iAdView setFrame:CGRectMake(0, 365, 320, 50)];
-            adView.frame = CGRectMake(0, 0, 320, 50);
+            [master_iAdView setFrame:CGRectMake(0, 365, 320, 50)];
+            master_iAdBanner.frame = CGRectMake(0, 0, 320, 50);
         }
         else 
         {
-            [iAdView setFrame:CGRectMake(0, 237, 480, 50)];
-            adView.frame = CGRectMake(0, 0, 480, 50);
+            [master_iAdView setFrame:CGRectMake(0, 237, 480, 50)];
+            master_iAdBanner.frame = CGRectMake(0, 0, 480, 50);
         }
     }
 }
@@ -134,6 +186,7 @@
         [self.navigationController presentModalViewController:infoNavigationController animated:YES];
     }
 }
+
 
 #pragma mark - ADBannerView Delegates
 
@@ -206,7 +259,8 @@
             //Featured Details
             
             [self autoFeaturedCellSelected:indexPath.row];
-            
+            [self.detailViewController dismissMasterView];
+
         }
         if(indexPath.row==1)
         {
@@ -221,19 +275,13 @@
                 brainTeaserViewController.strCategoryType = [teaserSectionOneArray objectAtIndex:indexPath.row];
                 [self.navigationController pushViewController:brainTeaserViewController animated:YES];
                 
-                [self.splitViewController.splitViewController viewWillDisappear:YES];
-                detailViewController.strTypeOfCategory = @"Static";
-                NSMutableArray *viewControllerArray = [[NSMutableArray alloc] initWithArray:[[self.splitViewController.viewControllers objectAtIndex:1] viewControllers]];
-                [viewControllerArray removeAllObjects];
-                [viewControllerArray addObject:detailViewController];
-                [[self.splitViewController.viewControllers objectAtIndex:1] setViewControllers:viewControllerArray animated:NO];
-                [self.splitViewController.splitViewController viewWillAppear:YES];
-                
+                self.detailViewController.strTypeOfCategory = @"Static";
+                [self.detailViewController webViewAction];
+
             } else {
                 brainTeaserViewController = [[BrainTeaserViewController alloc] initWithNibName:@"BrainTeaserViewController_iPhone" bundle:nil];
                 brainTeaserViewController.strCategoryType = [teaserSectionOneArray objectAtIndex:indexPath.row];
                 [self.navigationController pushViewController:brainTeaserViewController animated:YES];
-                
             }
         }
     }
@@ -250,21 +298,13 @@
             brainTeaserViewController.strCategoryType = [teaserSectionTwoArray objectAtIndex:indexPath.row];
 
             [self.navigationController pushViewController:brainTeaserViewController animated:YES];
-            
-            [self.splitViewController.splitViewController viewWillDisappear:YES];
-            detailViewController.strTypeOfCategory = @"Static";
-            NSMutableArray *viewControllerArray = [[NSMutableArray alloc] initWithArray:[[self.splitViewController.viewControllers objectAtIndex:1] viewControllers]];
-            [viewControllerArray removeAllObjects];
-            [viewControllerArray addObject:detailViewController];
-            [[self.splitViewController.viewControllers objectAtIndex:1] setViewControllers:viewControllerArray animated:NO];
-            [self.splitViewController.splitViewController viewWillAppear:YES];
-                     
+            self.detailViewController.strTypeOfCategory = @"Static";
+            [self.detailViewController webViewAction];
+
         } else {
             brainTeaserViewController = [[BrainTeaserViewController alloc] initWithNibName:@"BrainTeaserViewController_iPhone" bundle:nil];
             brainTeaserViewController.strCategoryType = [teaserSectionTwoArray objectAtIndex:indexPath.row];
             [self.navigationController pushViewController:brainTeaserViewController animated:YES];
-            
-            
         }
     }
 }
@@ -274,18 +314,19 @@
     //Adding the iAd on the table view.
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
 
-    if (![self isiPad]) 
+    if (![self isiPad])     
     {
         table_Y_Position = scrollView.contentOffset.y;
         if (self.tableView) 
         {
-            if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-                [iAdView setFrame:CGRectMake(0, 365+table_Y_Position, 320, 50)];
+            if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
+            {
+                [master_iAdView setFrame:CGRectMake(0, 365+table_Y_Position, 320, 50)];
             }
-            else {
-                [iAdView setFrame:CGRectMake(0, 237+table_Y_Position, 480, 50)];
+            else 
+            {
+                [master_iAdView setFrame:CGRectMake(0, 237+table_Y_Position, 480, 50)];
             }
-            NSLog(@"x = %f@y = %f@width = %f@height = %f",iAdView.frame.origin.x, iAdView.frame.origin.y, iAdView.frame.size.width, iAdView.frame.size.height);
         }
     }
 }
@@ -300,27 +341,16 @@
 
 - (void)autoFeaturedCellSelected:(NSInteger) indexValue
 {
-    DetailViewController *detailViewController;            
     if ([self isiPad]) 
     {
-        detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController_iPad" bundle:nil];
-        
-        [self.splitViewController.splitViewController viewWillDisappear:YES];
-        detailViewController.strDetailId = [teaserSectionOneArray objectAtIndex:indexValue] ;
-        NSMutableArray *viewControllerArray = [[NSMutableArray alloc] initWithArray:[[self.splitViewController.viewControllers objectAtIndex:1] viewControllers]];
-        [viewControllerArray removeAllObjects];
-        [viewControllerArray addObject:detailViewController];
-        [[self.splitViewController.viewControllers objectAtIndex:1] setViewControllers:viewControllerArray animated:NO];
-        [self.splitViewController.splitViewController viewWillAppear:YES];
+        self.detailViewController.strDetailId = [teaserSectionOneArray objectAtIndex:indexValue] ;
+        [self.detailViewController webViewAction];
     }
     else 
     {
-        detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController_iPhone" bundle:nil];
-        
+        DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController_iPhone" bundle:nil];
         detailViewController.strDetailId = [teaserSectionOneArray objectAtIndex:indexValue] ;
         [self.navigationController pushViewController:detailViewController animated:YES];
     }
-
 }
-
 @end

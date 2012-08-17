@@ -40,10 +40,6 @@
     NSMutableArray            *favoritesArray;
     BOOL                      checkFavorite;
     
-    //iAd
-    IBOutlet ADBannerView     *adView;
-    UIView                    *iAdView;
-
     //Rating icon
     UIImageView             *starImage1;
     UIImageView             *starImage2;
@@ -58,9 +54,15 @@
     IBOutlet UIView                     *loadingView;
     NSUInteger                          selectedRow;
     UIActionSheet                       *sortActionSheet;
+    AppDelegate                         *appDelegate;
+    ADBannerView                        *brainTeaser_iAdBanner;
+    UIView                              *brainTeaser_iAdView;
+
 }
 @property(nonatomic, retain) NSString    *strCategoryType;
 @property (retain, nonatomic) UIPopoverController *masterPopoverController;
+@property (strong, nonatomic) DetailViewController *detailViewController;
+
 
 
 - (IBAction)sortButtonAction:(id)sender;
@@ -74,6 +76,7 @@
 - (void)setPopularityImages:(NSString *) popularityValue;
 - (void)setDifficultyImages:(NSString *) difficultyValue;
 - (BOOL)isiPad;
+- (void)brainTeaserAddBannerView;
 
 @end
 
