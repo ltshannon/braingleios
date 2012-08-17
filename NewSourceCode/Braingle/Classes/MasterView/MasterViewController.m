@@ -343,7 +343,8 @@
 {
     if ([self isiPad]) 
     {
-        self.detailViewController.strDetailId = [teaserSectionOneArray objectAtIndex:indexValue] ;
+        self.detailViewController.strDetailId = [teaserSectionOneArray objectAtIndex:indexValue];
+        self.detailViewController.strTypeOfCategory = @"Featured";
         [self.detailViewController webViewAction];
     }
     else 
