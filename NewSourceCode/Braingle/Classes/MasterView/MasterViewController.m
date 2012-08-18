@@ -43,11 +43,19 @@
     self.tableView.allowsSelectionDuringEditing = YES; 
     
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    isFirstCellHilight = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    if (isFirstCellHilight) {
+        [self showFirstCellHilighted];
+    }
+}
+
+- (void)showFirstCellHilighted
+{
     if ([self isiPad]) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow: 0 inSection:0];
         [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
@@ -56,6 +64,8 @@
         }
         isiAdClicked = NO;
     }
+    isFirstCellHilight = NO;
+
 }
 
 - (void)viewDidUnload

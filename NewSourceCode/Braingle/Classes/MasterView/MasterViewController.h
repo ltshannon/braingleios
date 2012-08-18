@@ -26,6 +26,7 @@
     float                   table_Y_Position;
     BOOL                    isiAdClicked;
     AppDelegate             *appDelegate;
+    BOOL                    isFirstCellHilight;
 }
 
 @property (strong, nonatomic) DetailViewController *detailViewController;
@@ -36,5 +37,6 @@
 - (void)addBannerView;
 - (void)masterAddBannerView;
 - (void)addBannerView;
+- (void)showFirstCellHilighted;
 
 @end

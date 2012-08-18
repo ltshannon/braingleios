@@ -226,7 +226,14 @@
 
 -(void)loadURL{
     responseData = [[NSMutableData alloc]initWithLength:0];
-    NSString *strTempCategory = [strCategoryType stringByReplacingOccurrencesOfString:@" " withString:@"-"];
+    NSString *strTempCategory = strCategoryType;
+    if ([strTempCategory isEqualToString:@"Optical Illusions"]) {
+        strTempCategory = @"Optical Illusion";
+    }
+    else if([strTempCategory isEqualToString:@"Riddles"]) {
+        strTempCategory = @"Riddle";
+    }
+    strTempCategory = [strTempCategory stringByReplacingOccurrencesOfString:@" " withString:@"-"];
     
     NSString *strURL = CATEGORYTYPE_URL(strTempCategory,[OpenUDID  value]);
     strURL = [strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];

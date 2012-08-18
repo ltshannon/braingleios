@@ -19,11 +19,13 @@
     //NSLog(@"Open database");
 	return self;
 }
+/*
 - (void)dealloc
 {
     [super dealloc];
     [Detail release];
 }
+ */
 
 -(BOOL) openDatabase
 {
@@ -236,7 +238,7 @@
             
             [Detail addObject:ListDict];
             i = i+1;
-            [ListDict release];
+//            [ListDict release];
         }
     }
     sqlite3_finalize(compiledStatement);
