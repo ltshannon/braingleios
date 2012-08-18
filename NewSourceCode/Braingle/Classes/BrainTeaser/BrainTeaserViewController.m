@@ -75,13 +75,15 @@
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     if ([self isiPad]) {
+        CGRect rect = self.splitViewController.view.bounds;
+
         if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
         {
-            [appDelegate.iAdView setFrame:CGRectMake(0, 950, 768, 50)];
+            [appDelegate.iAdView setFrame:CGRectMake(0, rect.size.height-50, 768, 50)];
             appDelegate.iAdBanner.frame = CGRectMake(0, 0, 768, 50);
         } else 
         {
-            [appDelegate.iAdView setFrame:CGRectMake(0, 695, 10024, 50)];
+            [appDelegate.iAdView setFrame:CGRectMake(0, rect.size.height-50, 10024, 50)];
             appDelegate.iAdBanner.frame = CGRectMake(0, 0, 1024, 50);
         }
     }
@@ -409,7 +411,7 @@
     NSLog(@"indexValue = %d",indexValue);
     
     if ([listArray count] > 0 || [favoritesArray count] > 0) {
-        NSSortDescriptor *sortDescriptor;
+        
         if (indexValue == 0)
         {
             sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"difficulty"  ascending:NO];
@@ -431,8 +433,7 @@
         {
             sortDescriptor=nil;
         }
-        NSArray *descriptors = [[NSArray alloc] init];
-        descriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
+        NSArray *descriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
         if (checkFavorite) {
             [favoritesArray sortUsingDescriptors:descriptors];
         } else {
@@ -445,6 +446,37 @@
                                       animated:YES];
     }
 }
+
+#pragma mark - ADBannerView Delegates
+
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner
+{
+    [appDelegate.iAdView setHidden:NO];
+    //NSLog(@"animateAdBannerOn");
+//    [UIView beginAnimations:@"animateAdBannerOn" context:NULL];
+//    banner.frame = CGRectOffset(banner.frame, 0, 50);
+//    [UIView commitAnimations];
+}
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
+    [appDelegate.iAdView setHidden:YES];
+    //NSLog(@"animateAdBannerOFF");
+//    [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
+//    banner.frame = CGRectOffset(banner.frame, 0, -50);
+//    [UIView commitAnimations];
+}
+
+- (BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave
+{
+    return YES;
+}
+
+- (void)bannerViewActionDidFinish:(ADBannerView *)banner
+{
+    
+}
+
 
 #pragma mark - Table View
 
@@ -466,10 +498,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+//    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 
-    UILabel *titleLabel = [[UILabel alloc] init];
+
+    titleLabel = [[UILabel alloc] init];
     starImage1=[[UIImageView alloc]init];
     starImage2=[[UIImageView alloc]init];
     starImage3=[[UIImageView alloc]init];

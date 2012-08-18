@@ -17,6 +17,9 @@
     //iAd
     ADBannerView            *iAdBanner;
     UIView                  *iAdView;
+    ADBannerView            *iAdBanner_iPhone;
+    UIView                  *iAdView_iPhone;
+
 }
 
 @property (strong, nonatomic) UIWindow *window;

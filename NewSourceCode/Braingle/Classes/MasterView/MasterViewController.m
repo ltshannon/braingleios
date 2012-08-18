@@ -98,13 +98,15 @@
 {
     if ([self isiPad]) 
     {
+        CGRect rect = self.splitViewController.view.bounds;
+
         if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
         {
-            [appDelegate.iAdView setFrame:CGRectMake(0, 950, 768, 50)];
+            [appDelegate.iAdView setFrame:CGRectMake(0, rect.size.height-50, 768, 50)];
             appDelegate.iAdBanner.frame = CGRectMake(0, 0, 768, 50);
         } else 
         {
-            [appDelegate.iAdView setFrame:CGRectMake(0, 695, 10024, 50)];
+            [appDelegate.iAdView setFrame:CGRectMake(0, rect.size.height-50, 10024, 50)];
             appDelegate.iAdBanner.frame = CGRectMake(0, 0, 1024, 50);
         }
     }
@@ -135,19 +137,22 @@
     appDelegate.iAdBanner.frame = CGRectOffset(appDelegate.iAdBanner.frame, 0, -50);
     appDelegate.iAdBanner.delegate=self;
     [appDelegate.iAdView addSubview:appDelegate.iAdBanner];
+    CGRect rect = self.splitViewController.view.bounds;
+
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     if ([self isiPad]) 
     {
         if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
         {
-            [appDelegate.iAdView setFrame:CGRectMake(0, 950, 768, 50)];
+            [appDelegate.iAdView setFrame:CGRectMake(0, rect.size.height-50, 768, 50)];
             appDelegate.iAdBanner.frame = CGRectMake(0, 0, 768, 50);
         }
         else 
         {
-            [appDelegate.iAdView setFrame:CGRectMake(0, 695, 10024, 50)];
+            [appDelegate.iAdView setFrame:CGRectMake(0, rect.size.height-50, 10024, 50)];
             appDelegate.iAdBanner.frame = CGRectMake(0, 0, 1024, 50);
         }
+
         [self.splitViewController.view addSubview:appDelegate.iAdView];
     }
 }
@@ -205,8 +210,22 @@
 
 - (void)bannerViewDidLoadAd:(ADBannerView *)banner
 {
-
+    NSLog(@"animateAdBannerOn");
+    [appDelegate.iAdView setHidden:NO];
+//    [UIView beginAnimations:@"animateAdBannerOn" context:NULL];
+//    banner.frame = CGRectOffset(banner.frame, 0, 50);
+//    [UIView commitAnimations];
 }
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
+    NSLog(@"animateAdBannerOFF");
+//    [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
+//    banner.frame = CGRectOffset(banner.frame, 0, -50);
+//    [UIView commitAnimations];
+    [appDelegate.iAdView setHidden:YES];
+}
+ 
 - (BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave
 {
     isiAdClicked = YES;
@@ -216,11 +235,6 @@
 - (void)bannerViewActionDidFinish:(ADBannerView *)banner
 {
     
-}
-
-- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
-{
-
 }
 
 #pragma mark - Table View Delagates

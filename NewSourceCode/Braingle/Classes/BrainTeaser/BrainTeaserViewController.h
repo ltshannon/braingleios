@@ -38,7 +38,9 @@
     Database                  *dataBase;
     NSMutableArray            *favoritesArray;
     BOOL                      checkFavorite;
+    NSSortDescriptor          *sortDescriptor;
     //Rating icon
+    UILabel                 *titleLabel;
     UIImageView             *starImage1;
     UIImageView             *starImage2;
     UIImageView             *starImage3;

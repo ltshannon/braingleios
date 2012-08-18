@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		0083B56515D3F0D0007AA170 /* BraingleTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 30C64E9C15D3A51600499319 /* BraingleTests.h */; };
+		306391E315DFACCE00901C7A /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C64E9015D3A51600499319 /* SenTestingKit.framework */; };
+		306391E415DFACCE00901C7A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C64E6615D3A51500499319 /* UIKit.framework */; };
+		306391E515DFACCE00901C7A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C64E6815D3A51500499319 /* Foundation.framework */; };
+		306391EB15DFACCE00901C7A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 306391E915DFACCE00901C7A /* InfoPlist.strings */; };
+		306391EE15DFACCE00901C7A /* BraingleLogicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 306391ED15DFACCE00901C7A /* BraingleLogicTests.m */; };
 		30A6EFAE15D3A8EB0090C88D /* BrainTeaserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30A6EF9C15D3A8EB0090C88D /* BrainTeaserViewController.m */; };
 		30A6EFAF15D3A8EB0090C88D /* BrainTeaserViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30A6EF9D15D3A8EB0090C88D /* BrainTeaserViewController_iPad.xib */; };
 		30A6EFB015D3A8EB0090C88D /* BrainTeaserViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30A6EF9E15D3A8EB0090C88D /* BrainTeaserViewController_iPhone.xib */; };
@@ -163,11 +168,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0083B5BC15D3FB2A007AA170 /* BraingleLogicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BraingleLogicTests-Info.plist"; sourceTree = "<group>"; };
-		0083B5BE15D3FB2A007AA170 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0083B5C015D3FB2A007AA170 /* BraingleLogicTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BraingleLogicTests.h; sourceTree = "<group>"; };
-		0083B5C115D3FB2A007AA170 /* BraingleLogicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BraingleLogicTests.m; sourceTree = "<group>"; };
-		0083B5C315D3FB2A007AA170 /* BraingleLogicTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BraingleLogicTests-Prefix.pch"; sourceTree = "<group>"; };
+		306391E215DFACCE00901C7A /* BraingleLogicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BraingleLogicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		306391E815DFACCE00901C7A /* BraingleLogicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BraingleLogicTests-Info.plist"; sourceTree = "<group>"; };
+		306391EA15DFACCE00901C7A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		306391EC15DFACCE00901C7A /* BraingleLogicTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BraingleLogicTests.h; sourceTree = "<group>"; };
+		306391ED15DFACCE00901C7A /* BraingleLogicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BraingleLogicTests.m; sourceTree = "<group>"; };
+		306391EF15DFACCE00901C7A /* BraingleLogicTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BraingleLogicTests-Prefix.pch"; sourceTree = "<group>"; };
 		30A6EF9B15D3A8EB0090C88D /* BrainTeaserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainTeaserViewController.h; sourceTree = "<group>"; };
 		30A6EF9C15D3A8EB0090C88D /* BrainTeaserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrainTeaserViewController.m; sourceTree = "<group>"; };
 		30A6EF9D15D3A8EB0090C88D /* BrainTeaserViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrainTeaserViewController_iPad.xib; sourceTree = "<group>"; };
@@ -326,6 +332,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		306391DE15DFACCE00901C7A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				306391E315DFACCE00901C7A /* SenTestingKit.framework in Frameworks */,
+				306391E415DFACCE00901C7A /* UIKit.framework in Frameworks */,
+				306391E515DFACCE00901C7A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		30C64E5F15D3A51500499319 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -353,22 +369,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0083B5BA15D3FB2A007AA170 /* BraingleLogicTests */ = {
+		306391E615DFACCE00901C7A /* BraingleLogicTests */ = {
 			isa = PBXGroup;
 			children = (
-				0083B5C015D3FB2A007AA170 /* BraingleLogicTests.h */,
-				0083B5C115D3FB2A007AA170 /* BraingleLogicTests.m */,
-				0083B5BB15D3FB2A007AA170 /* Supporting Files */,
+				306391EC15DFACCE00901C7A /* BraingleLogicTests.h */,
+				306391ED15DFACCE00901C7A /* BraingleLogicTests.m */,
+				306391E715DFACCE00901C7A /* Supporting Files */,
 			);
 			path = BraingleLogicTests;
 			sourceTree = "<group>";
 		};
-		0083B5BB15D3FB2A007AA170 /* Supporting Files */ = {
+		306391E715DFACCE00901C7A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				0083B5BC15D3FB2A007AA170 /* BraingleLogicTests-Info.plist */,
-				0083B5BD15D3FB2A007AA170 /* InfoPlist.strings */,
-				0083B5C315D3FB2A007AA170 /* BraingleLogicTests-Prefix.pch */,
+				306391E815DFACCE00901C7A /* BraingleLogicTests-Info.plist */,
+				306391E915DFACCE00901C7A /* InfoPlist.strings */,
+				306391EF15DFACCE00901C7A /* BraingleLogicTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -433,7 +449,7 @@
 			children = (
 				30C64E6C15D3A51500499319 /* Braingle */,
 				30C64E9615D3A51600499319 /* BraingleTests */,
-				0083B5BA15D3FB2A007AA170 /* BraingleLogicTests */,
+				306391E615DFACCE00901C7A /* BraingleLogicTests */,
 				30C64E6515D3A51500499319 /* Frameworks */,
 				30C64E6315D3A51500499319 /* Products */,
 			);
@@ -444,6 +460,7 @@
 			children = (
 				30C64E6215D3A51500499319 /* Braingle.app */,
 				30C64E8F15D3A51600499319 /* BraingleTests.octest */,
+				306391E215DFACCE00901C7A /* BraingleLogicTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -722,6 +739,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		306391E115DFACCE00901C7A /* BraingleLogicTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 306391F015DFACCE00901C7A /* Build configuration list for PBXNativeTarget "BraingleLogicTests" */;
+			buildPhases = (
+				306391DD15DFACCE00901C7A /* Sources */,
+				306391DE15DFACCE00901C7A /* Frameworks */,
+				306391DF15DFACCE00901C7A /* Resources */,
+				306391E015DFACCE00901C7A /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BraingleLogicTests;
+			productName = BraingleLogicTests;
+			productReference = 306391E215DFACCE00901C7A /* BraingleLogicTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		30C64E6115D3A51500499319 /* Braingle */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 30C64EA115D3A51600499319 /* Build configuration list for PBXNativeTarget "Braingle" */;
@@ -780,11 +815,20 @@
 			targets = (
 				30C64E6115D3A51500499319 /* Braingle */,
 				30C64E8E15D3A51600499319 /* BraingleTests */,
+				306391E115DFACCE00901C7A /* BraingleLogicTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		306391DF15DFACCE00901C7A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				306391EB15DFACCE00901C7A /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		30C64E6015D3A51500499319 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -925,6 +969,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		306391E015DFACCE00901C7A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
 		30C64E8D15D3A51600499319 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -941,6 +998,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		306391DD15DFACCE00901C7A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				306391EE15DFACCE00901C7A /* BraingleLogicTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		30C64E5E15D3A51500499319 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -976,10 +1041,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		0083B5BD15D3FB2A007AA170 /* InfoPlist.strings */ = {
+		306391E915DFACCE00901C7A /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0083B5BE15D3FB2A007AA170 /* en */,
+				306391EA15DFACCE00901C7A /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1003,6 +1068,38 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		306391F115DFACCE00901C7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BraingleLogicTests/BraingleLogicTests-Prefix.pch";
+				INFOPLIST_FILE = "BraingleLogicTests/BraingleLogicTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		306391F215DFACCE00901C7A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BraingleLogicTests/BraingleLogicTests-Prefix.pch";
+				INFOPLIST_FILE = "BraingleLogicTests/BraingleLogicTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		30C64E9F15D3A51600499319 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1123,6 +1220,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		306391F015DFACCE00901C7A /* Build configuration list for PBXNativeTarget "BraingleLogicTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				306391F115DFACCE00901C7A /* Debug */,
+				306391F215DFACCE00901C7A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		30C64E5C15D3A51500499319 /* Build configuration list for PBXProject "Braingle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
