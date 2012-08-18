@@ -41,10 +41,7 @@
     
     UIBarButtonItem                     *menuBarButtonItem;
     NSString                            *strTypeOfCategory;
-    
-    //iAd
-    ADBannerView                        *detail_iAdBanner;
-    UIView                              *detail_iAdView;
+    AppDelegate                         *appDelegate;
 
 }
 @property (nonatomic, retain) NSString *strDetailId;
@@ -65,7 +62,6 @@
 - (BOOL)isiPad;
 - (void)dismissMasterView;
 - (void)webViewAction;
-- (void)detailAddBannerView;
 - (void)loadStaticHTML;
 
 @end

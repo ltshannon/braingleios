@@ -27,6 +27,7 @@
     BOOL                    isiAdClicked;
     AppDelegate             *appDelegate;
     BOOL                    isFirstCellHilight;
+
 }
 
 @property (strong, nonatomic) DetailViewController *detailViewController;
@@ -34,8 +35,6 @@
 - (BOOL)isiPad;
 - (IBAction)infoButtonAction:(id)sender;
 - (void)autoFeaturedCellSelected:(NSInteger) indexValue;
-- (void)addBannerView;
-- (void)masterAddBannerView;
 - (void)addBannerView;
 - (void)showFirstCellHilighted;
 

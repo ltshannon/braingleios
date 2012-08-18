@@ -20,19 +20,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if (![self isiPad]) {
-        [self detailAddBannerView];
-    }
+    appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {  
     [super viewWillAppear:animated];
+    [self.view addSubview:appDelegate.iAdView_iPhone];    
     [self webViewAction];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [appDelegate.iAdView_iPhone removeFromSuperview];    
     strDetailId = @"";
     if([detailWebView isLoading])
     {
@@ -69,9 +69,9 @@
     else 
     {
         if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
-            detail_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
+            appDelegate.iAdBanner_iPhone.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
         else
-            detail_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+            appDelegate.iAdBanner_iPhone.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
         return YES;
     }
 }
@@ -84,16 +84,15 @@
     {
         if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
         {
-            [detail_iAdView setFrame:CGRectMake(0, 365, 320, 50)];
-            detail_iAdBanner.frame = CGRectMake(0, 0, 320, 50);
+            [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 367, 320, 50)];
+            appDelegate.iAdBanner_iPhone.frame = CGRectMake(0, 0, 320, 50);
         }
         else 
         {
-            [detail_iAdView setFrame:CGRectMake(0, 237, 480, 50)];
-            detail_iAdBanner.frame = CGRectMake(0, 0, 480, 50);
+            [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 237, 480, 50)];
+            appDelegate.iAdBanner_iPhone.frame = CGRectMake(0, 0, 480, 50);
         }
     }
-
  
     if ([self isiPad])
     {
@@ -177,36 +176,6 @@
         }
     }
 }
-
-
-#pragma mark - Add iAd
-
-- (void)detailAddBannerView
-{
-    detail_iAdView=[[UIView alloc]init];
-    detail_iAdBanner = [[ADBannerView alloc]init];
-    [detail_iAdView setClipsToBounds:YES];
-    [detail_iAdView setClearsContextBeforeDrawing:YES];
-    detail_iAdBanner.frame = CGRectOffset(detail_iAdBanner.frame, 0, -50);
-    detail_iAdBanner.delegate=self;
-    [detail_iAdView addSubview:detail_iAdBanner];
-    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    if (![self isiPad]) 
-    {
-        if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
-        {
-            [detail_iAdView setFrame:CGRectMake(0, 365, 320, 50)];
-            detail_iAdBanner.frame = CGRectMake(0, 0, 320, 50);
-        }
-        else 
-        {
-            [detail_iAdView setFrame:CGRectMake(0, 237, 480, 50)];
-            detail_iAdBanner.frame = CGRectMake(0, 0, 480, 50);
-        }
-        [self.view addSubview:detail_iAdView];
-    }
-}
-
 
 #pragma mark - Split view methods
 
@@ -407,6 +376,38 @@
     [loadingView removeFromSuperview];
 }
 
+#pragma mark - ADBannerView Delegates
+
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner
+{    
+    if ([self isiPad]) {
+        [appDelegate.iAdView setHidden:NO];
+    }
+    else {
+        [appDelegate.iAdView_iPhone setHidden:NO];
+    }
+}
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
+    if ([self isiPad]) {
+        [appDelegate.iAdView setHidden:YES];
+    }
+    else {
+        [appDelegate.iAdView_iPhone setHidden:YES];
+    }
+}
+
+- (BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave
+{
+    return YES;
+}
+
+- (void)bannerViewActionDidFinish:(ADBannerView *)banner
+{
+    
+}
+
 #pragma mark - Button Action
 
 
@@ -434,9 +435,7 @@
 
 - (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
 {    
-    
     //Add menu button
-    
     menuBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:barButtonItem.target action:barButtonItem.action];
     [self.navigationItem setLeftBarButtonItem:menuBarButtonItem animated:YES];
     self.masterPopoverController = popoverController;

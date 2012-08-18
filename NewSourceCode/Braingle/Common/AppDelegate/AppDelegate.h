@@ -34,6 +34,10 @@
 
 @property (strong, nonatomic) UIView *iAdView;
 
+@property (strong, nonatomic) ADBannerView *iAdBanner_iPhone;
+
+@property (strong, nonatomic) UIView *iAdView_iPhone;
+
 - (void)showSplashView;
 - (void)hideSplashView;
 - (BOOL)isiPad;
