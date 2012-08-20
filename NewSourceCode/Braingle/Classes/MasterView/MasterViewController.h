@@ -37,5 +37,6 @@
 - (void)autoFeaturedCellSelected:(NSInteger) indexValue;
 - (void)addBannerView;
 - (void)showFirstCellHilighted;
+- (void)masterAddBannerView;
 
 @end
