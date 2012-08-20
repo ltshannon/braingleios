@@ -154,7 +154,16 @@
             heartButton.hidden = YES;
             if (![[NSFileManager defaultManager] fileExistsAtPath:[pathToDocuments stringByAppendingPathComponent:fileName]])
             {
-                [self loadURL];
+                if(([[Reachability sharedReachability] internetConnectionStatus] == NotReachable))
+                {
+                    UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"Braingle" message:@"No Network Connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    [errorAlert show];
+                    [self removeLoadIcon];
+                }
+                else 
+                {
+                    [self loadURL];
+                }
             }
             else 
             {
@@ -206,10 +215,20 @@
         NSLog(@"urlAddress = %@",urlAddress);
         NSData *htmlData = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlAddress]];
 
-        NSURL *url = [NSURL URLWithString:urlAddress];
-        NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-        [detailWebView loadRequest:requestObj];
-        [htmlData writeToFile:[NSString stringWithFormat:@"%@",[pathToDocuments stringByAppendingPathComponent:fileName]]  atomically:YES];
+        if(([[Reachability sharedReachability] internetConnectionStatus] == NotReachable))
+        {
+            UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"Braingle" message:@"Network not available" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [errorAlert show];
+            [self removeLoadIcon];
+        }
+        else 
+        {
+            NSURL *url = [NSURL URLWithString:urlAddress];
+            NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+            [detailWebView loadRequest:requestObj];
+            [htmlData writeToFile:[NSString stringWithFormat:@"%@",[pathToDocuments stringByAppendingPathComponent:fileName]]  atomically:YES];
+        }
+
     }
     else 
     {
@@ -273,7 +292,16 @@
     
     if (seconds > 86400.0)
     {
-        [self loadURL];
+        if(([[Reachability sharedReachability] internetConnectionStatus] == NotReachable))
+        {
+            UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"Braingle" message:@"No Network Connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [errorAlert show];
+            [self removeLoadIcon];
+        }
+        else 
+        {
+            [self loadURL];
+        }
     } else {
         
         NSMutableData *data = [NSData dataWithContentsOfFile:[pathToDocuments stringByAppendingPathComponent:fileName]];

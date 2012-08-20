@@ -131,7 +131,16 @@
     NSString *fileName = [NSString stringWithFormat:@"%@",strCategoryType];
     if (![[NSFileManager defaultManager] fileExistsAtPath:[pathToDocuments stringByAppendingPathComponent:fileName]])
     {
-        [self loadURL];
+        if(([[Reachability sharedReachability] internetConnectionStatus] == NotReachable))
+        {
+            UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"Braingle" message:@"No Network Connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [errorAlert show];
+            [self removeLoadIcon];
+        }
+        else 
+        {
+            [self loadURL];
+        }
     } 
     else 
     {
@@ -160,7 +169,16 @@
         
         if (hours > 86400.0)
         {
-            [self loadURL];
+            if(([[Reachability sharedReachability] internetConnectionStatus] == NotReachable))
+            {
+                UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"Braingle" message:@"No Network Connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [errorAlert show];
+                [self removeLoadIcon];
+            }
+            else 
+            {
+                [self loadURL];
+            }
         } else {
             NSMutableData *data = [NSData dataWithContentsOfFile:[pathToDocuments stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",strCategoryType]]];
             [self parseXMLFileAtURL:data];
