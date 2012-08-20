@@ -1227,6 +1227,7 @@
 				306391F215DFACCE00901C7A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		30C64E5C15D3A51500499319 /* Build configuration list for PBXProject "Braingle" */ = {
 			isa = XCConfigurationList;

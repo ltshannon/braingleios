@@ -160,58 +160,13 @@
         
     }
 	return NO;
-
 }
-
-/*
-
-- (NSMutableDictionary*)getFavoriteData;
-{
-    NSMutableDictionary *Detail = [[NSMutableDictionary alloc] init];
-    
-    NSString *query = [NSString stringWithFormat:@"SELECT favorites_id,date,title,difficulty,popularity FROM Favorites_Table"];
-    // NSLog(@"query for get = %@",query);
-    
-    sqlite3_stmt *compiledStatement;
-    if(sqlite3_prepare_v2(database, [query UTF8String], -1, &compiledStatement, NULL) == SQLITE_OK) 
-    {
-        int i = 0;
-        while(sqlite3_step(compiledStatement) == SQLITE_ROW) 
-        { 
-            NSMutableDictionary *ListDict = [[NSMutableDictionary alloc] init];
-            
-            if((char *)sqlite3_column_text(compiledStatement, 0) != nil)
-                [ListDict setValue:[NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 0)] forKey:@"id"];
-            
-            if((char *)sqlite3_column_text(compiledStatement, 1) != nil )
-                [ListDict setValue:[NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 1)] forKey:@"date"];
-            
-            if((char *)sqlite3_column_text(compiledStatement, 2) != nil )
-                [ListDict setValue:[NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 2)] forKey:@"title"];
-            
-            if((char *)sqlite3_column_text(compiledStatement, 3) != nil )
-                [ListDict setValue:[NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 3)] forKey:@"difficulty"];
-            
-            if((char *)sqlite3_column_text(compiledStatement, 4) != nil )
-                [ListDict setValue:[NSString stringWithUTF8String:(char *)sqlite3_column_text(compiledStatement, 4)] forKey:@"popularity"];
-                        
-            [Detail setValue:ListDict forKey:[NSString  stringWithFormat:@"%d",i]];
-            i = i+1;
-            [ListDict release];
-        }
-    }
-    sqlite3_finalize(compiledStatement);
-    return Detail;
-}
-
-*/
 
 - (NSMutableArray *)getFavoriteData;
 {
     Detail = [[NSMutableArray alloc] init];
     
     NSString *query = [NSString stringWithFormat:@"SELECT favorites_id,date,title,difficulty,popularity FROM Favorites_Table"];
-    // NSLog(@"query for get = %@",query);
     
     sqlite3_stmt *compiledStatement;
     if(sqlite3_prepare_v2(database, [query UTF8String], -1, &compiledStatement, NULL) == SQLITE_OK) 
@@ -238,13 +193,11 @@
             
             [Detail addObject:ListDict];
             i = i+1;
-//            [ListDict release];
         }
     }
     sqlite3_finalize(compiledStatement);
     return Detail;
 }
-
 
 -(BOOL)removeFavoriteData:(NSString *)deleteFavoriteID;
 {

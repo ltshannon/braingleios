@@ -447,12 +447,15 @@
         
         [((UIButton*)sender) setImage:[UIImage imageNamed:@"fav.png"] forState:UIControlStateNormal];
         [dataBase removeFavoriteData:[selectedDictionary valueForKey:@"id"]]; 
+        isFavorite = NO;
     } else {
         
         //Remove from favorites.
         
         [((UIButton*)sender) setImage:[UIImage imageNamed:@"fav-active.png"] forState:UIControlStateNormal];
         [dataBase addFavoriteData:selectedDictionary]; 
+        isFavorite = YES;
+
     }  
     if ([strTypeOfCategory isEqualToString:@"Favorite"]) {
         [self.brainDelegate reloadTableView];

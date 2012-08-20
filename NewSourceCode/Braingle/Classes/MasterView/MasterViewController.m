@@ -307,7 +307,6 @@
         if(indexPath.row==1)
         {
             //Favorite Details
-            
             BrainTeaserViewController *brainTeaserViewController;
             DetailViewController *detailViewController;            
             if ([self isiPad]) {
