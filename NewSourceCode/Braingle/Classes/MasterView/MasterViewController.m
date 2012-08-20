@@ -79,7 +79,6 @@
         isiAdClicked = NO;
     }
     isFirstCellHilight = NO;
-
 }
 
 - (void)viewDidUnload
@@ -149,6 +148,7 @@
     [appDelegate.iAdView setClearsContextBeforeDrawing:YES];
     appDelegate.iAdBanner.frame = CGRectOffset(appDelegate.iAdBanner.frame, 0, -50);
     appDelegate.iAdBanner.delegate=self;
+    appDelegate.iAdView.backgroundColor = [UIColor clearColor];
     [appDelegate.iAdView addSubview:appDelegate.iAdBanner];
     CGRect rect = self.splitViewController.view.bounds;
 
@@ -179,6 +179,7 @@
     [appDelegate.iAdView_iPhone setClearsContextBeforeDrawing:YES];
     appDelegate.iAdBanner_iPhone.frame = CGRectOffset(appDelegate.iAdBanner_iPhone.frame, 0, -50);
     appDelegate.iAdBanner_iPhone.delegate=self;
+    appDelegate.iAdView_iPhone.backgroundColor = [UIColor clearColor];
     [appDelegate.iAdView_iPhone addSubview:appDelegate.iAdBanner_iPhone];
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     if (![self isiPad]) 
