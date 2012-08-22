@@ -44,7 +44,7 @@ typedef enum {
 // Either this or 'hostName' must be set.
 @property (nonatomic, retain) NSString *address;
 // A cache of ReachabilityQuery objects, which encapsulate a SCNetworkReachabilityRef, a host or address, and a run loop. The keys are host names or addresses.
-@property (nonatomic, assign) NSMutableDictionary *reachabilityQueries;
+@property (nonatomic, retain) NSMutableDictionary *reachabilityQueries;
 
 // This class is intended to be used as a singleton.
 + (Reachability *)sharedReachability;

@@ -111,15 +111,15 @@
     if ([self isiPad]) 
     {
         CGRect rect = self.splitViewController.view.bounds;
-
+        
         if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
         {
-            [appDelegate.iAdView setFrame:CGRectMake(0, rect.size.height-50, 768, 50)];
-            appDelegate.iAdBanner.frame = CGRectMake(0, 0, 768, 50);
+            [appDelegate.iAdView setFrame:CGRectMake(0, rect.size.height-66, 768, 66)];
+            appDelegate.iAdBanner.frame = CGRectMake(0, 0, 768, 66);
         } else 
         {
-            [appDelegate.iAdView setFrame:CGRectMake(0, rect.size.height-50, 10024, 50)];
-            appDelegate.iAdBanner.frame = CGRectMake(0, 0, 1024, 50);
+            [appDelegate.iAdView setFrame:CGRectMake(0, rect.size.height-66, 10024, 66)];
+            appDelegate.iAdBanner.frame = CGRectMake(0, 0, 1024, 66);
         }
     }
     else 
@@ -157,13 +157,13 @@
     {
         if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
         {
-            [appDelegate.iAdView setFrame:CGRectMake(0, rect.size.height-50, 768, 50)];
-            appDelegate.iAdBanner.frame = CGRectMake(0, 0, 768, 50);
+            [appDelegate.iAdView setFrame:CGRectMake(0, rect.size.height-66, 768, 66)];
+            appDelegate.iAdBanner.frame = CGRectMake(0, 0, 768, 66);
         }
         else 
         {
-            [appDelegate.iAdView setFrame:CGRectMake(0, rect.size.height-50, 10024, 50)];
-            appDelegate.iAdBanner.frame = CGRectMake(0, 0, 1024, 50);
+            [appDelegate.iAdView setFrame:CGRectMake(0, rect.size.height-66, 10024, 66)];
+            appDelegate.iAdBanner.frame = CGRectMake(0, 0, 1024, 66);
         }
 
         [self.splitViewController.view addSubview:appDelegate.iAdView];

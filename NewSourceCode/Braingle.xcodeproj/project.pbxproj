@@ -38,7 +38,7 @@
 		30C64ED615D3A59500499319 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C64EBF15D3A59500499319 /* AppDelegate.m */; };
 		30C64ED715D3A59500499319 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C64EC315D3A59500499319 /* Database.m */; };
 		30C64ED815D3A59500499319 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C64EC615D3A59500499319 /* OpenUDID.m */; };
-		30C64ED915D3A59500499319 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C64EC915D3A59500499319 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		30C64ED915D3A59500499319 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C64EC915D3A59500499319 /* Reachability.m */; };
 		30C64F5115D3A5A800499319 /* Braingle_DB.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 30C64EDA15D3A5A800499319 /* Braingle_DB.sqlite */; };
 		30C64F5215D3A5A800499319 /* InfoDesc.html in Resources */ = {isa = PBXBuildFile; fileRef = 30C64EDC15D3A5A800499319 /* InfoDesc.html */; };
 		30C64F5315D3A5A800499319 /* TeaserDetailLandscape.html in Resources */ = {isa = PBXBuildFile; fileRef = 30C64EDD15D3A5A800499319 /* TeaserDetailLandscape.html */; };
@@ -1122,8 +1122,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PROVISIONING_PROFILE = "38A73AEE-88EE-404A-B002-249860455305";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "38A73AEE-88EE-404A-B002-249860455305";
+				PROVISIONING_PROFILE = "74845543-57B4-4F9B-A36F-30453C48509D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "74845543-57B4-4F9B-A36F-30453C48509D";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1135,7 +1135,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1164,8 +1164,8 @@
 				INFOPLIST_FILE = "Braingle/Braingle-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "38A73AEE-88EE-404A-B002-249860455305";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "38A73AEE-88EE-404A-B002-249860455305";
+				PROVISIONING_PROFILE = "057A14C4-714F-420E-8355-1B09E35CD617";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "057A14C4-714F-420E-8355-1B09E35CD617";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1174,11 +1174,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Braingle/Braingle-Prefix.pch";
 				INFOPLIST_FILE = "Braingle/Braingle-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
