@@ -57,7 +57,10 @@
     if (isFirstCellHilight) {
         [self showFirstCellHilighted];
     }
+
     [self.tableView addSubview:appDelegate.iAdView_iPhone];
+    [self.tableView setContentOffset:CGPointZero animated:NO];
+
 
 }
 

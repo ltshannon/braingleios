@@ -95,6 +95,7 @@
     }
     else 
     {
+
         if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
         {
             [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 367, 320, 50)];
