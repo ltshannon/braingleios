@@ -38,6 +38,5 @@
 - (void)addBannerView;
 - (void)showFirstCellHilighted;
 - (void)masterAddBannerView;
-- (void)iAdposition:(float)yPosition;
 
 @end

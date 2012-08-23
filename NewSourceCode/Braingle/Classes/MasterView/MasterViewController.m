@@ -124,18 +124,18 @@
     }
     else 
     {
-        [self iAdposition:0.0];
-
-//        if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
-//        {
-//            [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 367, 320, 50)];
-//            appDelegate.iAdBanner_iPhone.frame = CGRectMake(0, 0, 320, 50);
-//        }
-//        else 
-//        {
-//            [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 237, 480, 32)];
-//            appDelegate.iAdBanner_iPhone.frame = CGRectMake(0, 0, 480, 32);
-//        }
+        [self.tableView setContentOffset:CGPointZero animated:NO];
+        
+        if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
+        {
+            [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 367, 320, 50)];
+            appDelegate.iAdBanner_iPhone.frame = CGRectMake(0, 0, 320, 50);
+        }
+        else 
+        {
+            [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 237, 480, 32)];
+            appDelegate.iAdBanner_iPhone.frame = CGRectMake(0, 0, 480, 32);
+        }
     }
 }
 
@@ -355,30 +355,25 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     //Adding the iAd on the table view.
+    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    
     if (![self isiPad])     
     {
         table_Y_Position = scrollView.contentOffset.y;
-        [self iAdposition:table_Y_Position];
+        if (self.tableView) 
+        {
+            if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
+            {
+                [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 367+table_Y_Position, 320, 50)];
+            }
+            else 
+            {
+                [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 237+table_Y_Position, 480, 50)];
+            }
+        }
     }
 }
 
-- (void)iAdposition:(float)yPosition
-{
-    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-
-    if (self.tableView) 
-    {
-        if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
-        {
-            [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 367+table_Y_Position, 320, 50)];
-        }
-        else 
-        {
-            [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 237+table_Y_Position, 480, 50)];
-        }
-    }
-
-}
 
 #pragma mark - Check Device
 
