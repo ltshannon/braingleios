@@ -26,7 +26,10 @@
     self.navigationItem.rightBarButtonItem = sortButton;
     
     favoritesArray = [[NSMutableArray alloc] init];
-    dataBase     =  [[Database alloc] initialise];
+    
+    if (dataBase == NULL) 
+        dataBase     =  [[Database alloc] initialise];
+    
     self.title = strCategoryType;
     docDir = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     pathToDocuments  = [[docDir objectAtIndex:0] copy];

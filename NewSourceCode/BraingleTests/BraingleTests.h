@@ -7,7 +7,12 @@
 //
 
 #import <SenTestingKit/SenTestingKit.h>
+#import "BrainTeaserViewController.h"
+#import "Config.h"
 
 @interface BraingleTests : SenTestCase
+{
+    BrainTeaserViewController *brainTeaserViewController;
+}
 
 @end

@@ -125,7 +125,9 @@
     self.title = @"Brain Teaser";
     isFavorite = NO;
     favoritesArray=[[NSMutableArray alloc]init];
-    dataBase=[[Database alloc]initialise];
+    if (dataBase == NULL) 
+        dataBase     =  [[Database alloc] initialise];
+        
     heartButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     [heartButton setFrame:CGRectMake(271, 11, 32, 29)];
     [heartButton addTarget:self action:@selector(favoritesButtonAction:) forControlEvents:UIControlEventTouchUpInside];
