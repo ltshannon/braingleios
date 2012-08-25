@@ -117,7 +117,6 @@
     if ([strCategoryType isEqualToString:@"Favorites"]) {
         checkFavorite = YES;
         favoritesArray = [dataBase getFavoriteData];
-        NSLog(@"favoritesArray = %@",favoritesArray);
         [brainTeaserTableView reloadData];
     } else {
         [self checkFileCreateTime];
@@ -381,7 +380,6 @@
 -(void)parserDidEndDocument:(NSXMLParser *)parser
 {	
     [brainTeaserTableView reloadData];
-    NSLog(@"listArray = %@",listArray);
     [self removeLoadIcon];
 }
 
@@ -403,9 +401,7 @@
     [self sortingList:buttonIndex];
 }
 - (void) sortingList:(NSInteger)indexValue
-{
-    NSLog(@"indexValue = %d",indexValue);
-    
+{    
     if ([listArray count] > 0 || [favoritesArray count] > 0) {
         
         if (indexValue == 0)

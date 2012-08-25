@@ -120,7 +120,6 @@
 
 - (void)webViewAction
 {
-    NSLog(@"strDetailId = %@",strDetailId);
     self.title = @"Brain Teaser";
     isFavorite = NO;
     favoritesArray=[[NSMutableArray alloc]init];
@@ -139,7 +138,6 @@
     docDir=NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     pathToDocuments=[[docDir objectAtIndex:0]copy];
     NSString *fileName=[NSString stringWithFormat:@"FeatureID"];
-    NSLog(@"fileName = %@",fileName);
     if([strTypeOfCategory isEqualToString:@"Static"])
     {
         heartButton.hidden = YES;
@@ -240,8 +238,6 @@
 }
 - (void)loadStaticHTML
 {
-    NSLog(@"Load Static HTML");
-    
     if([strTypeOfCategory isEqualToString:@"Static"])
     {
         UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];

@@ -67,6 +67,19 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    
+    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    
+    if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
+    {
+        [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 367, 320, 50)];
+    }
+    else 
+    {
+        [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 237, 480, 50)];
+    }
+
+    
     [appDelegate.iAdView_iPhone removeFromSuperview];
 }
 

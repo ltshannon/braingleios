@@ -46,7 +46,6 @@
 	return YES;
 }
 
-
 -(void) checkAndCreateDatabase{
 	// Check if the SQL database has already been saved to the users phone, if not then copy it over
 	BOOL success;
@@ -162,7 +161,8 @@
 
 - (NSMutableArray *)getFavoriteData;
 {
-    Detail = [[NSMutableArray alloc] init];
+    if (Detail == NULL)
+        Detail = [[NSMutableArray alloc] init];
     
     NSString *query = [NSString stringWithFormat:@"SELECT favorites_id,date,title,difficulty,popularity FROM Favorites_Table"];
     
