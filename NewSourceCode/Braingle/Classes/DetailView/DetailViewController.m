@@ -86,11 +86,13 @@
         {
             [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 367, 320, 50)];
             appDelegate.iAdBanner_iPhone.frame = CGRectMake(0, 0, 320, 50);
+            [loadingView setFrame:CGRectMake((self.view.frame.size.width/2)-40, (self.view.frame.size.height/2)-40, 80, 80)];
         }
         else 
         {
             [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 237, 480, 50)];
             appDelegate.iAdBanner_iPhone.frame = CGRectMake(0, 0, 480, 50);
+            [loadingView setFrame:CGRectMake((self.view.frame.size.width/2)-40, (self.view.frame.size.height/2)-40, 80, 80)];
         }
     }
  

@@ -467,7 +467,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 {
 	self = [super init];
 	if (self != nil) {
-		self.runLoops = CFArrayCreateMutable(kCFAllocatorDefault, 0, NULL);
+//		self.runLoops = CFArrayCreateMutable(kCFAllocatorDefault, 0, NULL);
 	}
 	return self;
 }
