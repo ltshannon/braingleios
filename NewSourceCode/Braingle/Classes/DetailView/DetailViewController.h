@@ -43,6 +43,10 @@
     UIBarButtonItem                     *menuBarButtonItem;
     NSString                            *strTypeOfCategory;
     AppDelegate                         *appDelegate;
+    
+    ADBannerView                        *detail_iAdBanner;
+    UIView                              *detail_iAdView;
+
 
 }
 @property (nonatomic, retain) NSString *strDetailId;
@@ -64,6 +68,7 @@
 - (void)dismissMasterView;
 - (void)webViewAction;
 - (void)loadStaticHTML;
+- (void)detailAddBannerView;
 
 @end
 

@@ -20,19 +20,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    appDelegate  = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    dataBase     =  [[Database alloc] initialise];
+    if (![self isiPad]) {
+        [self detailAddBannerView];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {  
     [super viewWillAppear:animated];
-    [self.view addSubview:appDelegate.iAdView_iPhone];    
+
     [self webViewAction];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [appDelegate.iAdView_iPhone removeFromSuperview];    
     strDetailId = @"";
     if([detailWebView isLoading])
     {
@@ -44,7 +47,6 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -69,29 +71,27 @@
     else 
     {
         if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
-            appDelegate.iAdBanner_iPhone.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
+            detail_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
         else
-            appDelegate.iAdBanner_iPhone.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+            detail_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
         return YES;
     }
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    //    [self CreateBannerForPage];
-    
+{    
     if (![self isiPad])
     {
         if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
         {
-            [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 367, 320, 50)];
-            appDelegate.iAdBanner_iPhone.frame = CGRectMake(0, 0, 320, 50);
+            [detail_iAdView setFrame:CGRectMake(0, 367, 320, 50)];
+            detail_iAdBanner.frame = CGRectMake(0, 0, 320, 50);
             [loadingView setFrame:CGRectMake((self.view.frame.size.width/2)-40, (self.view.frame.size.height/2)-40, 80, 80)];
         }
         else 
         {
-            [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 237, 480, 50)];
-            appDelegate.iAdBanner_iPhone.frame = CGRectMake(0, 0, 480, 50);
+            [detail_iAdView setFrame:CGRectMake(0, 237, 480, 50)];
+            detail_iAdBanner.frame = CGRectMake(0, 0, 480, 50);
             [loadingView setFrame:CGRectMake((self.view.frame.size.width/2)-40, (self.view.frame.size.height/2)-40, 80, 80)];
         }
     }
@@ -107,6 +107,35 @@
         }
     }
 }
+
+- (void)detailAddBannerView
+{
+    detail_iAdView =[[UIView alloc]init];
+    detail_iAdBanner = [[ADBannerView alloc]init];
+    [detail_iAdView setClipsToBounds:YES];
+    [detail_iAdView setClearsContextBeforeDrawing:YES];
+    detail_iAdView.hidden = YES;
+    detail_iAdBanner.frame = CGRectOffset(detail_iAdBanner.frame, 0, -50);
+    detail_iAdBanner.delegate=self;
+    detail_iAdView.backgroundColor = [UIColor clearColor];
+    [detail_iAdView addSubview:detail_iAdBanner];
+    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if (![self isiPad]) 
+    {
+        if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
+        {
+            [detail_iAdView setFrame:CGRectMake(0, 367, 320, 50)];
+            detail_iAdBanner.frame = CGRectMake(0, 0, 320, 50);
+        }
+        else 
+        {
+            [detail_iAdView setFrame:CGRectMake(0, 237, 480, 32)];
+            detail_iAdBanner.frame = CGRectMake(0, 0, 480, 32);
+        }
+        [self.view addSubview:detail_iAdView];
+    }
+}
+
 
 #pragma mark - Dismiss Master View
 
@@ -125,8 +154,6 @@
     self.title = @"Brain Teaser";
     isFavorite = NO;
     favoritesArray=[[NSMutableArray alloc]init];
-    if (dataBase == NULL) 
-        dataBase     =  [[Database alloc] initialise];
         
     heartButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     [heartButton setFrame:CGRectMake(271, 11, 32, 29)];
@@ -407,22 +434,26 @@
 #pragma mark - ADBannerView Delegates
 
 - (void)bannerViewDidLoadAd:(ADBannerView *)banner
-{    
+{  
+    NSLog(@"animateAdBannerOn");
+
     if ([self isiPad]) {
         [appDelegate.iAdView setHidden:NO];
     }
     else {
-        [appDelegate.iAdView_iPhone setHidden:NO];
+        [detail_iAdView setHidden:NO];
     }
 }
 
 - (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
 {
+    NSLog(@"animateAdBannerOFF");
+
     if ([self isiPad]) {
         [appDelegate.iAdView setHidden:YES];
     }
     else {
-        [appDelegate.iAdView_iPhone setHidden:YES];
+        [detail_iAdView setHidden:YES];
     }
 }
 

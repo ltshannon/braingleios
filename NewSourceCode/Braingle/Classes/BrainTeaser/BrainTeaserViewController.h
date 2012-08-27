@@ -57,6 +57,10 @@
     UIActionSheet                       *sortActionSheet;
     //iAd
     AppDelegate                         *appDelegate;
+    
+    ADBannerView                        *brainTeaser_iAdBanner;
+    UIView                              *brainTeaser_iAdView;
+
 }
 @property(nonatomic, retain) NSString    *strCategoryType;
 @property (retain, nonatomic) UIPopoverController *masterPopoverController;

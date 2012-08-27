@@ -17,8 +17,8 @@
     //iAd
     ADBannerView            *iAdBanner;
     UIView                  *iAdView;
-    ADBannerView            *iAdBanner_iPhone;
-    UIView                  *iAdView_iPhone;
+//    ADBannerView            *iAdBanner_iPhone;
+//    UIView                  *iAdView_iPhone;
 
 }
 
@@ -34,9 +34,9 @@
 
 @property (strong, nonatomic) UIView *iAdView;
 
-@property (strong, nonatomic) ADBannerView *iAdBanner_iPhone;
-
-@property (strong, nonatomic) UIView *iAdView_iPhone;
+//@property (strong, nonatomic) ADBannerView *iAdBanner_iPhone;
+//
+//@property (strong, nonatomic) UIView *iAdView_iPhone;
 
 - (void)showSplashView;
 - (void)hideSplashView;

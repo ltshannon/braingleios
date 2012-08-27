@@ -17,6 +17,7 @@
 		//NSLog(@"Open database failed.");
 	}
     //NSLog(@"Open database");
+    
 	return self;
 }
 /*

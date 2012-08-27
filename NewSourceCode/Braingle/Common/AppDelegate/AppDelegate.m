@@ -18,7 +18,7 @@
 @synthesize navigationController = _navigationController;
 @synthesize splitViewController = _splitViewController;
 @synthesize masterPopoverButtonItem;
-@synthesize iAdBanner,iAdView, iAdBanner_iPhone, iAdView_iPhone;
+@synthesize iAdBanner,iAdView;//, iAdBanner_iPhone, iAdView_iPhone;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

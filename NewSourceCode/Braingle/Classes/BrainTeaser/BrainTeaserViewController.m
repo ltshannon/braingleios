@@ -18,6 +18,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (![self isiPad]) {
+        [self brainTeaserAddBannerView];
+    }
 
     appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     
@@ -27,8 +30,7 @@
     
     favoritesArray = [[NSMutableArray alloc] init];
     
-    if (dataBase == NULL) 
-        dataBase     =  [[Database alloc] initialise];
+    dataBase     =  [[Database alloc] initialise];
     
     self.title = strCategoryType;
     docDir = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
@@ -40,16 +42,15 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.view addSubview:appDelegate.iAdView_iPhone];    
+
     [self checkCategoryType];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [appDelegate.iAdView_iPhone removeFromSuperview];    
-}
 
+}
 
 - (void)viewDidUnload
 {
@@ -72,9 +73,9 @@
     else 
     {
         if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
-            appDelegate.iAdBanner_iPhone.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
+            brainTeaser_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
         else
-            appDelegate.iAdBanner_iPhone.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+            brainTeaser_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
         
         return YES;
     }
@@ -101,20 +102,49 @@
 
         if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
         {
-            [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 367, 320, 50)];
-            appDelegate.iAdBanner_iPhone.frame = CGRectMake(0, 0, 320, 50);
+            [brainTeaser_iAdView setFrame:CGRectMake(0, 367, 320, 50)];
+            brainTeaser_iAdBanner.frame = CGRectMake(0, 0, 320, 50);
             [loadingView setFrame:CGRectMake((self.view.frame.size.width/2)-40, (self.view.frame.size.height/2)-40, 80, 80)];
         }
         else 
         {
-            [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 237, 480, 50)];
-            appDelegate.iAdBanner_iPhone.frame = CGRectMake(0, 0, 480, 50);
+            [brainTeaser_iAdView setFrame:CGRectMake(0, 237, 480, 50)];
+            brainTeaser_iAdBanner.frame = CGRectMake(0, 0, 480, 50);
             [loadingView setFrame:CGRectMake((self.view.frame.size.width/2)-40, (self.view.frame.size.height/2)-40, 80, 80)];
 
         }
     }
 
 }
+
+- (void)brainTeaserAddBannerView
+{
+    brainTeaser_iAdView =[[UIView alloc]init];
+    brainTeaser_iAdBanner = [[ADBannerView alloc]init];
+    [brainTeaser_iAdView setClipsToBounds:YES];
+    [brainTeaser_iAdView setClearsContextBeforeDrawing:YES];
+    brainTeaser_iAdView.hidden = YES;
+    brainTeaser_iAdBanner.frame = CGRectOffset(brainTeaser_iAdBanner.frame, 0, -50);
+    brainTeaser_iAdBanner.delegate=self;
+    brainTeaser_iAdView.backgroundColor = [UIColor clearColor];
+    [brainTeaser_iAdView addSubview:brainTeaser_iAdBanner];
+    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if (![self isiPad]) 
+    {
+        if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
+        {
+            [brainTeaser_iAdView setFrame:CGRectMake(0, 367, 320, 50)];
+            brainTeaser_iAdBanner.frame = CGRectMake(0, 0, 320, 50);
+        }
+        else 
+        {
+            [brainTeaser_iAdView setFrame:CGRectMake(0, 237, 480, 32)];
+            brainTeaser_iAdBanner.frame = CGRectMake(0, 0, 480, 32);
+        }
+        [self.view addSubview:brainTeaser_iAdView];
+    }
+}
+
 
 #pragma mark - Check & Load webview
 
@@ -449,21 +479,25 @@
 
 - (void)bannerViewDidLoadAd:(ADBannerView *)banner
 {    
+    NSLog(@"animateAdBannerOn");
+    
     if ([self isiPad]) {
         [appDelegate.iAdView setHidden:NO];
     }
     else {
-        [appDelegate.iAdView_iPhone setHidden:NO];
+        [brainTeaser_iAdView setHidden:NO];
     }
 }
 
 - (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
-{
+{    
+    NSLog(@"animateAdBannerOFF");
+
     if ([self isiPad]) {
         [appDelegate.iAdView setHidden:YES];
     }
     else {
-        [appDelegate.iAdView_iPhone setHidden:YES];
+        [brainTeaser_iAdView setHidden:YES];
     }
 }
 

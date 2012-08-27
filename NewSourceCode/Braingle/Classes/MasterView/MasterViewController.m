@@ -50,15 +50,10 @@
 {
     [super viewWillAppear:animated];
     
-//    if (![self isiPad]) {
-//        [self masterAddBannerView];
-//    } 
-
     if (isFirstCellHilight) {
         [self showFirstCellHilighted];
     }
 
-    [self.tableView addSubview:appDelegate.iAdView_iPhone];
     [self.tableView setContentOffset:CGPointZero animated:NO];
 
 
@@ -67,20 +62,6 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
-    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    
-    if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
-    {
-        [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 367, 320, 50)];
-    }
-    else 
-    {
-        [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 237, 480, 50)];
-    }
-
-    
-    [appDelegate.iAdView_iPhone removeFromSuperview];
 }
 
 
@@ -115,9 +96,9 @@
     else 
     {
         if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
-            appDelegate.iAdBanner_iPhone.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
+            master_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
         else
-            appDelegate.iAdBanner_iPhone.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+            master_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
         return YES;
     }
 }
@@ -144,13 +125,13 @@
         
         if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
         {
-            [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 367, 320, 50)];
-            appDelegate.iAdBanner_iPhone.frame = CGRectMake(0, 0, 320, 50);
+            [master_iAdView setFrame:CGRectMake(0, 367, 320, 50)];
+            master_iAdBanner.frame = CGRectMake(0, 0, 320, 50);
         }
         else 
         {
-            [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 237, 480, 32)];
-            appDelegate.iAdBanner_iPhone.frame = CGRectMake(0, 0, 480, 32);
+            [master_iAdView setFrame:CGRectMake(0, 237, 480, 32)];
+            master_iAdBanner.frame = CGRectMake(0, 0, 480, 32);
         }
     }
 }
@@ -164,6 +145,7 @@
     appDelegate.iAdBanner = [[ADBannerView alloc]init];
     [appDelegate.iAdView setClipsToBounds:YES];
     [appDelegate.iAdView setClearsContextBeforeDrawing:YES];
+    appDelegate.iAdView.hidden = YES;
     appDelegate.iAdBanner.frame = CGRectOffset(appDelegate.iAdBanner.frame, 0, -50);
     appDelegate.iAdBanner.delegate=self;
     appDelegate.iAdView.backgroundColor = [UIColor clearColor];
@@ -191,31 +173,31 @@
 //Adding iAd only for iPhone.
 - (void)masterAddBannerView
 {
-    appDelegate.iAdView_iPhone =[[UIView alloc]init];
-    appDelegate.iAdBanner_iPhone = [[ADBannerView alloc]init];
-    [appDelegate.iAdView_iPhone setClipsToBounds:YES];
-    [appDelegate.iAdView_iPhone setClearsContextBeforeDrawing:YES];
-    appDelegate.iAdBanner_iPhone.frame = CGRectOffset(appDelegate.iAdBanner_iPhone.frame, 0, -50);
-    appDelegate.iAdBanner_iPhone.delegate=self;
-    appDelegate.iAdView_iPhone.backgroundColor = [UIColor clearColor];
-    [appDelegate.iAdView_iPhone addSubview:appDelegate.iAdBanner_iPhone];
+    master_iAdView =[[UIView alloc]init];
+    master_iAdBanner = [[ADBannerView alloc]init];
+    [master_iAdView setClipsToBounds:YES];
+    [master_iAdView setClearsContextBeforeDrawing:YES];
+    master_iAdView.hidden = YES;
+    master_iAdBanner.frame = CGRectOffset(master_iAdBanner.frame, 0, -50);
+    master_iAdBanner.delegate=self;
+    master_iAdView.backgroundColor = [UIColor clearColor];
+    [master_iAdView addSubview:master_iAdBanner];
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     if (![self isiPad]) 
     {
         if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
         {
-            [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 367, 320, 50)];
-            appDelegate.iAdBanner_iPhone.frame = CGRectMake(0, 0, 320, 50);
+            [master_iAdView setFrame:CGRectMake(0, 367, 320, 50)];
+            master_iAdBanner.frame = CGRectMake(0, 0, 320, 50);
         }
         else 
         {
-            [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 237, 480, 32)];
-            appDelegate.iAdBanner_iPhone.frame = CGRectMake(0, 0, 480, 32);
+            [master_iAdView setFrame:CGRectMake(0, 237, 480, 32)];
+            master_iAdBanner.frame = CGRectMake(0, 0, 480, 32);
         }
-        [self.tableView addSubview:appDelegate.iAdView_iPhone];
+        [self.tableView addSubview:master_iAdView];
     }
 }
-
 
 #pragma mark - Button Action
 
@@ -247,7 +229,7 @@
         [appDelegate.iAdView setHidden:NO];
     }
     else {
-        [appDelegate.iAdView_iPhone setHidden:NO];
+        [master_iAdView setHidden:NO];
     }
 }
 
@@ -258,7 +240,7 @@
         [appDelegate.iAdView setHidden:YES];
     }
     else {
-        [appDelegate.iAdView_iPhone setHidden:YES];
+        [master_iAdView setHidden:YES];
     }
 }
  
@@ -380,11 +362,11 @@
         {
             if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
             {
-                [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 367+table_Y_Position, 320, 50)];
+                [master_iAdView setFrame:CGRectMake(0, 367+table_Y_Position, 320, 50)];
             }
             else 
             {
-                [appDelegate.iAdView_iPhone setFrame:CGRectMake(0, 237+table_Y_Position, 480, 50)];
+                [master_iAdView setFrame:CGRectMake(0, 237+table_Y_Position, 480, 50)];
             }
         }
     }
