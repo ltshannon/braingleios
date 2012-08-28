@@ -1118,8 +1118,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Keyar Srinivasan (VDMUX9P6GV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Keyar Srinivasan (VDMUX9P6GV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Loganathan Venkatesh (RNTZRSZ4TL)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Loganathan Venkatesh (RNTZRSZ4TL)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1134,8 +1134,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PROVISIONING_PROFILE = "3CC62106-9F56-4A6C-84A3-C5176493DF9D";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3CC62106-9F56-4A6C-84A3-C5176493DF9D";
+				PROVISIONING_PROFILE = "057A14C4-714F-420E-8355-1B09E35CD617";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "057A14C4-714F-420E-8355-1B09E35CD617";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1169,15 +1169,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Keyar Srinivasan (VDMUX9P6GV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Keyar Srinivasan (VDMUX9P6GV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Loganathan Venkatesh (RNTZRSZ4TL)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Loganathan Venkatesh (RNTZRSZ4TL)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Braingle/Braingle-Prefix.pch";
 				INFOPLIST_FILE = "Braingle/Braingle-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "FE103B92-3E55-4847-8E2E-D4B38AEBBA9B";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FE103B92-3E55-4847-8E2E-D4B38AEBBA9B";
+				PROVISIONING_PROFILE = "057A14C4-714F-420E-8355-1B09E35CD617";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "057A14C4-714F-420E-8355-1B09E35CD617";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

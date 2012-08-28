@@ -13,6 +13,8 @@
 
 {
     MasterViewController *masterViewControlle;
+    NSMutableArray       *teaserSectionTwoArray;
+    NSMutableArray       *teaserSectionOneArray;
 }
 
 @end

@@ -16,7 +16,9 @@
     
     NSArray                   *docDir ;
     NSString                  *pathToDocuments ;
-
+    NSSortDescriptor          * sortDescriptor;
+    NSMutableArray            *listArray;
+    NSInteger                  indexValue;
 }
 
 @end
