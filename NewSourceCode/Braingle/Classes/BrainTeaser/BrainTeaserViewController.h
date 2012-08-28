@@ -60,7 +60,6 @@
     
     ADBannerView                        *brainTeaser_iAdBanner;
     UIView                              *brainTeaser_iAdView;
-
 }
 @property(nonatomic, retain) NSString    *strCategoryType;
 @property (retain, nonatomic) UIPopoverController *masterPopoverController;
@@ -77,6 +76,7 @@
 - (void)setPopularityImages:(NSString *) popularityValue;
 - (void)setDifficultyImages:(NSString *) difficultyValue;
 - (BOOL)isiPad;
+- (void)brainTeaserAddBannerView;
 
 @end
 

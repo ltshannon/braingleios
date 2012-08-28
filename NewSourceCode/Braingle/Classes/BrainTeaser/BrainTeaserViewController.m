@@ -43,7 +43,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self willAnimateRotationToInterfaceOrientation:self.interfaceOrientation duration:0];
+    if (![self isiPad]) {
+        [self willAnimateRotationToInterfaceOrientation:self.interfaceOrientation duration:0];
+    }
 
     [self checkCategoryType];
 }

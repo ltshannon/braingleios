@@ -10,9 +10,13 @@
 #import "BrainTeaserViewController.h"
 #import "Config.h"
 
-@interface BraingleTests : SenTestCase
+@interface BrainTeaserTests : SenTestCase
 {
     BrainTeaserViewController *brainTeaserViewController;
+    
+    NSArray                   *docDir ;
+    NSString                  *pathToDocuments ;
+
 }
 
 @end

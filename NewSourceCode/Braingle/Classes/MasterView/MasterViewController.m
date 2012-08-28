@@ -55,7 +55,9 @@
     if (isFirstCellHilight) {
         [self showFirstCellHilighted];
     }
-    [self willAnimateRotationToInterfaceOrientation:self.interfaceOrientation duration:0];
+    if (![self isiPad]) {
+        [self willAnimateRotationToInterfaceOrientation:self.interfaceOrientation duration:0];
+    }
 
     [self.tableView setContentOffset:CGPointZero animated:NO];
 

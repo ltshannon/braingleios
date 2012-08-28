@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0083B56515D3F0D0007AA170 /* BraingleTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 30C64E9C15D3A51600499319 /* BraingleTests.h */; };
+		0083B56515D3F0D0007AA170 /* BrainTeaserTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 30C64E9C15D3A51600499319 /* BrainTeaserTests.h */; };
 		306391E315DFACCE00901C7A /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C64E9015D3A51600499319 /* SenTestingKit.framework */; };
 		306391E415DFACCE00901C7A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C64E6615D3A51500499319 /* UIKit.framework */; };
 		306391E515DFACCE00901C7A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C64E6815D3A51500499319 /* Foundation.framework */; };
@@ -34,7 +34,7 @@
 		30C64E9215D3A51600499319 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C64E6615D3A51500499319 /* UIKit.framework */; };
 		30C64E9315D3A51600499319 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C64E6815D3A51500499319 /* Foundation.framework */; };
 		30C64E9B15D3A51600499319 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30C64E9915D3A51600499319 /* InfoPlist.strings */; };
-		30C64E9E15D3A51600499319 /* BraingleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C64E9D15D3A51600499319 /* BraingleTests.m */; };
+		30C64E9E15D3A51600499319 /* BrainTeaserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C64E9D15D3A51600499319 /* BrainTeaserTests.m */; };
 		30C64ED615D3A59500499319 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C64EBF15D3A59500499319 /* AppDelegate.m */; };
 		30C64ED715D3A59500499319 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C64EC315D3A59500499319 /* Database.m */; };
 		30C64ED815D3A59500499319 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C64EC615D3A59500499319 /* OpenUDID.m */; };
@@ -202,8 +202,8 @@
 		30C64E9015D3A51600499319 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		30C64E9815D3A51600499319 /* BraingleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BraingleTests-Info.plist"; sourceTree = "<group>"; };
 		30C64E9A15D3A51600499319 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		30C64E9C15D3A51600499319 /* BraingleTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BraingleTests.h; sourceTree = "<group>"; };
-		30C64E9D15D3A51600499319 /* BraingleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BraingleTests.m; sourceTree = "<group>"; };
+		30C64E9C15D3A51600499319 /* BrainTeaserTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrainTeaserTests.h; sourceTree = "<group>"; };
+		30C64E9D15D3A51600499319 /* BrainTeaserTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrainTeaserTests.m; sourceTree = "<group>"; };
 		30C64EBE15D3A59500499319 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		30C64EBF15D3A59500499319 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		30C64EC015D3A59500499319 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
@@ -507,8 +507,8 @@
 		30C64E9615D3A51600499319 /* BraingleTests */ = {
 			isa = PBXGroup;
 			children = (
-				30C64E9C15D3A51600499319 /* BraingleTests.h */,
-				30C64E9D15D3A51600499319 /* BraingleTests.m */,
+				30C64E9C15D3A51600499319 /* BrainTeaserTests.h */,
+				30C64E9D15D3A51600499319 /* BrainTeaserTests.m */,
 				30C64E9715D3A51600499319 /* Supporting Files */,
 			);
 			path = BraingleTests;
@@ -961,7 +961,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0083B56515D3F0D0007AA170 /* BraingleTests.h in Resources */,
+				0083B56515D3F0D0007AA170 /* BrainTeaserTests.h in Resources */,
 				30C64E9B15D3A51600499319 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1026,7 +1026,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30C64E9E15D3A51600499319 /* BraingleTests.m in Sources */,
+				30C64E9E15D3A51600499319 /* BrainTeaserTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
