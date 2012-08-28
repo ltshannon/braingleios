@@ -20,12 +20,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    appDelegate  = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    dataBase     =  [[Database alloc] initialise];
     
     if (![self isiPad]) {
         [self detailAddBannerView];
     }
+
+    appDelegate  = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    dataBase     =  [[Database alloc] initialise];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -61,7 +63,6 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {    
-    
     self.applicationDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     if ([self isiPad]) 
     {

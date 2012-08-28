@@ -24,4 +24,11 @@
     [super tearDown];
 }
 
+- (void)testControllerReturnsCorrectNumberOfRows
+{
+	masterViewControlle = [[MasterViewController alloc] initWithStyle:UITableViewStylePlain];
+	
+	STAssertEquals(1, [masterViewControlle tableView:nil numberOfRowsInSection:0], @"Should have returned correct number of rows.");
+}
+
 @end
