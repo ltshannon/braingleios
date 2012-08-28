@@ -155,6 +155,8 @@
 		30C64FC415D3A72D00499319 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C64FC315D3A72D00499319 /* iAd.framework */; };
 		30C64FC615D3A73500499319 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C64FC515D3A73500499319 /* QuartzCore.framework */; };
 		30C64FC815D3A74200499319 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C64FC715D3A74200499319 /* libsqlite3.0.dylib */; };
+		30CE478115ECA34800EDD29D /* DetailViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30CE478015ECA34800EDD29D /* DetailViewTests.m */; };
+		30CE478415ECAA0000EDD29D /* MasterViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30CE478315ECAA0000EDD29D /* MasterViewTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -329,6 +331,10 @@
 		30C64FC315D3A72D00499319 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		30C64FC515D3A73500499319 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		30C64FC715D3A74200499319 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		30CE477F15ECA34800EDD29D /* DetailViewTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewTests.h; sourceTree = "<group>"; };
+		30CE478015ECA34800EDD29D /* DetailViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewTests.m; sourceTree = "<group>"; };
+		30CE478215ECAA0000EDD29D /* MasterViewTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewTests.h; sourceTree = "<group>"; };
+		30CE478315ECAA0000EDD29D /* MasterViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -509,6 +515,10 @@
 			children = (
 				30C64E9C15D3A51600499319 /* BrainTeaserTests.h */,
 				30C64E9D15D3A51600499319 /* BrainTeaserTests.m */,
+				30CE477F15ECA34800EDD29D /* DetailViewTests.h */,
+				30CE478015ECA34800EDD29D /* DetailViewTests.m */,
+				30CE478215ECAA0000EDD29D /* MasterViewTests.h */,
+				30CE478315ECAA0000EDD29D /* MasterViewTests.m */,
 				30C64E9715D3A51600499319 /* Supporting Files */,
 			);
 			path = BraingleTests;
@@ -1027,6 +1037,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				30C64E9E15D3A51600499319 /* BrainTeaserTests.m in Sources */,
+				30CE478115ECA34800EDD29D /* DetailViewTests.m in Sources */,
+				30CE478415ECAA0000EDD29D /* MasterViewTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1135,7 +1147,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;

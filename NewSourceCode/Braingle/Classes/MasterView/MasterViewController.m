@@ -28,7 +28,6 @@
         [self masterAddBannerView];
     } 
 
-
     isiAdClicked = NO;
     self.title = @"Braingle";
     teaserSectionOneArray=[[NSMutableArray alloc]initWithObjects:@"Featured",@"Favorites",nil ];
@@ -116,14 +115,6 @@
 {
     if ([self isiPad]) 
     {
-        
-        
-        if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation))
-            master_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
-        else
-            master_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
-
-        
         CGRect rect = self.splitViewController.view.bounds;
         
         if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
@@ -138,6 +129,12 @@
     }
     else 
     {
+        
+        if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation))
+            master_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
+        else
+            master_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+
         [self.tableView setContentOffset:CGPointZero animated:NO];
         
         if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
