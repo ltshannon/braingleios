@@ -18,6 +18,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     if (![self isiPad]) {
         [self brainTeaserAddBannerView];
     }
@@ -42,6 +43,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self willAnimateRotationToInterfaceOrientation:self.interfaceOrientation duration:0];
 
     [self checkCategoryType];
 }
@@ -49,7 +51,11 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+}
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
 }
 
 - (void)viewDidUnload
@@ -59,8 +65,6 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
 {
-    
-
     if ([self isiPad]) 
     {
         if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
@@ -99,22 +103,28 @@
     }
     else 
     {
+        
+        if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation))
+            brainTeaser_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
+        else
+            brainTeaser_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+
 
         if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
         {
             [brainTeaser_iAdView setFrame:CGRectMake(0, 367, 320, 50)];
             brainTeaser_iAdBanner.frame = CGRectMake(0, 0, 320, 50);
+            NSLog(@"Portrait x = %f, y = %f, width = %f, height = %f",brainTeaser_iAdView.frame.origin.x, brainTeaser_iAdView.frame.origin.y, brainTeaser_iAdView.frame.size.width, brainTeaser_iAdView.frame.size.height);
             [loadingView setFrame:CGRectMake((self.view.frame.size.width/2)-40, (self.view.frame.size.height/2)-40, 80, 80)];
         }
         else 
         {
-            [brainTeaser_iAdView setFrame:CGRectMake(0, 237, 480, 50)];
-            brainTeaser_iAdBanner.frame = CGRectMake(0, 0, 480, 50);
+            [brainTeaser_iAdView setFrame:CGRectMake(0, 237, 480, 32)];
+            brainTeaser_iAdBanner.frame = CGRectMake(0, 0, 480, 32);
+            NSLog(@"Landscape x = %f, y = %f, width = %f, height = %f",brainTeaser_iAdView.frame.origin.x, brainTeaser_iAdView.frame.origin.y, brainTeaser_iAdView.frame.size.width, brainTeaser_iAdView.frame.size.height);
             [loadingView setFrame:CGRectMake((self.view.frame.size.width/2)-40, (self.view.frame.size.height/2)-40, 80, 80)];
-
         }
     }
-
 }
 
 - (void)brainTeaserAddBannerView
@@ -144,7 +154,6 @@
         [self.view addSubview:brainTeaser_iAdView];
     }
 }
-
 
 #pragma mark - Check & Load webview
 

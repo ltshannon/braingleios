@@ -23,9 +23,11 @@
     if ([self isiPad]) {
         [self addBannerView];
     }
-    else {
+    
+    if (![self isiPad]) {
         [self masterAddBannerView];
-    }
+    } 
+
 
     isiAdClicked = NO;
     self.title = @"Braingle";
@@ -49,10 +51,11 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+        
     if (isFirstCellHilight) {
         [self showFirstCellHilighted];
     }
+    [self willAnimateRotationToInterfaceOrientation:self.interfaceOrientation duration:0];
 
     [self.tableView setContentOffset:CGPointZero animated:NO];
 
@@ -62,6 +65,10 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
 }
 
 
@@ -107,6 +114,14 @@
 {
     if ([self isiPad]) 
     {
+        
+        
+        if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation))
+            master_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
+        else
+            master_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+
+        
         CGRect rect = self.splitViewController.view.bounds;
         
         if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
@@ -218,7 +233,6 @@
         [self.navigationController presentModalViewController:infoNavigationController animated:YES];
     }
 }
-
 
 #pragma mark - ADBannerView Delegates
 

@@ -22,6 +22,7 @@
     [super viewDidLoad];
     appDelegate  = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     dataBase     =  [[Database alloc] initialise];
+    
     if (![self isiPad]) {
         [self detailAddBannerView];
     }
@@ -30,6 +31,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {  
     [super viewWillAppear:animated];
+    [self willAnimateRotationToInterfaceOrientation:self.interfaceOrientation duration:0];
 
     [self webViewAction];
 }
@@ -43,6 +45,12 @@
         detailWebView.delegate = nil;
     }
 }
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+
+}
+
 
 - (void)viewDidUnload
 {
@@ -82,6 +90,13 @@
 {    
     if (![self isiPad])
     {
+        
+        if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation))
+            detail_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
+        else
+            detail_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+        
+
         if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
         {
             [detail_iAdView setFrame:CGRectMake(0, 367, 320, 50)];
@@ -90,8 +105,8 @@
         }
         else 
         {
-            [detail_iAdView setFrame:CGRectMake(0, 237, 480, 50)];
-            detail_iAdBanner.frame = CGRectMake(0, 0, 480, 50);
+            [detail_iAdView setFrame:CGRectMake(0, 237, 480, 32)];
+            detail_iAdBanner.frame = CGRectMake(0, 0, 480, 32);
             [loadingView setFrame:CGRectMake((self.view.frame.size.width/2)-40, (self.view.frame.size.height/2)-40, 80, 80)];
         }
     }
