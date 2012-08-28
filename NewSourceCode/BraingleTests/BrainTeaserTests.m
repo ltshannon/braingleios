@@ -16,14 +16,10 @@
     NSLog(@"%@ setUp", self.name);
     brainTeaserViewController = [[BrainTeaserViewController alloc] init];
     STAssertNotNil(brainTeaserViewController, @"Cannot create BrainTeaserViewController instance");
-
-    // Set-up code here.
 }
 
 - (void)tearDown
-{
-    // Tear-down code here.
-    
+{    
     [super tearDown];
 }
 
@@ -238,8 +234,7 @@
 -(void)testSorting
 {
     NSLog(@"%@ start", self.name); 
-    if ([listArray count] > 0){
-             
+    if ([listArray count] > 0) {
         if (indexValue == 0)
         {
             sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"difficulty"  ascending:NO];
@@ -265,12 +260,7 @@
         [listArray sortUsingDescriptors:descriptors];
         NSLog(@"%@ end", self.name);
         STAssertTrue([listArray count] > 0, @"We should have data");
-
-
-        }
-           }
-
-
-
+    }
+}
 
 @end

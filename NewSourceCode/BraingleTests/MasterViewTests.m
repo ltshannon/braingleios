@@ -29,7 +29,7 @@
 -(void) testSize 
 {
     STAssertTrue([teaserSectionTwoArray count] > 0, @"Size must be Values.");
-    STAssertTrue([teaserSectionOneArray count] >0,  @"Size must be True.");
+    STAssertTrue([teaserSectionOneArray count] > 0,  @"Size must be True.");
 }
 
 @end

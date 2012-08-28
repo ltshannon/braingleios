@@ -16,7 +16,6 @@
     NSLog(@"%@ setUp", self.name);
     detailViewController = [[DetailViewController alloc] init];
     STAssertNotNil(detailViewController, @"Cannot create DetailViewController instance");
-    
 }
 
 - (void)tearDown
