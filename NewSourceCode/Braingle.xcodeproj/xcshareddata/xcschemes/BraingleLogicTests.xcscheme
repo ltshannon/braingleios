@@ -7,8 +7,8 @@
       buildImplicitDependencies = "YES">
    </BuildAction>
    <TestAction
-      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.GDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
@@ -16,9 +16,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "30C64E8E15D3A51600499319"
-               BuildableName = "BraingleTests.octest"
-               BlueprintName = "BraingleTests"
+               BlueprintIdentifier = "306391E115DFACCE00901C7A"
+               BuildableName = "BraingleLogicTests.octest"
+               BlueprintName = "BraingleLogicTests"
                ReferencedContainer = "container:Braingle.xcodeproj">
             </BuildableReference>
          </TestableReference>

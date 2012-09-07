@@ -157,6 +157,7 @@
 		30C64FC815D3A74200499319 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C64FC715D3A74200499319 /* libsqlite3.0.dylib */; };
 		30CE478115ECA34800EDD29D /* DetailViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30CE478015ECA34800EDD29D /* DetailViewTests.m */; };
 		30CE478415ECAA0000EDD29D /* MasterViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30CE478315ECAA0000EDD29D /* MasterViewTests.m */; };
+		30D7B77D15F1E3FA002DA488 /* BannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30D7B77C15F1E3FA002DA488 /* BannerViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -335,6 +336,8 @@
 		30CE478015ECA34800EDD29D /* DetailViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewTests.m; sourceTree = "<group>"; };
 		30CE478215ECAA0000EDD29D /* MasterViewTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewTests.h; sourceTree = "<group>"; };
 		30CE478315ECAA0000EDD29D /* MasterViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewTests.m; sourceTree = "<group>"; };
+		30D7B77B15F1E3FA002DA488 /* BannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerViewController.h; sourceTree = "<group>"; };
+		30D7B77C15F1E3FA002DA488 /* BannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -402,6 +405,7 @@
 				30A6EF9F15D3A8EB0090C88D /* DetailView */,
 				30A6EFA415D3A8EB0090C88D /* InfoView */,
 				30A6EFA915D3A8EB0090C88D /* MasterView */,
+				30D7B77A15F1E3FA002DA488 /* BannerView */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -746,6 +750,15 @@
 			path = SplashImages;
 			sourceTree = "<group>";
 		};
+		30D7B77A15F1E3FA002DA488 /* BannerView */ = {
+			isa = PBXGroup;
+			children = (
+				30D7B77B15F1E3FA002DA488 /* BannerViewController.h */,
+				30D7B77C15F1E3FA002DA488 /* BannerViewController.m */,
+			);
+			path = BannerView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -809,7 +822,7 @@
 		30C64E5915D3A51500499319 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0440;
 			};
 			buildConfigurationList = 30C64E5C15D3A51500499319 /* Build configuration list for PBXProject "Braingle" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1029,6 +1042,7 @@
 				30A6EFB115D3A8EB0090C88D /* DetailViewController.m in Sources */,
 				30A6EFB415D3A8EB0090C88D /* InfoViewController.m in Sources */,
 				30A6EFB715D3A8EB0090C88D /* MasterViewController.m in Sources */,
+				30D7B77D15F1E3FA002DA488 /* BannerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1134,8 +1148,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PROVISIONING_PROFILE = "057A14C4-714F-420E-8355-1B09E35CD617";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "057A14C4-714F-420E-8355-1B09E35CD617";
+				PROVISIONING_PROFILE = "C62C1FC8-929D-42FD-80F6-AD3F24C0C48D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C62C1FC8-929D-42FD-80F6-AD3F24C0C48D";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1176,8 +1190,8 @@
 				INFOPLIST_FILE = "Braingle/Braingle-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "057A14C4-714F-420E-8355-1B09E35CD617";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "057A14C4-714F-420E-8355-1B09E35CD617";
+				PROVISIONING_PROFILE = "38A73AEE-88EE-404A-B002-249860455305";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "38A73AEE-88EE-404A-B002-249860455305";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

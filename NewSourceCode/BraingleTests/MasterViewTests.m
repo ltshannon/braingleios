@@ -17,8 +17,6 @@
     NSLog(@"%@ setUp", self.name);
     masterViewControlle = [[MasterViewController alloc] init];
     STAssertNotNil(masterViewControlle, @"Cannot create MasterViewController instance");
-    teaserSectionTwoArray=[NSMutableArray arrayWithObjects: @"Cryptography",@"Group",@"Language",@"Letter Equations",@"Logic",@"Math",@"Mystery",@"Optical Illusions",@"Other",@"Probability",@"Rebus",@"Riddles",@"Science",@"Series",@"Situation",@"Trick",@"Trivia",nil];
-    teaserSectionOneArray=[NSMutableArray arrayWithObjects:@"Featured",@"Favorites",nil];
 }
 
 - (void)tearDown
@@ -26,10 +24,11 @@
     [super tearDown];
 }
 
--(void) testSize 
+- (void)testControllerReturnsCorrectNumberOfRows
 {
-    STAssertTrue([teaserSectionTwoArray count] > 0, @"Size must be Values.");
-    STAssertTrue([teaserSectionOneArray count] > 0,  @"Size must be True.");
+	masterViewControlle = [[MasterViewController alloc] initWithStyle:UITableViewStylePlain];
+	
+	STAssertEquals(1, [masterViewControlle tableView:nil numberOfRowsInSection:0], @"Should have returned correct number of rows.");
 }
 
 @end

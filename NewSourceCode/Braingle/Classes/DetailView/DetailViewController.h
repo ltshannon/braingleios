@@ -44,10 +44,6 @@
     NSString                            *strTypeOfCategory;
     AppDelegate                         *appDelegate;
     
-    ADBannerView                        *detail_iAdBanner;
-    UIView                              *detail_iAdView;
-
-
 }
 @property (nonatomic, retain) NSString *strDetailId;
 @property (nonatomic, retain) NSString *strTypeOfCategory;
@@ -68,7 +64,6 @@
 - (void)dismissMasterView;
 - (void)webViewAction;
 - (void)loadStaticHTML;
-- (void)detailAddBannerView;
 
 @end
 

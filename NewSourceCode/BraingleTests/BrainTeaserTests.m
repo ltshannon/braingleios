@@ -16,10 +16,14 @@
     NSLog(@"%@ setUp", self.name);
     brainTeaserViewController = [[BrainTeaserViewController alloc] init];
     STAssertNotNil(brainTeaserViewController, @"Cannot create BrainTeaserViewController instance");
+
+    // Set-up code here.
 }
 
 - (void)tearDown
-{    
+{
+    // Tear-down code here.
+    
     [super tearDown];
 }
 
@@ -33,140 +37,7 @@
     
     STAssertNotNil(response, @"We should have response");
     STAssertNil(error, @"We should not have an error");
-    STAssertTrue([data length] > 10, @"We should have data");
-    
-    request=[NSURLRequest requestWithURL:[NSURL URLWithString:CATEGORYTYPE_URL(@"Group",@"1bc8b7bf1f5b5a55b82b2a55ce47053978623593")]];
-    response=nil;
-    error=nil;
-    data=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    STAssertNotNil(response, @"We should have response");
-    STAssertNil(error, @"We should not have an error");
-    STAssertTrue([data length] > 10, @"We should have data");
-    
-    
-    request=[NSURLRequest requestWithURL:[NSURL URLWithString:CATEGORYTYPE_URL(@"Language",@"1bc8b7bf1f5b5a55b82b2a55ce47053978623593")]];
-    response=nil;
-    error=nil;
-    data=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    STAssertNotNil(response, @"We should have response");
-    STAssertNil(error, @"We should not have an error");
-    STAssertTrue([data length] > 10, @"We should have data");
-
-    request=[NSURLRequest requestWithURL:[NSURL URLWithString:CATEGORYTYPE_URL(@"Letter-Equation",@"1bc8b7bf1f5b5a55b82b2a55ce47053978623593")]];
-    response=nil;
-    error=nil;
-    data=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    STAssertNotNil(response, @"We should have response");
-    STAssertNil(error, @"We should not have an error");
-    STAssertTrue([data length] > 10, @"We should have data");
-
-
-    request=[NSURLRequest requestWithURL:[NSURL URLWithString:CATEGORYTYPE_URL(@"Logic",@"1bc8b7bf1f5b5a55b82b2a55ce47053978623593")]];
-    response=nil;
-    error=nil;
-    data=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    STAssertNotNil(response, @"We should have response");
-    STAssertNil(error, @"We should not have an error");
-    STAssertTrue([data length] > 10, @"We should have data");
-
-    request=[NSURLRequest requestWithURL:[NSURL URLWithString:CATEGORYTYPE_URL(@"Math",@"1bc8b7bf1f5b5a55b82b2a55ce47053978623593")]];
-    response=nil;
-    error=nil;
-    data=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    STAssertNotNil(response, @"We should have response");
-    STAssertNil(error, @"We should not have an error");
-    STAssertTrue([data length] > 10, @"We should have data");
-
-    request=[NSURLRequest requestWithURL:[NSURL URLWithString:CATEGORYTYPE_URL(@"Mystery",@"1bc8b7bf1f5b5a55b82b2a55ce47053978623593")]];
-    response=nil;
-    error=nil;
-    data=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    STAssertNotNil(response, @"We should have response");
-    STAssertNil(error, @"We should not have an error");
-    STAssertTrue([data length] > 10, @"We should have data");
-
-    request=[NSURLRequest requestWithURL:[NSURL URLWithString:CATEGORYTYPE_URL(@"Optical-Illusion",@"1bc8b7bf1f5b5a55b82b2a55ce47053978623593")]];
-    response=nil;
-    error=nil;
-    data=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    STAssertNotNil(response, @"We should have response");
-    STAssertNil(error, @"We should not have an error");
-    STAssertTrue([data length] > 10, @"We should have data");
-
-
-    request=[NSURLRequest requestWithURL:[NSURL URLWithString:CATEGORYTYPE_URL(@"Other",@"1bc8b7bf1f5b5a55b82b2a55ce47053978623593")]];
-    response=nil;
-    error=nil;
-    data=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    STAssertNotNil(response, @"We should have response");
-    STAssertNil(error, @"We should not have an error");
-    STAssertTrue([data length] > 10, @"We should have data");
-
-    request=[NSURLRequest requestWithURL:[NSURL URLWithString:CATEGORYTYPE_URL(@"Probability",@"1bc8b7bf1f5b5a55b82b2a55ce47053978623593")]];
-    response=nil;
-    error=nil;
-    data=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    STAssertNotNil(response, @"We should have response");
-    STAssertNil(error, @"We should not have an error");
-    STAssertTrue([data length] > 10, @"We should have data");
-
-    request=[NSURLRequest requestWithURL:[NSURL URLWithString:CATEGORYTYPE_URL(@"Rebus",@"1bc8b7bf1f5b5a55b82b2a55ce47053978623593")]];
-    response=nil;
-    error=nil;
-    data=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    STAssertNotNil(response, @"We should have response");
-    STAssertNil(error, @"We should not have an error");
-    STAssertTrue([data length] > 10, @"We should have data");
-
-    request=[NSURLRequest requestWithURL:[NSURL URLWithString:CATEGORYTYPE_URL(@"Riddle",@"1bc8b7bf1f5b5a55b82b2a55ce47053978623593")]];
-    response=nil;
-    error=nil;
-    data=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    STAssertNotNil(response, @"We should have response");
-    STAssertNil(error, @"We should not have an error");
-    STAssertTrue([data length] > 10, @"We should have data");
-
-    request=[NSURLRequest requestWithURL:[NSURL URLWithString:CATEGORYTYPE_URL(@"Science",@"1bc8b7bf1f5b5a55b82b2a55ce47053978623593")]];
-    response=nil;
-    error=nil;
-    data=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    STAssertNotNil(response, @"We should have response");
-    STAssertNil(error, @"We should not have an error");
-    STAssertTrue([data length] > 10, @"We should have data");
-
-    request=[NSURLRequest requestWithURL:[NSURL URLWithString:CATEGORYTYPE_URL(@"Series",@"1bc8b7bf1f5b5a55b82b2a55ce47053978623593")]];
-    response=nil;
-    error=nil;
-    data=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    STAssertNotNil(response, @"We should have response");
-    STAssertNil(error, @"We should not have an error");
-    STAssertTrue([data length] > 10, @"We should have data");
-    
-    request=[NSURLRequest requestWithURL:[NSURL URLWithString:CATEGORYTYPE_URL(@"Situation",@"1bc8b7bf1f5b5a55b82b2a55ce47053978623593")]];
-    response=nil;
-    error=nil;
-    data=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    STAssertNotNil(response, @"We should have response");
-    STAssertNil(error, @"We should not have an error");
-    STAssertTrue([data length] > 10, @"We should have data");
-
-    request=[NSURLRequest requestWithURL:[NSURL URLWithString:CATEGORYTYPE_URL(@"Trick",@"1bc8b7bf1f5b5a55b82b2a55ce47053978623593")]];
-    response=nil;
-    error=nil;
-    data=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    STAssertNotNil(response, @"We should have response");
-    STAssertNil(error, @"We should not have an error");
-    STAssertTrue([data length] > 10, @"We should have data");
-
-
-    request=[NSURLRequest requestWithURL:[NSURL URLWithString:CATEGORYTYPE_URL(@"Trivia",@"1bc8b7bf1f5b5a55b82b2a55ce47053978623593")]];
-    response=nil;
-    error=nil;
-    data=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    STAssertNotNil(response, @"We should have response");
-    STAssertNil(error, @"We should not have an error");
-    STAssertTrue([data length] > 10, @"We should have data");
-
+    STAssertTrue([data length] > 100, @"We should have data");
 }
 
 - (void)testCheckFileCreateTime
@@ -228,38 +99,6 @@
             STAssertNil(error, @"We should not have an error");
             STAssertTrue([data length] > 100, @"We should have data");
         }
-    }
-}
-
--(void)testSorting
-{
-    NSLog(@"%@ start", self.name); 
-    if ([listArray count] > 0) {
-        if (indexValue == 0)
-        {
-            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"difficulty"  ascending:NO];
-        }
-        else if (indexValue == 1)
-        {
-            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"difficulty"  ascending:YES];
-            
-        }
-        else if (indexValue == 2)
-        {
-            sortDescriptor =[[NSSortDescriptor alloc]initWithKey:@"popularity" ascending:NO];   
-        }
-        else if(indexValue == 3)
-        {
-            sortDescriptor =[[NSSortDescriptor alloc]initWithKey:@"date" ascending:NO];
-        }
-        else if(indexValue == 4)
-        {
-            sortDescriptor=nil;
-        }
-        NSArray *descriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
-        [listArray sortUsingDescriptors:descriptors];
-        NSLog(@"%@ end", self.name);
-        STAssertTrue([listArray count] > 0, @"We should have data");
     }
 }
 

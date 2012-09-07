@@ -10,11 +10,8 @@
 #import "MasterViewController.h"
 
 @interface MasterViewTests : SenTestCase
-
 {
     MasterViewController *masterViewControlle;
-    NSMutableArray       *teaserSectionTwoArray;
-    NSMutableArray       *teaserSectionOneArray;
 }
 
 @end

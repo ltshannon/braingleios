@@ -19,10 +19,6 @@
 {
     [super viewDidLoad];
     
-    if (![self isiPad]) {
-        [self brainTeaserAddBannerView];
-    }
-
     appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     
     selectedRow = -1;
@@ -43,11 +39,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (![self isiPad]) {
-        [self willAnimateRotationToInterfaceOrientation:self.interfaceOrientation duration:0];
-    }
-
     [self checkCategoryType];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -67,93 +64,32 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
 {
-    if ([self isiPad]) 
-    {
-        if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
-            appDelegate.iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
-        else
-            appDelegate.iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
-
-        return YES;
-    }
-    else 
-    {
-        if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
-            brainTeaser_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
-        else
-            brainTeaser_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
-        
-        return YES;
-    }
+    return YES;
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     if ([self isiPad]) 
     {
-        CGRect rect = self.splitViewController.view.bounds;
-        
-        if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
+        if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown)
         {
-            [appDelegate.iAdView setFrame:CGRectMake(0, rect.size.height-66, 768, 66)];
-            appDelegate.iAdBanner.frame = CGRectMake(0, 0, 768, 66);
-        } else 
-        {
-            [appDelegate.iAdView setFrame:CGRectMake(0, rect.size.height-66, 10024, 66)];
-            appDelegate.iAdBanner.frame = CGRectMake(0, 0, 1024, 66);
+            [loadingView setFrame:CGRectMake((self.view.frame.size.width/2)-40, (self.view.frame.size.height/2)-40, 80, 80)];
         }
-    }
-    else 
-    {
-        
-        if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation))
-            brainTeaser_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
         else
-            brainTeaser_iAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
-
-
-        if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
         {
-            [brainTeaser_iAdView setFrame:CGRectMake(0, 367, 320, 50)];
-            brainTeaser_iAdBanner.frame = CGRectMake(0, 0, 320, 50);
-            NSLog(@"Portrait x = %f, y = %f, width = %f, height = %f",brainTeaser_iAdView.frame.origin.x, brainTeaser_iAdView.frame.origin.y, brainTeaser_iAdView.frame.size.width, brainTeaser_iAdView.frame.size.height);
-            [loadingView setFrame:CGRectMake((self.view.frame.size.width/2)-40, (self.view.frame.size.height/2)-40, 80, 80)];
-        }
-        else 
-        {
-            [brainTeaser_iAdView setFrame:CGRectMake(0, 237, 480, 32)];
-            brainTeaser_iAdBanner.frame = CGRectMake(0, 0, 480, 32);
-            NSLog(@"Landscape x = %f, y = %f, width = %f, height = %f",brainTeaser_iAdView.frame.origin.x, brainTeaser_iAdView.frame.origin.y, brainTeaser_iAdView.frame.size.width, brainTeaser_iAdView.frame.size.height);
             [loadingView setFrame:CGRectMake((self.view.frame.size.width/2)-40, (self.view.frame.size.height/2)-40, 80, 80)];
         }
     }
-}
-
-- (void)brainTeaserAddBannerView
-{
-    brainTeaser_iAdView =[[UIView alloc]init];
-    brainTeaser_iAdBanner = [[ADBannerView alloc]init];
-    [brainTeaser_iAdView setClipsToBounds:YES];
-    [brainTeaser_iAdView setClearsContextBeforeDrawing:YES];
-    brainTeaser_iAdView.hidden = YES;
-    brainTeaser_iAdBanner.frame = CGRectOffset(brainTeaser_iAdBanner.frame, 0, -50);
-    brainTeaser_iAdBanner.delegate=self;
-    brainTeaser_iAdView.backgroundColor = [UIColor clearColor];
-    [brainTeaser_iAdView addSubview:brainTeaser_iAdBanner];
-    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    if (![self isiPad]) 
+    else
     {
-        if (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
+        if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) 
         {
-            [brainTeaser_iAdView setFrame:CGRectMake(0, 367, 320, 50)];
-            brainTeaser_iAdBanner.frame = CGRectMake(0, 0, 320, 50);
+            [loadingView setFrame:CGRectMake((self.view.frame.size.width/2)-40, (self.view.frame.size.height/2)-40, 80, 80)];
         }
         else 
         {
-            [brainTeaser_iAdView setFrame:CGRectMake(0, 237, 480, 32)];
-            brainTeaser_iAdBanner.frame = CGRectMake(0, 0, 480, 32);
+            [loadingView setFrame:CGRectMake((self.view.frame.size.width/2)-40, (self.view.frame.size.height/2)-40, 80, 80)];
         }
-        [self.view addSubview:brainTeaser_iAdView];
     }
 }
 
@@ -327,7 +263,7 @@
     }
     else
     {
-        NSString *fileName = [NSString stringWithFormat:[NSString stringWithFormat:@"%@",strCategoryType]];
+        NSString *fileName = [NSString stringWithFormat:@"%@",strCategoryType];
         [responseData writeToFile:[NSString stringWithFormat:@"%@",[pathToDocuments stringByAppendingPathComponent:fileName]]  atomically:YES];
         
         NSMutableData *data = [NSData dataWithContentsOfFile:[pathToDocuments stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",strCategoryType]]];
@@ -375,7 +311,6 @@
     if([currentElement isEqualToString:@"date"])
     {
         [strDate appendString:string];
-        
     }
     if([currentElement isEqualToString:@"title"])
     {
@@ -485,43 +420,6 @@
                                       animated:YES];
     }
 }
-
-#pragma mark - ADBannerView Delegates
-
-- (void)bannerViewDidLoadAd:(ADBannerView *)banner
-{    
-    NSLog(@"animateAdBannerOn");
-    
-    if ([self isiPad]) {
-        [appDelegate.iAdView setHidden:NO];
-    }
-    else {
-        [brainTeaser_iAdView setHidden:NO];
-    }
-}
-
-- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
-{    
-    NSLog(@"animateAdBannerOFF");
-
-    if ([self isiPad]) {
-        [appDelegate.iAdView setHidden:YES];
-    }
-    else {
-        [brainTeaser_iAdView setHidden:YES];
-    }
-}
-
-- (BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave
-{
-    return YES;
-}
-
-- (void)bannerViewActionDidFinish:(ADBannerView *)banner
-{
-    
-}
-
 
 #pragma mark - Table View
 

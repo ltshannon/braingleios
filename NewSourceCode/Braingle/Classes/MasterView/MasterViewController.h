@@ -20,9 +20,6 @@
     NSMutableArray          *teaserSectionTwoArray;
     IBOutlet UIView         *infoView;
 
-    //iAd
-    ADBannerView            *master_iAdBanner;
-    UIView                  *master_iAdView;
     float                   table_Y_Position;
     BOOL                    isiAdClicked;
     AppDelegate             *appDelegate;
@@ -35,8 +32,6 @@
 - (BOOL)isiPad;
 - (IBAction)infoButtonAction:(id)sender;
 - (void)autoFeaturedCellSelected:(NSInteger) indexValue;
-- (void)addBannerView;
 - (void)showFirstCellHilighted;
-- (void)masterAddBannerView;
 
 @end
