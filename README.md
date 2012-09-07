@@ -1,2 +1,2 @@
-braingleios
+Braingle for iOS
 ===========
