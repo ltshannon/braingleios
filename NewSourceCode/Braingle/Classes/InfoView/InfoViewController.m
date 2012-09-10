@@ -15,7 +15,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"INFO";
+    self.title = @"Braingle Info";
     
     //Add info Button
 

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0083B56515D3F0D0007AA170 /* BrainTeaserTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 30C64E9C15D3A51600499319 /* BrainTeaserTests.h */; };
+		230648FF15FE6011001354E2 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 230648FE15FE6011001354E2 /* logo.png */; };
+		2306490215FE654A001354E2 /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = 2306490115FE654A001354E2 /* up.png */; };
+		2306490415FE65EA001354E2 /* left.png in Resources */ = {isa = PBXBuildFile; fileRef = 2306490315FE65EA001354E2 /* left.png */; };
 		306391E315DFACCE00901C7A /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C64E9015D3A51600499319 /* SenTestingKit.framework */; };
 		306391E415DFACCE00901C7A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C64E6615D3A51500499319 /* UIKit.framework */; };
 		306391E515DFACCE00901C7A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C64E6815D3A51500499319 /* Foundation.framework */; };
@@ -171,6 +174,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		230648FE15FE6011001354E2 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		2306490115FE654A001354E2 /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
+		2306490315FE65EA001354E2 /* left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left.png; sourceTree = "<group>"; };
 		306391E215DFACCE00901C7A /* BraingleLogicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BraingleLogicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		306391E815DFACCE00901C7A /* BraingleLogicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BraingleLogicTests-Info.plist"; sourceTree = "<group>"; };
 		306391EA15DFACCE00901C7A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -598,6 +604,9 @@
 		30C64EDF15D3A5A800499319 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				230648FE15FE6011001354E2 /* logo.png */,
+				2306490315FE65EA001354E2 /* left.png */,
+				2306490115FE654A001354E2 /* up.png */,
 				30C64EE015D3A5A800499319 /* FavoriteImages */,
 				30C64EE515D3A5A800499319 /* HomeViewIcons */,
 				30C64F1115D3A5A800499319 /* icons */,
@@ -977,6 +986,9 @@
 				30A6EFB615D3A8EB0090C88D /* InfoViewController_iPhone.xib in Resources */,
 				30A6EFB815D3A8EB0090C88D /* MasterViewController_iPad.xib in Resources */,
 				30A6EFB915D3A8EB0090C88D /* MasterViewController_iPhone.xib in Resources */,
+				230648FF15FE6011001354E2 /* logo.png in Resources */,
+				2306490215FE654A001354E2 /* up.png in Resources */,
+				2306490415FE65EA001354E2 /* left.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1183,15 +1195,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Loganathan Venkatesh (RNTZRSZ4TL)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Loganathan Venkatesh (RNTZRSZ4TL)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Braingle/Braingle-Prefix.pch";
 				INFOPLIST_FILE = "Braingle/Braingle-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "38A73AEE-88EE-404A-B002-249860455305";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "38A73AEE-88EE-404A-B002-249860455305";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
