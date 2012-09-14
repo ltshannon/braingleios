@@ -50,7 +50,7 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
     }
     CGRect contentFrame = self.view.bounds;
     CGRect bannerFrame = _bannerView.frame;
-    if (_bannerView.bannerLoaded) {
+    if (_bannerView.bannerLoaded) { //To disable ads, put && false
         contentFrame.size.height -= _bannerView.frame.size.height;
         bannerFrame.origin.y = contentFrame.size.height;
     } else {
