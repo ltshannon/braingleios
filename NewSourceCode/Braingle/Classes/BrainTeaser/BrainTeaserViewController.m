@@ -104,6 +104,17 @@
     } else {
         [self checkFileCreateTime];
         checkFavorite = NO;
+
+        if (sortDescriptor)
+        {
+            NSArray *descriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
+            if (checkFavorite) {
+                [favoritesArray sortUsingDescriptors:descriptors];
+            } else {
+                [listArray sortUsingDescriptors:descriptors];
+            }
+        }
+
         [brainTeaserTableView reloadData];
     }
 }
