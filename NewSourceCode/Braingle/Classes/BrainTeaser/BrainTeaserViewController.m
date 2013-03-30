@@ -469,7 +469,14 @@
     gearImage3=[[UIImageView alloc]init];
     gearImage4=[[UIImageView alloc]init];
     
-    titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(13, 4, 192, 43)];
+    float adj = 0;
+    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation) && !self.isiPad)
+    {
+        CGRect frame = self.view.frame;
+        adj = frame.size.width - (192 + 128); // 192 is the size of the UILabel & 128 is 4 * 16 for each image
+    }
+
+    titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(13, 4, 192 + adj, 43)];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.textColor = [UIColor blackColor];
     titleLabel.textAlignment = UITextAlignmentLeft;
@@ -477,15 +484,15 @@
     titleLabel.text = [[listArray objectAtIndex:indexPath.row] valueForKey:@"title"];
     [cell.contentView addSubview:titleLabel];
     
-    starImage1.frame=CGRectMake(207, 8, 16, 16);
-    starImage2.frame=CGRectMake(227, 8, 16, 16);
-    starImage3.frame=CGRectMake(247, 8, 16, 16);
-    starImage4.frame=CGRectMake(267, 8, 16, 16);
+    starImage1.frame=CGRectMake(207 + adj, 8, 16, 16);
+    starImage2.frame=CGRectMake(227 + adj, 8, 16, 16);
+    starImage3.frame=CGRectMake(247 + adj, 8, 16, 16);
+    starImage4.frame=CGRectMake(267 + adj, 8, 16, 16);
     
-    gearImage1.frame=CGRectMake(207, 28, 16, 16);
-    gearImage2.frame=CGRectMake(227, 28, 16, 16);
-    gearImage3.frame=CGRectMake(247, 28, 16, 16);
-    gearImage4.frame=CGRectMake(267, 28, 16, 16);
+    gearImage1.frame=CGRectMake(207 + adj, 28, 16, 16);
+    gearImage2.frame=CGRectMake(227 + adj, 28, 16, 16);
+    gearImage3.frame=CGRectMake(247 + adj, 28, 16, 16);
+    gearImage4.frame=CGRectMake(267 + adj, 28, 16, 16);
     
     if (checkFavorite) {
         titleLabel.text = [[favoritesArray objectAtIndex:indexPath.row] valueForKey:@"title"];
