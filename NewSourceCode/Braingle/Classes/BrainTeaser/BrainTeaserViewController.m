@@ -385,7 +385,7 @@
     if ([self isiPad]) {
         [sortActionSheet showInView:[UIApplication sharedApplication].keyWindow];
     } else {
-        [sortActionSheet showInView:self.view];
+        [sortActionSheet showFromToolbar:self.navigationController.toolbar];
     }
 }
 
