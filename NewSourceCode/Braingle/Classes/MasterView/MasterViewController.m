@@ -144,50 +144,50 @@
             
             [self autoFeaturedCellSelected:indexPath.row];
             [self.detailViewController dismissMasterView];
-
+            
         }
         if(indexPath.row==1)
         {
             //Favorite Details
-            BrainTeaserViewController *brainTeaserViewController;
-            DetailViewController *detailViewController;            
+            BraingleTableViewController *braingleTableViewController;
+            DetailViewController *detailViewController;
             if ([self isiPad]) {
-                brainTeaserViewController = [[BrainTeaserViewController alloc] initWithNibName:@"BrainTeaserViewController_iPad" bundle:nil];
+                braingleTableViewController = [[BraingleTableViewController alloc] initWithNibName:@"BraingleTableViewController" bundle:nil];
                 detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController_iPad" bundle:nil];
-
-                brainTeaserViewController.strCategoryType = [teaserSectionOneArray objectAtIndex:indexPath.row];
-                [self.navigationController pushViewController:brainTeaserViewController animated:YES];
+                
+                braingleTableViewController.strCategoryType = [teaserSectionOneArray objectAtIndex:indexPath.row];
+                [self.navigationController pushViewController:braingleTableViewController animated:YES];
                 
                 self.detailViewController.strTypeOfCategory = @"Static";
                 [self.detailViewController webViewAction];
-
+                
             } else {
-                brainTeaserViewController = [[BrainTeaserViewController alloc] initWithNibName:@"BrainTeaserViewController_iPhone" bundle:nil];
-                brainTeaserViewController.strCategoryType = [teaserSectionOneArray objectAtIndex:indexPath.row];
-                [self.navigationController pushViewController:brainTeaserViewController animated:YES];
+                braingleTableViewController = [[BraingleTableViewController alloc] initWithNibName:@"BraingleTableViewController" bundle:nil];
+                braingleTableViewController.strCategoryType = [teaserSectionOneArray objectAtIndex:indexPath.row];
+                [self.navigationController pushViewController:braingleTableViewController animated:YES];
             }
         }
     }
     else if(indexPath.section==1)
     {
         //Brain Teaser Details
-        BrainTeaserViewController *brainTeaserViewController;
-        DetailViewController *detailViewController;            
+        BraingleTableViewController *braingleTableViewController;
+        DetailViewController *detailViewController;
         
         if ([self isiPad]) {
-            brainTeaserViewController = [[BrainTeaserViewController alloc] initWithNibName:@"BrainTeaserViewController_iPad" bundle:nil];
+            braingleTableViewController = [[BraingleTableViewController alloc] initWithNibName:@"BraingleTableViewController" bundle:nil];
             detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController_iPad" bundle:nil];
-
-            brainTeaserViewController.strCategoryType = [teaserSectionTwoArray objectAtIndex:indexPath.row];
-
-            [self.navigationController pushViewController:brainTeaserViewController animated:YES];
+            
+            braingleTableViewController.strCategoryType = [teaserSectionTwoArray objectAtIndex:indexPath.row];
+            
+            [self.navigationController pushViewController:braingleTableViewController animated:YES];
             self.detailViewController.strTypeOfCategory = @"Static";
             [self.detailViewController webViewAction];
-
+            
         } else {
-            brainTeaserViewController = [[BrainTeaserViewController alloc] initWithNibName:@"BrainTeaserViewController_iPhone" bundle:nil];
-            brainTeaserViewController.strCategoryType = [teaserSectionTwoArray objectAtIndex:indexPath.row];
-            [self.navigationController pushViewController:brainTeaserViewController animated:YES];
+            braingleTableViewController = [[BraingleTableViewController alloc] initWithNibName:@"BraingleTableViewController" bundle:nil];
+            braingleTableViewController.strCategoryType = [teaserSectionTwoArray objectAtIndex:indexPath.row];
+            [self.navigationController pushViewController:braingleTableViewController animated:YES];
         }
     }
 }

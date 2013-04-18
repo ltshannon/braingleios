@@ -23,6 +23,7 @@
     
     appDelegate  = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     dataBase     =  [[Database alloc] initialise];
+    braingleDB = [[BraingleDB alloc] initialise];
     
 }
 
@@ -164,6 +165,7 @@
         {
             heartButton.hidden = NO;
             [self loadWebView];
+            [braingleDB setBraingleVisited:strTypeOfCategory forID:[strDetailId intValue]];
         }
         
         for (int i = 0; i < [favoritesArray count]; i++)

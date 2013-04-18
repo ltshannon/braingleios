@@ -9,5 +9,15 @@
 #import "Braingle.h"
 
 @implementation Braingle
+@synthesize category;
+@synthesize date;
+@synthesize difficulty;
+@synthesize html;
+@synthesize id;
+@synthesize popularity;
+@synthesize title;
+@synthesize url;
+@synthesize visited;
+
 
 @end

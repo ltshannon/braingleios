@@ -26,9 +26,6 @@
 		306391E515DFACCE00901C7A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C64E6815D3A51500499319 /* Foundation.framework */; };
 		306391EB15DFACCE00901C7A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 306391E915DFACCE00901C7A /* InfoPlist.strings */; };
 		306391EE15DFACCE00901C7A /* BraingleLogicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 306391ED15DFACCE00901C7A /* BraingleLogicTests.m */; };
-		30A6EFAE15D3A8EB0090C88D /* BrainTeaserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30A6EF9C15D3A8EB0090C88D /* BrainTeaserViewController.m */; };
-		30A6EFAF15D3A8EB0090C88D /* BrainTeaserViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30A6EF9D15D3A8EB0090C88D /* BrainTeaserViewController_iPad.xib */; };
-		30A6EFB015D3A8EB0090C88D /* BrainTeaserViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30A6EF9E15D3A8EB0090C88D /* BrainTeaserViewController_iPhone.xib */; };
 		30A6EFB115D3A8EB0090C88D /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30A6EFA115D3A8EB0090C88D /* DetailViewController.m */; };
 		30A6EFB215D3A8EB0090C88D /* DetailViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30A6EFA215D3A8EB0090C88D /* DetailViewController_iPad.xib */; };
 		30A6EFB315D3A8EB0090C88D /* DetailViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30A6EFA315D3A8EB0090C88D /* DetailViewController_iPhone.xib */; };
@@ -164,6 +161,10 @@
 		30CE478115ECA34800EDD29D /* DetailViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30CE478015ECA34800EDD29D /* DetailViewTests.m */; };
 		30CE478415ECAA0000EDD29D /* MasterViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30CE478315ECAA0000EDD29D /* MasterViewTests.m */; };
 		30D7B77D15F1E3FA002DA488 /* BannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30D7B77C15F1E3FA002DA488 /* BannerViewController.m */; };
+		4633D4EB1720B5E300145F1E /* BraingleDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4633D4EA1720B5E300145F1E /* BraingleDB.m */; };
+		4633D4EE1720B62300145F1E /* Braingle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4633D4ED1720B62300145F1E /* Braingle.m */; };
+		4633D4F21720B6FA00145F1E /* BraingleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4633D4F01720B6FA00145F1E /* BraingleTableViewController.m */; };
+		4633D4F31720B6FA00145F1E /* BraingleTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4633D4F11720B6FA00145F1E /* BraingleTableViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,10 +197,6 @@
 		306391EC15DFACCE00901C7A /* BraingleLogicTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BraingleLogicTests.h; sourceTree = "<group>"; };
 		306391ED15DFACCE00901C7A /* BraingleLogicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BraingleLogicTests.m; sourceTree = "<group>"; };
 		306391EF15DFACCE00901C7A /* BraingleLogicTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BraingleLogicTests-Prefix.pch"; sourceTree = "<group>"; };
-		30A6EF9B15D3A8EB0090C88D /* BrainTeaserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrainTeaserViewController.h; sourceTree = "<group>"; };
-		30A6EF9C15D3A8EB0090C88D /* BrainTeaserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrainTeaserViewController.m; sourceTree = "<group>"; };
-		30A6EF9D15D3A8EB0090C88D /* BrainTeaserViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrainTeaserViewController_iPad.xib; sourceTree = "<group>"; };
-		30A6EF9E15D3A8EB0090C88D /* BrainTeaserViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrainTeaserViewController_iPhone.xib; sourceTree = "<group>"; };
 		30A6EFA015D3A8EB0090C88D /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		30A6EFA115D3A8EB0090C88D /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		30A6EFA215D3A8EB0090C88D /* DetailViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController_iPad.xib; sourceTree = "<group>"; };
@@ -350,6 +347,13 @@
 		30CE478315ECAA0000EDD29D /* MasterViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewTests.m; sourceTree = "<group>"; };
 		30D7B77B15F1E3FA002DA488 /* BannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerViewController.h; sourceTree = "<group>"; };
 		30D7B77C15F1E3FA002DA488 /* BannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerViewController.m; sourceTree = "<group>"; };
+		4633D4E91720B5E300145F1E /* BraingleDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BraingleDB.h; sourceTree = "<group>"; };
+		4633D4EA1720B5E300145F1E /* BraingleDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BraingleDB.m; sourceTree = "<group>"; };
+		4633D4EC1720B62300145F1E /* Braingle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Braingle.h; sourceTree = "<group>"; };
+		4633D4ED1720B62300145F1E /* Braingle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Braingle.m; sourceTree = "<group>"; };
+		4633D4EF1720B6FA00145F1E /* BraingleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BraingleTableViewController.h; sourceTree = "<group>"; };
+		4633D4F01720B6FA00145F1E /* BraingleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BraingleTableViewController.m; sourceTree = "<group>"; };
+		4633D4F11720B6FA00145F1E /* BraingleTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BraingleTableViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -425,10 +429,9 @@
 		30A6EF9A15D3A8EB0090C88D /* BrainTeaser */ = {
 			isa = PBXGroup;
 			children = (
-				30A6EF9B15D3A8EB0090C88D /* BrainTeaserViewController.h */,
-				30A6EF9C15D3A8EB0090C88D /* BrainTeaserViewController.m */,
-				30A6EF9D15D3A8EB0090C88D /* BrainTeaserViewController_iPad.xib */,
-				30A6EF9E15D3A8EB0090C88D /* BrainTeaserViewController_iPhone.xib */,
+				4633D4EF1720B6FA00145F1E /* BraingleTableViewController.h */,
+				4633D4F01720B6FA00145F1E /* BraingleTableViewController.m */,
+				4633D4F11720B6FA00145F1E /* BraingleTableViewController.xib */,
 			);
 			path = BrainTeaser;
 			sourceTree = "<group>";
@@ -576,6 +579,10 @@
 			children = (
 				30C64EC215D3A59500499319 /* Database.h */,
 				30C64EC315D3A59500499319 /* Database.m */,
+				4633D4E91720B5E300145F1E /* BraingleDB.h */,
+				4633D4EA1720B5E300145F1E /* BraingleDB.m */,
+				4633D4EC1720B62300145F1E /* Braingle.h */,
+				4633D4ED1720B62300145F1E /* Braingle.m */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -980,8 +987,6 @@
 				30C64FBE15D3A5A800499319 /* Default-Portrait@2x.png in Resources */,
 				30C64FBF15D3A5A800499319 /* Default.png in Resources */,
 				30C64FC015D3A5A800499319 /* Default@2x.png in Resources */,
-				30A6EFAF15D3A8EB0090C88D /* BrainTeaserViewController_iPad.xib in Resources */,
-				30A6EFB015D3A8EB0090C88D /* BrainTeaserViewController_iPhone.xib in Resources */,
 				30A6EFB215D3A8EB0090C88D /* DetailViewController_iPad.xib in Resources */,
 				30A6EFB315D3A8EB0090C88D /* DetailViewController_iPhone.xib in Resources */,
 				30A6EFB515D3A8EB0090C88D /* InfoViewController_iPad.xib in Resources */,
@@ -1001,6 +1006,7 @@
 				2351580D16038A9900784F42 /* icon57@2x.png in Resources */,
 				2351580E16038A9900784F42 /* icon72.png in Resources */,
 				2351580F16038A9900784F42 /* icon72@2x.png in Resources */,
+				4633D4F31720B6FA00145F1E /* BraingleTableViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1062,11 +1068,13 @@
 				30C64ED715D3A59500499319 /* Database.m in Sources */,
 				30C64ED815D3A59500499319 /* OpenUDID.m in Sources */,
 				30C64ED915D3A59500499319 /* Reachability.m in Sources */,
-				30A6EFAE15D3A8EB0090C88D /* BrainTeaserViewController.m in Sources */,
 				30A6EFB115D3A8EB0090C88D /* DetailViewController.m in Sources */,
 				30A6EFB415D3A8EB0090C88D /* InfoViewController.m in Sources */,
 				30A6EFB715D3A8EB0090C88D /* MasterViewController.m in Sources */,
 				30D7B77D15F1E3FA002DA488 /* BannerViewController.m in Sources */,
+				4633D4EB1720B5E300145F1E /* BraingleDB.m in Sources */,
+				4633D4EE1720B62300145F1E /* Braingle.m in Sources */,
+				4633D4F21720B6FA00145F1E /* BraingleTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,6 +15,8 @@
 #import "Reachability.h"
 #import "AppDelegate.h"
 #import "InfoViewController.h"
+#import "BraingleDB.h"
+
 @protocol BrainTeaserViewControllerDelegate;
 
 @interface DetailViewController : UIViewController <UISplitViewControllerDelegate, NSXMLParserDelegate, ADBannerViewDelegate>
@@ -23,6 +25,7 @@
     NSString                            *strDetailId;
     
     Database                            *dataBase;
+    BraingleDB                          *braingleDB;
     NSString                            *strFavoriteID;
     NSMutableDictionary                 *selectedDictionary;
     

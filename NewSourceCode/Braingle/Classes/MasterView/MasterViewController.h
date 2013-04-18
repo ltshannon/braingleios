@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <iAd/iAd.h>
 #import "InfoViewController.h"
-#import "BrainTeaserViewController.h"
+#import "BraingleTableViewController.h"
 #import "AppDelegate.h"
 
 @interface MasterViewController : UITableViewController<ADBannerViewDelegate,UISplitViewControllerDelegate>
